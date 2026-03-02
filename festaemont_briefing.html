@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festa e Monte — Briefing e Estratégia de Marca</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dark: #8A6A3E;
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+    --rose: #C47A7A; --rose-light: #E8BABA;
+    --sage: #7A9B8A; --sage-light: #B0CCBF;
+  }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
+
+  /* ── NAV ── */
+  .nav { background: var(--ink); padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--gold); letter-spacing: 0.2em; }
+  .nav-back { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px; transition: color 0.2s; }
+  .nav-back:hover { color: rgba(255,255,255,0.7); }
+
+  /* ── HERO ── */
+  .hero { background: var(--ink); padding: 80px 80px 64px; position: relative; overflow: hidden; }
+  .hero-grade {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(184,151,106,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(184,151,106,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-tag { font-size: 12px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 5vw, 68px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 28px; position: relative; z-index: 2; }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.4); line-height: 1.85; max-width: 560px; position: relative; z-index: 2; }
+  .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin: 48px 0 0; position: relative; z-index: 2; }
+
+  /* ── SEÇÃO ── */
+  .secao { padding: 72px 80px; border-bottom: 1px solid rgba(184,151,106,0.12); }
+  .secao-dark { background: var(--ink); }
+  .secao-cream { background: var(--cream); }
+  .secao-mid { background: var(--cream-mid); }
+  .secao-tag { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .secao-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; margin-bottom: 32px; }
+  .secao-titulo em { font-style: italic; color: var(--gold); }
+  .secao-titulo.light { color: white; }
+  .secao-titulo.light em { color: var(--gold-light); }
+  .secao-intro { font-size: 17px; line-height: 1.85; color: var(--ink-soft); max-width: 680px; margin-bottom: 48px; }
+  .secao-intro.light { color: rgba(255,255,255,0.5); }
+
+  /* ── DIAGNÓSTICO ── */
+  .diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .diag-card { background: rgba(255,255,255,0.04); padding: 32px; }
+  .diag-card.problema { border-left: 3px solid rgba(196,122,122,0.6); }
+  .diag-card.oportunidade { border-left: 3px solid rgba(122,155,138,0.6); }
+  .diag-card-tag { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; }
+  .diag-card.problema .diag-card-tag { color: var(--rose-light); }
+  .diag-card.oportunidade .diag-card-tag { color: var(--sage-light); }
+  .diag-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+  .diag-item:last-child { margin-bottom: 0; }
+  .diag-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 9px; }
+  .problema .diag-dot { background: var(--rose); }
+  .oportunidade .diag-dot { background: var(--sage); }
+  .diag-item p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+  .diag-item p strong { color: rgba(255,255,255,0.85); font-weight: 400; }
+
+  /* ── POSICIONAMENTO ── */
+  .pos-box { background: rgba(184,151,106,0.07); border: 1px solid rgba(184,151,106,0.2); padding: 40px 48px; margin-bottom: 48px; }
+  .pos-box-label { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .pos-frase { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; color: white; line-height: 1.35; }
+  .pos-frase em { font-style: italic; color: var(--gold-light); }
+
+  .pos-pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2px; }
+  .pos-pilar { background: rgba(255,255,255,0.03); padding: 28px 24px; border-top: 2px solid var(--gold); }
+  .pos-pilar-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: rgba(184,151,106,0.25); line-height: 1; margin-bottom: 10px; }
+  .pos-pilar-titulo { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .pos-pilar-desc { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+  /* ── NOME ── */
+  .nome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .nome-card { padding: 36px; }
+  .nome-card.atual { background: rgba(255,255,255,0.03); }
+  .nome-card.sugerido { background: rgba(184,151,106,0.08); border: 1px solid rgba(184,151,106,0.2); }
+  .nome-card-tag { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
+  .nome-card.sugerido .nome-card-tag { color: var(--gold); }
+  .nome-destaque { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .nome-card.sugerido .nome-destaque { color: white; }
+  .nome-desc { font-size: 15px; color: rgba(255,255,255,0.35); line-height: 1.75; }
+  .nome-card.sugerido .nome-desc { color: rgba(255,255,255,0.55); }
+
+  /* ── PRODUTOS ── */
+  .produtos-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+  .produto-card { background: var(--cream); padding: 32px; border-top: 3px solid var(--gold); }
+  .produto-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: rgba(184,151,106,0.25); margin-bottom: 12px; }
+  .produto-nome { font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .produto-titulo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); margin-bottom: 12px; }
+  .produto-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 16px; }
+  .produto-preco { font-size: 13px; letter-spacing: 0.1em; color: var(--gold-dark); border-top: 1px solid rgba(184,151,106,0.2); padding-top: 14px; }
+  .produto-preco strong { font-size: 20px; color: var(--gold); font-family: 'Cormorant Garamond', serif; }
+  .produto-status { display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 10px; margin-bottom: 16px; }
+  .produto-status.ativo { background: rgba(122,155,138,0.15); color: var(--sage); }
+  .produto-status.futuro { background: rgba(184,151,106,0.1); color: var(--gold); }
+
+  /* ── INSTAGRAM ── */
+  .ig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ig-col-titulo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); margin-bottom: 20px; border-bottom: 1px solid rgba(184,151,106,0.2); padding-bottom: 14px; }
+  .ig-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+  .ig-check { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .ig-check.sim { background: rgba(122,155,138,0.15); color: var(--sage); }
+  .ig-check.nao { background: rgba(196,122,122,0.12); color: var(--rose); }
+  .ig-item p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+  .ig-item p strong { color: var(--ink); font-weight: 400; }
+
+  /* ── PRÓXIMOS PASSOS ── */
+  .passos { display: flex; flex-direction: column; gap: 2px; }
+  .passo { display: flex; gap: 24px; align-items: flex-start; padding: 28px 32px; background: var(--cream); }
+  .passo-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: rgba(184,151,106,0.3); flex-shrink: 0; line-height: 1; }
+  .passo-corpo { flex: 1; }
+  .passo-titulo { font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 6px; }
+  .passo-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.75; }
+  .passo-tag { display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; margin-top: 10px; }
+  .passo-tag.imediato { background: rgba(122,155,138,0.15); color: var(--sage); }
+  .passo-tag.curto { background: rgba(184,151,106,0.12); color: var(--gold); }
+  .passo-tag.medio { background: rgba(61,56,48,0.1); color: var(--ink-soft); }
+
+  /* ── BRIEFING ── */
+  .briefing-bloco { margin-bottom: 40px; }
+  .briefing-pergunta { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .briefing-resposta { background: rgba(184,151,106,0.06); border-left: 2px solid rgba(184,151,106,0.3); padding: 16px 20px; font-size: 16px; color: var(--ink-soft); line-height: 1.75; }
+  .briefing-resposta.vazio { color: rgba(61,56,48,0.35); font-style: italic; }
+  .briefing-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(184,151,106,0.3); padding: 12px 0; font-family: 'Jost', sans-serif; font-size: 16px; color: var(--ink); outline: none; }
+  .briefing-input:focus { border-bottom-color: var(--gold); }
+
+  /* ── RODAPÉ ── */
+  .rodape { background: var(--ink); padding: 40px 80px; display: flex; justify-content: space-between; align-items: center; }
+  .rodape-marca { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(184,151,106,0.5); letter-spacing: 0.2em; }
+  .rodape-nota { font-size: 13px; color: rgba(255,255,255,0.2); }
+
+  @media (max-width: 768px) {
+    .hero, .secao { padding: 48px 24px; }
+    .diag-grid, .nome-grid, .ig-grid { grid-template-columns: 1fr; }
+    .produtos-grid { grid-template-columns: 1fr; }
+    .pos-pilares { grid-template-columns: 1fr; }
+    .rodape { flex-direction: column; gap: 12px; text-align: center; }
+    .nav { padding: 14px 24px; }
+  }
+
+  /* ── SENHA ── */
+  #senha-tela {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #1A1714;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .senha-box {
+    width: 100%; max-width: 400px; padding: 48px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .senha-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(184,151,106,0.5); letter-spacing: 0.3em; }
+  .senha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: white; line-height: 1.1; }
+  .senha-titulo em { font-style: italic; color: #D4B896; }
+  .senha-input {
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1px solid rgba(184,151,106,0.35);
+    padding: 14px 0; font-family: 'Jost', sans-serif; font-size: 18px;
+    color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
+  }
+  .senha-input:focus { border-bottom-color: #B8976A; }
+  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-btn {
+    background: #B8976A; color: #1A1714; border: none;
+    padding: 14px 32px; font-family: 'Jost', sans-serif;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; align-self: flex-start;
+  }
+  .senha-btn:hover { background: #D4B896; }
+  .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
+  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+</style>
+
+<script>
+(function() {
+  var SENHA = '#A5dRy7Gg92x';
+  var KEY = 'zh_fem_b';
+  if (sessionStorage.getItem(KEY) === '1') return;
+  var tela = document.getElementById('senha-tela');
+  if (tela) tela.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  window.verificarSenha = function() {
+    var inp = document.getElementById('senha-input');
+    var err = document.getElementById('senha-erro');
+    if (inp.value === SENHA) {
+      sessionStorage.setItem(KEY, '1');
+      tela.style.transition = 'opacity 0.3s';
+      tela.style.opacity = '0';
+      setTimeout(function() { tela.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+    } else {
+      err.textContent = 'Senha incorreta.';
+      inp.value = ''; inp.focus();
+      setTimeout(function() { err.textContent = ''; }, 2000);
+    }
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    var inp = document.getElementById('senha-input');
+    if (inp) { inp.focus(); inp.addEventListener('keydown', function(e) { if (e.key==='Enter') verificarSenha(); }); }
+  });
+})();
+</script>
+</head>
+<body>
+
+<div id="senha-tela" style="display:none;">
+  <div class="senha-box">
+    <div class="senha-logo">Zyllah Digital</div>
+    <div class="senha-titulo">Acesso<br><em>restrito</em></div>
+    <input id="senha-input" type="password" class="senha-input" placeholder="senha" autocomplete="off">
+    <div id="senha-erro" class="senha-erro"></div>
+    <button class="senha-btn" onclick="verificarSenha()">Entrar →</button>
+    <div class="senha-hint">Dificuldades? Entre em contato com a Zyllah Digital.</div>
+  </div>
+</div>
+
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Zyllah Digital · Cliente</div>
+  <a href="zyllah_hub.html" class="nav-back">← Hub</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grade"></div>
+  <div class="hero-tag">Diagnóstico + Estratégia</div>
+  <h1 class="hero-title">Festa e Monte<br><em>Reformulação de Marca</em></h1>
+  <p class="hero-sub">Análise do negócio atual, posicionamento estratégico, estrutura de produtos e plano de ação para o Instagram e crescimento orgânico em Nova Friburgo.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<div class="secao secao-dark">
+  <div class="secao-tag">01 · Diagnóstico</div>
+  <h2 class="secao-titulo light">O que o negócio<br><em>comunica hoje</em></h2>
+  <p class="secao-intro light">Análise do perfil atual com base nas fotos e informações fornecidas. Honesta — porque é o ponto de partida para construir algo sólido.</p>
+
+  <div class="diag-grid">
+    <div class="diag-card problema">
+      <div class="diag-card-tag">Problemas identificados</div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Identidade visual inexistente.</strong> Cada post tem cores, fontes e estilo diferentes. O perfil parece cinco empresas distintas numa só página.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Conteúdo 100% produto, zero contexto.</strong> Posts mostram a decoração mas não ensinam, não contam história, não constroem autoridade. O seguidor não tem razão para voltar amanhã.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Posts institucionais genéricos.</strong> "Atenção clientes!", "Festou!", "Reserve sua data!" — linguagem de panfleto. Comunicação de urgência artificial que deprecia o produto.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Sem diferencial declarado.</strong> Por que escolher a Festa e Monte e não o concorrente? O Instagram não responde essa pergunta.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Número perdido.</strong> O WhatsApp como principal canal de conversão foi cortado por falta de pagamento — isso interrompeu o fluxo de leads existente.</p>
+      </div>
+    </div>
+    <div class="diag-card oportunidade">
+      <div class="diag-card-tag">Oportunidades reais</div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>O produto em si é bom.</strong> As fotos do trabalho real (imagens 5 a 11) mostram acabamento limpo, materiais cuidados, composição com critério. Isso é real e comunicável.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>A cômoda branca é um ativo de marca.</strong> Aparece em quase todas as montagens — cria coerência visual silenciosa. Pode virar elemento de identidade intencional.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Marketplace Facebook converte.</strong> Já é a fonte de leads que funciona. Estruturar os anúncios com identidade vai aumentar a taxa de contato sem aumentar o gasto.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Kit personalizado com papelaria de Conselheiro.</strong> Impressão A4 por R$5 com qualidade alta + arte editável por R$7,50 = produto diferenciado a custo baixíssimo. Ninguém em Nova Friburgo oferece isso de forma organizada.</p>
+      </div>
+      <div class="diag-item">
+        <div class="diag-dot"></div>
+        <p><strong>Nicho de retirada funciona bem em cidade menor.</strong> O modelo "pega e monta você mesmo" reduz o trabalho operacional e aumenta a escalabilidade sem contratar ninguém.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POSICIONAMENTO -->
+<div class="secao secao-dark" style="border-top: 1px solid rgba(184,151,106,0.08);">
+  <div class="secao-tag">02 · Posicionamento</div>
+  <h2 class="secao-titulo light">O diferencial que<br><em>precisa ser construído</em></h2>
+  <p class="secao-intro light">O diferencial não foi descoberto — vai ser decidido. Esta é a proposta de posicionamento para a Festa e Monte.</p>
+
+  <div class="pos-box">
+    <div class="pos-box-label">Frase de posicionamento</div>
+    <div class="pos-frase">
+      A decoração que você <em>monta com suas próprias mãos</em><br>
+      — com a qualidade de quem sabe o que está fazendo.
+    </div>
+  </div>
+
+  <div class="pos-pilares">
+    <div class="pos-pilar">
+      <div class="pos-pilar-num">01</div>
+      <div class="pos-pilar-titulo">Acessível</div>
+      <div class="pos-pilar-desc">Kit mini a partir de R$120. A festa bonita não precisa custar uma fortuna — precisa de materiais certos e uma boa combinação de peças.</div>
+    </div>
+    <div class="pos-pilar">
+      <div class="pos-pilar-num">02</div>
+      <div class="pos-pilar-titulo">Personalizado</div>
+      <div class="pos-pilar-desc">Com o combo de arte editável + papelaria de Conselheiro, cada festa tem o nome, as cores e o tema da criança. Sem genérico.</div>
+    </div>
+    <div class="pos-pilar">
+      <div class="pos-pilar-num">03</div>
+      <div class="pos-pilar-titulo">Sem surpresa</div>
+      <div class="pos-pilar-desc">Fotos reais do trabalho real. Preço claro. Material em bom estado. A mãe que contrata sabe exatamente o que vai receber.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOME -->
+<div class="secao secao-dark" style="border-top: 1px solid rgba(184,151,106,0.08);">
+  <div class="secao-tag">03 · Nome</div>
+  <h2 class="secao-titulo light">Sobre o nome<br><em>"Festa e Monte"</em></h2>
+  <p class="secao-intro light">O nome não é o problema central — mas merece uma análise honesta antes de decidir manter ou evoluir.</p>
+
+  <div class="nome-grid">
+    <div class="nome-card atual">
+      <div class="nome-card-tag">Análise do nome atual</div>
+      <div class="nome-destaque">Festa e Monte</div>
+      <div class="nome-desc">
+        <p style="margin-bottom:12px;">✓ &nbsp;Descritivo — diz exatamente o que é</p>
+        <p style="margin-bottom:12px;">✓ &nbsp;Fácil de lembrar e de falar</p>
+        <p style="margin-bottom:12px;">✓ &nbsp;Original — já verificado</p>
+        <p style="margin-bottom:12px;">✗ &nbsp;Não transmite qualidade ou personalidade</p>
+        <p style="margin-bottom:12px;">✗ &nbsp;"Monte" soa como instrução, não como marca</p>
+        <p>✗ &nbsp;Difícil de criar identidade visual forte em torno dele</p>
+      </div>
+    </div>
+    <div class="nome-card sugerido">
+      <div class="nome-card-tag">Sugestão para considerar</div>
+      <div class="nome-destaque">Manter — por agora</div>
+      <div class="nome-desc">
+        <p style="margin-bottom:14px;">A prioridade agora não é o nome. É a <strong style="color:rgba(255,255,255,0.75);">identidade visual, a consistência do conteúdo e o produto personalizado</strong>.</p>
+        <p style="margin-bottom:14px;">Mudar o nome tem custo: perde o histórico do perfil, confunde quem já conhece, exige recriar tudo.</p>
+        <p>Quando o negócio crescer e o posicionamento estiver consolidado, aí sim a decisão de renomear faz mais sentido. Por enquanto, o trabalho é fazer o "Festa e Monte" valer mais.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<div class="secao secao-mid">
+  <div class="secao-tag">04 · Estrutura de Produtos</div>
+  <h2 class="secao-titulo">Quatro produtos,<br><em>quatro momentos de compra</em></h2>
+  <p class="secao-intro">Cardápio claro para o cliente entender o que contratar — e para a Fernanda saber o que oferecer e como precificar.</p>
+
+  <div class="produtos-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="produto-card">
+      <div class="produto-num">01</div>
+      <div class="produto-nome">Produto atual</div>
+      <div class="produto-titulo">Kit Mini Temático</div>
+      <span class="produto-status ativo">Ativo</span>
+      <div class="produto-desc">Cômoda branca + painel redondo temático + escada ou coluna + acessórios de mesa. Cliente retira, monta e desmonta. Temas variados em estoque.</div>
+      <div class="produto-preco">A partir de <strong>R$120</strong> · retirada em NF</div>
+    
+    <div class="produto-card" style="grid-column:1/-1;">
+      <div class="produto-num">04</div>
+      <div class="produto-nome">Produto atual</div>
+      <div class="produto-titulo">Kit Grande — Painel + Estrutura Completa</div>
+      <span class="produto-status ativo">Ativo</span>
+      <div class="produto-desc">Montagens completas com painel redondo ou romano de maior porte, colunas, escada, acessórios e ambientação — os trabalhos exibidos no Instagram. Maior ticket, maior impacto visual. Indicado para festas em salão ou ambientes maiores.</div>
+      <div class="produto-preco">Painel avulso <strong>R$70</strong> · Dois painéis <strong>R$85</strong> · Composição completa a combinar</div>
+    </div>
+  </div>
+    <div class="produto-card">
+      <div class="produto-num">02</div>
+      <div class="produto-nome">Produto atual</div>
+      <div class="produto-titulo">Kit Mini + Entrega</div>
+      <span class="produto-status ativo">Ativo</span>
+      <div class="produto-desc">Mesmo kit com transporte incluso. Entrega e recolhida cobrada por km rodado (R$2/km). Ideal para quem mora em bairros mais distantes ou não tem carro grande.</div>
+      <div class="produto-preco">Kit + <strong>R$2/km</strong> rodado ida e volta</div>
+    </div>
+    <div class="produto-card">
+      <div class="produto-num">03</div>
+      <div class="produto-nome">Produto futuro</div>
+      <div class="produto-titulo">Kit Personalizado</div>
+      <span class="produto-status futuro">Rodando em paralelo</span>
+      <div class="produto-desc">Kit padrão do estoque + itens personalizados impressos: topper de bolo, plaquinhas, tags e identificadores com o nome da criança e tema exato. Arte editável R$7,50 + impressão A4 em Conselheiro. Painel continua sendo o do estoque.</div>
+      <div class="produto-preco">Adicional de <strong>R$20–30</strong> sobre o kit padrão · zero estoque novo</div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="secao secao-cream">
+  <div class="secao-tag">05 · Instagram</div>
+  <h2 class="secao-titulo">O que muda<br><em>no conteúdo</em></h2>
+  <p class="secao-intro">O Instagram não gera leads diretos ainda — mas é o que o cliente vê quando pesquisa depois de ver o anúncio no Facebook. Tem que existir e ter cara.</p>
+
+  <div class="ig-grid">
+    <div>
+      <div class="ig-col-titulo">Para de fazer</div>
+      <div class="ig-item">
+        <div class="ig-check nao">✗</div>
+        <p><strong>Posts de aviso com fundo laranja e megafone.</strong> Passa imagem de amador e não tem relação com a estética do produto.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check nao">✗</div>
+        <p><strong>"Festou!", "Reserve!", "Promoção por tempo limitado!".</strong> Urgência artificial desgasta a marca e atrai o cliente errado.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check nao">✗</div>
+        <p><strong>Posts com cores e fontes diferentes a cada semana.</strong> O perfil precisa de uma paleta de no máximo 3 cores e uma família tipográfica fixa.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check nao">✗</div>
+        <p><strong>Fotos com enquadramento descuidado ou fundo com tomadas e cabos aparecendo.</strong> Se o produto é visual, a foto tem que ser boa.</p>
+      </div>
+    </div>
+    <div>
+      <div class="ig-col-titulo">Passa a fazer</div>
+      <div class="ig-item">
+        <div class="ig-check sim">✓</div>
+        <p><strong>Uma paleta definida.</strong> Branco, bege claro e um acento por tema. Toda arte de divulgação segue esse padrão.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check sim">✓</div>
+        <p><strong>Fotos antes e depois da montagem.</strong> Mostra o processo, humaniza o negócio, gera curiosidade e engajamento real.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check sim">✓</div>
+        <p><strong>Stories de "o que está disponível essa semana".</strong> Lista de temas com foto — simples, direto, gera DM. Faz todo sábado ou domingo.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check sim">✓</div>
+        <p><strong>Repost de fotos do cliente com a decoração montada.</strong> Prova social real, custo zero, e faz o cliente sentir valorizado.</p>
+      </div>
+      <div class="ig-item">
+        <div class="ig-check sim">✓</div>
+        <p><strong>Post fixado explicando como funciona.</strong> "O que é o kit mini, como reservar, como funciona a retirada." Responde antes de perguntarem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FACEBOOK MARKETPLACE -->
+<div class="secao secao-mid">
+  <div class="secao-tag">06 · Facebook Marketplace</div>
+  <h2 class="secao-titulo">O canal que<br><em>já funciona</em></h2>
+  <p class="secao-intro">O Marketplace é a boca do funil real. Não abandona — estrutura.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+    <div style="background:white;padding:32px;border-top:3px solid var(--gold);">
+      <div style="font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Anúncio atual</div>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:12px;">Provavelmente foto do produto, preço e telefone. Funciona porque o Marketplace tem tráfego alto. Mas converte menos do que poderia.</p>
+    </div>
+    <div style="background:white;padding:32px;border-top:3px solid var(--sage);">
+      <div style="font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">Anúncio melhorado</div>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:12px;"><strong style="color:var(--ink);font-weight:400;">Foto:</strong> Montagem completa, bem iluminada, sem fundo bagunçado.</p>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:12px;"><strong style="color:var(--ink);font-weight:400;">Título:</strong> "Kit mini decoração [tema] — retirar em Nova Friburgo · [preço]"</p>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:12px;"><strong style="color:var(--ink);font-weight:400;">Descrição:</strong> O que está incluso, como funciona a retirada, como reservar. Simples e completo.</p>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;"><strong style="color:var(--ink);font-weight:400;">WhatsApp:</strong> Novo número ativo com mensagem automática de boas-vindas configurada.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRÓXIMOS PASSOS -->
+<div class="secao secao-cream">
+  <div class="secao-tag">07 · Plano de Ação</div>
+  <h2 class="secao-titulo">O que fazer,<br><em>em que ordem</em></h2>
+  <p class="secao-intro">Sem pressão. Cada passo no tempo certo.</p>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Novo número de WhatsApp</div>
+        <div class="passo-desc">Chip novo, ativo, cadastrado no WhatsApp Business. Configurar mensagem automática de boas-vindas: "Oi! Sou a Fernanda da Festa e Monte. Qual tema você está pensando e para qual data?" Simples assim já qualifica o cliente.</div>
+        <span class="passo-tag imediato">Imediato · 1 dia</span>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Paleta e identidade visual mínima</div>
+        <div class="passo-desc">Definir 3 cores fixas para os posts (branco, bege, acento neutro). Criar um template de post no Canva que serve para todas as fotos de kit. Aplicar em todos os próximos posts. Não precisa repostar o passado — só seguir o padrão de agora em diante.</div>
+        <span class="passo-tag imediato">Imediato · 1 semana</span>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Atualizar anúncios no Marketplace</div>
+        <div class="passo-desc">Para cada tema disponível, um anúncio separado com foto boa e descrição completa. Novo número de WhatsApp em todos. Isso ativa o canal que já converte.</div>
+        <span class="passo-tag imediato">Imediato · 1 semana</span>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Post fixado "como funciona"</div>
+        <div class="passo-desc">Um Reels ou carrossel fixado no topo do perfil explicando o kit mini: o que inclui, como é a retirada, quanto tempo antes de reservar, como pedir. Responde as dúvidas antes de o cliente precisar perguntar.</div>
+        <span class="passo-tag curto">Curto prazo · 2 semanas</span>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">5</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Primeiro kit personalizado</div>
+        <div class="passo-desc">Comprar 1 pacote de arte editável (R$7,50). Editar um tema popular (Urso, Stitch, dinossauro). Imprimir na papelaria de Conselheiro. Fotografar o kit completo. Publicar como lançamento. Esse post vira o produto que diferencia.</div>
+        <span class="passo-tag curto">Curto prazo · 1 mês</span>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">6</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Tabela de preços clara</div>
+        <div class="passo-desc">Kit Mini Retirada · Kit Mini Entrega (R$2/km) · Kit Personalizado. Preços fixos com o que está incluso em cada um. Publicar no Stories fixo e enviar para todo cliente que perguntar. Elimina a negociação de preço a cada contato.</div>
+        <span class="passo-tag medio">Médio prazo · 1–2 meses</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULÁRIO -->
+<div class="secao secao-mid">
+  <div class="secao-tag">08 · Formulário de Briefing</div>
+  <h2 class="secao-titulo">Perguntas para <em>a Fernanda</em></h2>
+  <p class="secao-intro">O formulário de briefing está em documento separado — mais limpo para enviar diretamente à Fernanda preencher.</p>
+  <a href="festaemont_formulario.html" target="_blank" style="display:inline-flex;align-items:center;gap:16px;background:rgba(184,151,106,0.08);border:1px solid rgba(184,151,106,0.25);padding:24px 32px;text-decoration:none;transition:all 0.2s;">
+    <div>
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Documento separado</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:white;">Formulário de Briefing →</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.4);margin-top:4px;">4 blocos · negócio, cliente, visual, direção</div>
+    </div>
+  </a>
+</div>
+
+<!-- RODAPÉ --><!-- RODAPÉ -->
+<div class="rodape">
+  <div class="rodape-marca">Zyllah Digital · Trabalho interno</div>
+  <div class="rodape-nota">Documento estratégico · Não compartilhar com terceiros</div>
+</div>
+
+</body>
+</html>

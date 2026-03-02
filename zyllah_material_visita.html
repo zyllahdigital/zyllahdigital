@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyllah Digital — Material de Visita</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dark: #8A6A3E;
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+  }
+
+  /* ── TELA DE NAVEGAÇÃO ──────────────────────────── */
+  body {
+    font-family: 'Jost', sans-serif; font-weight: 300;
+    background: var(--ink); color: var(--cream);
+    min-height: 100vh;
+  }
+
+  .nav-tela {
+    padding: 48px 64px;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; justify-content: center; gap: 48px;
+  }
+  .nav-titulo {
+    font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300;
+    color: white; text-align: center; line-height: 1.1;
+  }
+  .nav-titulo em { font-style: italic; color: var(--gold-light); }
+  .nav-sub { font-size: 16px; color: rgba(255,255,255,0.35); text-align: center; max-width: 480px; line-height: 1.8; }
+  .nav-btns { display: flex; gap: 2px; }
+  .nav-btn {
+    padding: 18px 40px; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-weight: 400;
+    transition: all 0.25s;
+  }
+  .nav-btn.cartao { background: var(--gold); color: var(--ink); }
+  .nav-btn.cartao:hover { background: var(--gold-light); }
+  .nav-btn.folder { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(184,151,106,0.2); }
+  .nav-btn.folder:hover { background: rgba(255,255,255,0.1); }
+  .nav-nota { font-size: 12px; color: rgba(255,255,255,0.2); text-align: center; line-height: 1.7; max-width: 460px; }
+  .nav-voltar { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(184,151,106,0.5); text-decoration: none; margin-top: 16px; border-bottom: 1px solid rgba(184,151,106,0.2); padding-bottom: 2px; }
+
+  /* ── PÁGINAS DE IMPRESSÃO ─────────────────────── */
+  .pagina { display: none; }
+  .pagina.ativa { display: block; }
+
+  .print-header {
+    background: var(--ink); padding: 28px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .print-header-titulo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: white; }
+  .print-header-titulo em { font-style: italic; color: var(--gold); }
+  .print-header-acoes { display: flex; gap: 12px; align-items: center; }
+  .btn-print {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--gold); color: var(--ink); padding: 10px 24px;
+    border: none; cursor: pointer; font-family: 'Jost', sans-serif; transition: all 0.2s;
+  }
+  .btn-print:hover { background: var(--gold-light); }
+  .btn-voltar-nav {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    background: transparent; color: rgba(255,255,255,0.4); padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.1); cursor: pointer; font-family: 'Jost', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-voltar-nav:hover { color: white; border-color: rgba(255,255,255,0.3); }
+
+  .instrucoes {
+    background: rgba(184,151,106,0.06); border-bottom: 1px solid rgba(184,151,106,0.12);
+    padding: 20px 56px; display: flex; gap: 48px; flex-wrap: wrap;
+  }
+  .instrucao-item { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+  .instrucao-item strong { color: rgba(255,255,255,0.65); font-weight: 400; }
+
+  /* ── ÁREA DE IMPRESSÃO ─────────────────────────── */
+  .print-area {
+    background: #E5DDD0;
+    padding: 60px; min-height: calc(100vh - 140px);
+    display: flex; flex-direction: column; align-items: center; gap: 48px;
+  }
+
+  /* ══════════════════════════════════════
+     CARTÃO DE VISITA
+  ══════════════════════════════════════ */
+  .cartoes-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%;
+  }
+  .cartoes-label {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(61,56,48,0.5);
+  }
+  .cartoes-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    width: 100%; max-width: 900px;
+  }
+
+  /* Cartão: 9cm × 5cm ≈ 340px × 189px em 96dpi */
+  .cartao {
+    width: 340px; height: 189px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(26,23,20,0.25);
+  }
+  .cartao-frente {
+    background: var(--ink);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 28px 32px;
+  }
+  .cartao-verso {
+    background: var(--cream);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 28px 32px;
+  }
+
+  /* Frente */
+  .c-f-topo { display: flex; justify-content: space-between; align-items: flex-start; }
+  .c-f-z { width: 40px; height: auto; }
+  .c-f-linha { width: 1px; height: 60px; background: rgba(184,151,106,0.2); }
+  .c-f-nome { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: white; line-height: 1.2; }
+  .c-f-nome em { font-style: italic; color: var(--gold-light); font-size: 14px; display: block; margin-top: 2px; }
+  .c-f-base { display: flex; justify-content: space-between; align-items: flex-end; }
+  .c-f-cargo { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); line-height: 1.8; }
+  .c-f-marca { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--gold); letter-spacing: 0.2em; }
+
+  /* Verso */
+  .c-v-topo { }
+  .c-v-tag { font-size: 7px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .c-v-frase { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: var(--ink); line-height: 1.4; font-style: italic; }
+  .c-v-base { display: flex; justify-content: space-between; align-items: flex-end; }
+  .c-v-contato { font-size: 8px; color: var(--ink-soft); line-height: 1.9; letter-spacing: 0.03em; }
+  .c-v-qr {
+    width: 52px; height: 52px; background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; flex-shrink: 0;
+  }
+  .c-v-qr-inner { font-size: 6px; color: var(--gold); text-align: center; letter-spacing: 0.05em; line-height: 1.5; }
+  /* QR visual placeholder */
+  .qr-grid {
+    display: grid; grid-template-columns: repeat(7,1fr); gap: 1px;
+    width: 40px; height: 40px; margin-bottom: 3px;
+  }
+  .qr-cell { background: var(--gold); border-radius: 0; }
+  .qr-cell.off { background: transparent; }
+  .c-v-ornamento { position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; opacity: 0.04; }
+
+  /* ══════════════════════════════════════
+     FOLDER A5 (148mm × 210mm ≈ 560px × 794px)
+  ══════════════════════════════════════ */
+  .folder-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%;
+  }
+
+  .folder {
+    width: 560px;
+    box-shadow: 0 12px 60px rgba(26,23,20,0.3);
+    position: relative;
+  }
+
+  .folder-capa {
+    background: var(--ink);
+    height: 794px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    padding: 48px 44px;
+  }
+  .folder-grade {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(184,151,106,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,151,106,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .folder-z-bg {
+    position: absolute; right: -12%; bottom: -5%; width: 70%; opacity: 0.04;
+  }
+
+  /* Topo capa */
+  .folder-topo { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .folder-logo-txt { line-height: 1; }
+  .folder-tipo { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+
+  /* Hero capa */
+  .folder-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+  .folder-pre { font-size: 8px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .folder-pre::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+  .folder-titulo {
+    font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300;
+    color: white; line-height: 1.0; margin-bottom: 28px;
+  }
+  .folder-titulo em { font-style: italic; color: var(--gold-light); display: block; }
+  .folder-resumo { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.85; max-width: 380px; }
+
+  /* Divisor diagonal */
+  .folder-divisor {
+    height: 2px; background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 32px 0; position: relative; z-index: 2;
+  }
+
+  /* Pilares na capa */
+  .folder-pilares { display: flex; gap: 0; position: relative; z-index: 2; }
+  .folder-pilar { flex: 1; padding: 16px 0; padding-right: 20px; }
+  .folder-pilar + .folder-pilar { border-left: 1px solid rgba(184,151,106,0.12); padding-left: 20px; padding-right: 0; }
+  .folder-pilar-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: rgba(184,151,106,0.3); line-height: 1; margin-bottom: 6px; }
+  .folder-pilar-nome { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .folder-pilar-desc { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+
+  /* Rodapé capa */
+  .folder-rodape { display: flex; justify-content: space-between; align-items: flex-end; position: relative; z-index: 2; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(184,151,106,0.1); }
+  .folder-contato { font-size: 10px; color: rgba(255,255,255,0.3); line-height: 1.9; letter-spacing: 0.04em; }
+  .folder-contato strong { color: rgba(255,255,255,0.55); font-weight: 400; }
+  .folder-qr-box {
+    width: 72px; height: 72px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,151,106,0.2);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+  }
+  .folder-qr-label { font-size: 6px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(184,151,106,0.5); }
+  .folder-qr-url { font-size: 7px; color: var(--gold); letter-spacing: 0.05em; }
+
+  /* INTERIOR */
+  .folder-interior {
+    background: var(--cream);
+    height: 794px;
+    padding: 48px 44px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .folder-int-topo { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; }
+  .folder-int-pre { font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+  .folder-int-titulo { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
+  .folder-int-titulo em { font-style: italic; color: var(--gold); }
+  .folder-int-sub { font-size: 13px; color: var(--ink-soft); line-height: 1.8; max-width: 380px; }
+
+  .folder-servicos { display: flex; flex-direction: column; gap: 0; margin: 28px 0; flex: 1; }
+  .folder-servico { padding: 18px 0; border-bottom: 1px solid rgba(184,151,106,0.12); display: flex; gap: 20px; align-items: flex-start; }
+  .folder-servico:first-child { border-top: 1px solid rgba(184,151,106,0.12); }
+  .folder-servico-num { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: rgba(184,151,106,0.35); line-height: 1; flex-shrink: 0; width: 28px; }
+  .folder-servico-corpo { flex: 1; }
+  .folder-servico-nome { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .folder-servico-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.65; }
+
+  .folder-cta-box { background: var(--ink); padding: 24px 28px; margin-top: auto; }
+  .folder-cta-tag { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .folder-cta-texto { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: white; margin-bottom: 12px; line-height: 1.3; }
+  .folder-cta-texto em { font-style: italic; color: var(--gold-light); }
+  .folder-cta-detalhe { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+  .folder-cta-detalhe strong { color: rgba(255,255,255,0.6); font-weight: 400; }
+
+  /* ── QR CODE SVG REAL ─── */
+  /* QR para zyllahdigital.github.io — módulos 25×25 gerados manualmente (simplificado) */
+
+  /* ── PRINT ─────────────────────────────────────── */
+  @media print {
+    .nav-tela, .print-header, .instrucoes { display: none !important; }
+    .pagina { display: block !important; }
+    .print-area { background: white; padding: 0; gap: 0; }
+    body { background: white; }
+    .cartao { break-inside: avoid; }
+    .folder { break-inside: avoid; break-before: page; }
+  }
+
+  @media (max-width: 700px) {
+    .nav-btns { flex-direction: column; }
+    .cartoes-grid { grid-template-columns: 1fr; }
+    .print-header { padding: 20px 24px; flex-direction: column; gap: 16px; }
+    .instrucoes { padding: 16px 24px; }
+    .print-area { padding: 24px; }
+    .folder { width: 100%; }
+    .folder-capa, .folder-interior { height: auto; min-height: 560px; }
+    .folder-titulo { font-size: 36px; }
+  }
+
+  /* ── SENHA ── */
+  #senha-tela {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #1A1714;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .senha-box {
+    width: 100%; max-width: 400px; padding: 48px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .senha-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(184,151,106,0.5); letter-spacing: 0.3em; }
+  .senha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: white; line-height: 1.1; }
+  .senha-titulo em { font-style: italic; color: #D4B896; }
+  .senha-input {
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1px solid rgba(184,151,106,0.35);
+    padding: 14px 0; font-family: 'Jost', sans-serif; font-size: 18px;
+    color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
+  }
+  .senha-input:focus { border-bottom-color: #B8976A; }
+  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-btn {
+    background: #B8976A; color: #1A1714; border: none;
+    padding: 14px 32px; font-family: 'Jost', sans-serif;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; align-self: flex-start;
+  }
+  .senha-btn:hover { background: #D4B896; }
+  .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
+  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+</style>
+
+<script>
+(function() {
+  var SENHA = 'dj57Mi4WX$ZY';
+  var KEY = 'zyl_zyllahmateri';
+  if (sessionStorage.getItem(KEY) === '1') return;
+  var tela = document.getElementById('senha-tela');
+  if (tela) tela.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  window.verificarSenha = function() {
+    var inp = document.getElementById('senha-input');
+    var err = document.getElementById('senha-erro');
+    if (inp.value === SENHA) {
+      sessionStorage.setItem(KEY, '1');
+      tela.style.transition = 'opacity 0.3s';
+      tela.style.opacity = '0';
+      setTimeout(function() { tela.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+    } else {
+      err.textContent = 'Senha incorreta.';
+      inp.value = ''; inp.focus();
+      setTimeout(function() { err.textContent = ''; }, 2000);
+    }
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    var inp = document.getElementById('senha-input');
+    if (inp) { inp.focus(); inp.addEventListener('keydown', function(e) { if (e.key==='Enter') verificarSenha(); }); }
+  });
+})();
+</script>
+</head>
+<body>
+
+<div id="senha-tela" style="display:none;">
+  <div class="senha-box">
+    <div class="senha-logo">Zyllah Digital</div>
+    <div class="senha-titulo">Acesso<br><em>restrito</em></div>
+    <input id="senha-input" type="password" class="senha-input" placeholder="senha" autocomplete="off">
+    <div id="senha-erro" class="senha-erro"></div>
+    <button class="senha-btn" onclick="verificarSenha()">Entrar →</button>
+    <div class="senha-hint">Dificuldades? Entre em contato com a Zyllah Digital.</div>
+  </div>
+</div>
+
+
+<!-- ═══ NAVEGAÇÃO ═══ -->
+<div class="nav-tela" id="nav">
+  <div>
+    <h1 class="nav-titulo">Material de<br><em>Visita</em></h1>
+    <p class="nav-sub" style="margin-top:16px;">Cartão de visita e folder A5 para visitas a clínicas em Nova Friburgo. Imprima, deixe na recepção, abra a conversa.</p>
+  </div>
+  <div class="nav-btns">
+    <button class="nav-btn cartao" onclick="mostrar('cartao')">Cartão de Visita</button>
+    <button class="nav-btn folder" onclick="mostrar('folder')">Folder A5</button>
+  </div>
+  <p class="nav-nota">O QR Code aponta para <strong>zyllahdigital.github.io</strong>. Antes de imprimir, certifique-se que o site está no ar. Para gerar o QR Code real, use qr-code-generator.com com a URL do site.</p>
+  <a href="zyllah_hub.html" class="nav-voltar">← Voltar ao Hub</a>
+</div>
+
+<!-- ═══ CARTÃO ═══ -->
+<div class="pagina" id="pag-cartao">
+  <div class="print-header no-print">
+    <div class="print-header-titulo">Cartão de Visita — <em>Frente e Verso</em></div>
+    <div class="print-header-acoes">
+      <button class="btn-voltar-nav" onclick="mostrar('nav')">← Voltar</button>
+      <button class="btn-print" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+  <div class="instrucoes no-print">
+    <div class="instrucao-item"><strong>Tamanho:</strong> 9 × 5 cm (padrão)</div>
+    <div class="instrucao-item"><strong>Papel:</strong> Couchê 300g fosco ou Color Plus Preto para a frente</div>
+    <div class="instrucao-item"><strong>Acabamento ideal:</strong> Laminação fosca + hot stamping dourado no logo</div>
+    <div class="instrucao-item"><strong>Gráfica:</strong> Peça arquivo PDF em alta resolução — imprimir a tela diretamente é só para visualização</div>
+    <div class="instrucao-item"><strong>QR:</strong> Gerar em qr-code-generator.com antes de enviar para a gráfica</div>
+  </div>
+  <div class="print-area">
+    <div class="cartoes-wrap">
+      <div class="cartoes-label">Frente · Fundo escuro</div>
+      <div class="cartoes-grid">
+
+        <!-- FRENTE -->
+        <div>
+          <div style="font-size:10px;color:rgba(61,56,48,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;text-align:center;">Frente</div>
+          <div class="cartao cartao-frente">
+            <!-- Z decorativo fundo -->
+            <svg style="position:absolute;right:-8%;top:50%;transform:translateY(-50%);width:55%;opacity:0.04;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+              <path fill="white" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/>
+              <polygon fill="white" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/>
+              <path fill="white" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/>
+              <path fill="white" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/>
+              <polygon fill="white" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/>
+            </svg>
+            <div class="c-f-topo" style="position:relative;z-index:2;">
+              <svg class="c-f-z" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+                <path fill="#c3a366" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/>
+                <polygon fill="#c1a260" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/>
+                <path fill="#c7a866" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/>
+                <path fill="#a58346" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/>
+                <polygon fill="#a38342" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/>
+              </svg>
+              <div style="text-align:right;">
+                <div class="c-f-nome">Guilherme Caetano<em style="font-style:italic;font-size:11px;display:block;opacity:0.6;">Fundador</em></div>
+              </div>
+            </div>
+            <div class="c-f-base" style="position:relative;z-index:2;">
+              <div class="c-f-cargo">
+                Fundador<br>
+                Presença digital de alto padrão<br>
+                para especialistas de saúde
+              </div>
+              <div style="text-align:right;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:110px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERSO -->
+        <div>
+          <div style="font-size:10px;color:rgba(61,56,48,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;text-align:center;">Verso</div>
+          <div class="cartao cartao-verso">
+            <svg class="c-v-ornamento" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+              <path fill="#1A1714" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/>
+              <polygon fill="#1A1714" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/>
+              <path fill="#1A1714" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/>
+              <polygon fill="#1A1714" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/>
+            </svg>
+            <div class="c-v-topo">
+              <div class="c-v-tag" style="margin-bottom:10px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:80px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div>
+              <div class="c-v-frase">"Sua presença digital à<br>altura de quem você é."</div>
+            </div>
+            <div class="c-v-base">
+              <div class="c-v-contato">
+                <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8c2c1d4d4d9d096dcd1dfd1ccd9d4f8dfd5d9d1d496dbd7d5">[email&#160;protected]</a><br>
+                zyllahdigital.github.io<br>
+                Nova Friburgo · RJ
+              </div>
+              <div class="c-v-qr">
+                <!-- QR Code simplificado visual -->
+                <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                  <!-- finder top-left -->
+                  <rect x="2" y="2" width="14" height="14" rx="1" fill="#B8976A"/>
+                  <rect x="4" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/>
+                  <rect x="6" y="6" width="6" height="6" fill="#B8976A"/>
+                  <!-- finder top-right -->
+                  <rect x="28" y="2" width="14" height="14" rx="1" fill="#B8976A"/>
+                  <rect x="30" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/>
+                  <rect x="32" y="6" width="6" height="6" fill="#B8976A"/>
+                  <!-- finder bottom-left -->
+                  <rect x="2" y="28" width="14" height="14" rx="1" fill="#B8976A"/>
+                  <rect x="4" y="30" width="10" height="10" rx="0.5" fill="#FAF7F2"/>
+                  <rect x="6" y="32" width="6" height="6" fill="#B8976A"/>
+                  <!-- data modules simulados -->
+                  <rect x="18" y="2" width="2" height="2" fill="#B8976A"/>
+                  <rect x="22" y="2" width="2" height="2" fill="#B8976A"/>
+                  <rect x="18" y="6" width="4" height="2" fill="#B8976A"/>
+                  <rect x="18" y="10" width="2" height="4" fill="#B8976A"/>
+                  <rect x="22" y="10" width="4" height="2" fill="#B8976A"/>
+                  <rect x="2" y="18" width="2" height="4" fill="#B8976A"/>
+                  <rect x="6" y="18" width="4" height="2" fill="#B8976A"/>
+                  <rect x="2" y="24" width="4" height="2" fill="#B8976A"/>
+                  <rect x="10" y="22" width="2" height="4" fill="#B8976A"/>
+                  <rect x="18" y="18" width="6" height="2" fill="#B8976A"/>
+                  <rect x="18" y="22" width="2" height="6" fill="#B8976A"/>
+                  <rect x="22" y="24" width="6" height="2" fill="#B8976A"/>
+                  <rect x="26" y="18" width="2" height="4" fill="#B8976A"/>
+                  <rect x="30" y="18" width="4" height="2" fill="#B8976A"/>
+                  <rect x="28" y="22" width="2" height="2" fill="#B8976A"/>
+                  <rect x="32" y="22" width="4" height="2" fill="#B8976A"/>
+                  <rect x="30" y="26" width="2" height="4" fill="#B8976A"/>
+                  <rect x="34" y="28" width="4" height="2" fill="#B8976A"/>
+                  <rect x="38" y="24" width="2" height="6" fill="#B8976A"/>
+                  <rect x="34" y="34" width="6" height="2" fill="#B8976A"/>
+                  <rect x="28" y="32" width="4" height="2" fill="#B8976A"/>
+                  <rect x="22" y="32" width="4" height="4" fill="#B8976A"/>
+                  <rect x="14" y="28" width="2" height="2" fill="#B8976A"/>
+                  <rect x="14" y="32" width="2" height="4" fill="#B8976A"/>
+                  <rect x="6" y="28" width="4" height="2" fill="#B8976A"/>
+                  <rect x="8" y="32" width="2" height="6" fill="#B8976A"/>
+                  <rect x="4" y="36" width="2" height="4" fill="#B8976A"/>
+                  <rect x="12" y="38" width="4" height="2" fill="#B8976A"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- versão 2: 4 cartões para imprimir -->
+      <div style="margin-top:32px;width:100%;max-width:900px;">
+        <div style="font-size:10px;color:rgba(61,56,48,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;text-align:center;">Layout para impressão — 4 cartões por folha A4</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;background:white;padding:24px;border:1px solid rgba(184,151,106,0.15);">
+          <div class="cartao cartao-frente" style="position:relative;overflow:hidden;">
+            <svg style="position:absolute;right:-8%;top:50%;transform:translateY(-50%);width:55%;opacity:0.04;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="white" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="white" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="white" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="white" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg>
+            <div class="c-f-topo" style="position:relative;z-index:2;"><svg class="c-f-z" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="#c3a366" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="#c1a260" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="#c7a866" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/><path fill="#a58346" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="#a38342" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg><div style="text-align:right;"><div class="c-f-nome">Guilherme Caetano<em style="font-style:italic;font-size:11px;display:block;opacity:0.6;">Fundador</em></div></div></div>
+            <div class="c-f-base" style="position:relative;z-index:2;"><div class="c-f-cargo">Fundador<br>Presença digital de alto padrão<br>para especialistas de saúde</div><div style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:110px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div></div>
+          </div>
+          <div class="cartao cartao-verso" style="position:relative;overflow:hidden;">
+            <svg class="c-v-ornamento" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="#1A1714" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="#1A1714" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="#1A1714" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="#1A1714" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg>
+            <div class="c-v-topo"><div class="c-v-tag" style="margin-bottom:10px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:80px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div><div class="c-v-frase">"Sua presença digital à<br>altura de quem você é."</div></div>
+            <div class="c-v-base"><div class="c-v-contato"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="374d4e5b5b565f19535e505e43565b77505a565e5b1954585a">[email&#160;protected]</a><br>zyllahdigital.github.io<br>Nova Friburgo · RJ</div><div class="c-v-qr"><svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="6" y="6" width="6" height="6" fill="#B8976A"/><rect x="28" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="30" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="32" y="6" width="6" height="6" fill="#B8976A"/><rect x="2" y="28" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="30" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="6" y="32" width="6" height="6" fill="#B8976A"/><rect x="18" y="2" width="2" height="2" fill="#B8976A"/><rect x="22" y="2" width="2" height="2" fill="#B8976A"/><rect x="18" y="6" width="4" height="2" fill="#B8976A"/><rect x="18" y="10" width="2" height="4" fill="#B8976A"/><rect x="22" y="10" width="4" height="2" fill="#B8976A"/><rect x="2" y="18" width="2" height="4" fill="#B8976A"/><rect x="6" y="18" width="4" height="2" fill="#B8976A"/><rect x="2" y="24" width="4" height="2" fill="#B8976A"/><rect x="18" y="18" width="6" height="2" fill="#B8976A"/><rect x="18" y="22" width="2" height="6" fill="#B8976A"/><rect x="22" y="24" width="6" height="2" fill="#B8976A"/><rect x="26" y="18" width="2" height="4" fill="#B8976A"/><rect x="30" y="18" width="4" height="2" fill="#B8976A"/><rect x="34" y="28" width="4" height="2" fill="#B8976A"/><rect x="38" y="24" width="2" height="6" fill="#B8976A"/><rect x="34" y="34" width="6" height="2" fill="#B8976A"/><rect x="22" y="32" width="4" height="4" fill="#B8976A"/><rect x="8" y="32" width="2" height="6" fill="#B8976A"/><rect x="12" y="38" width="4" height="2" fill="#B8976A"/></svg></div></div>
+          </div>
+          <!-- repetir mais dois -->
+          <div class="cartao cartao-frente" style="position:relative;overflow:hidden;">
+            <svg style="position:absolute;right:-8%;top:50%;transform:translateY(-50%);width:55%;opacity:0.04;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="white" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="white" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="white" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="white" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg>
+            <div class="c-f-topo" style="position:relative;z-index:2;"><svg class="c-f-z" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="#c3a366" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="#c1a260" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="#c7a866" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/><path fill="#a58346" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="#a38342" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg><div style="text-align:right;"><div class="c-f-nome">Guilherme Caetano<em style="font-style:italic;font-size:11px;display:block;opacity:0.6;">Fundador</em></div></div></div>
+            <div class="c-f-base" style="position:relative;z-index:2;"><div class="c-f-cargo">Fundador<br>Presença digital de alto padrão<br>para especialistas de saúde</div><div style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:110px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div></div>
+          </div>
+          <div class="cartao cartao-verso" style="position:relative;overflow:hidden;">
+            <svg class="c-v-ornamento" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080"><path fill="#1A1714" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/><polygon fill="#1A1714" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/><path fill="#1A1714" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/><polygon fill="#1A1714" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/></svg>
+            <div class="c-v-topo"><div class="c-v-tag" style="margin-bottom:10px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:80px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div><div class="c-v-frase">"Sua presença digital à<br>altura de quem você é."</div></div>
+            <div class="c-v-base"><div class="c-v-contato"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ff5f6e3e3eee7a1ebe6e8e6fbeee3cfe8e2eee6e3a1ece0e2">[email&#160;protected]</a><br>zyllahdigital.github.io<br>Nova Friburgo · RJ</div><div class="c-v-qr"><svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="6" y="6" width="6" height="6" fill="#B8976A"/><rect x="28" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="30" y="4" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="32" y="6" width="6" height="6" fill="#B8976A"/><rect x="2" y="28" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="30" width="10" height="10" rx="0.5" fill="#FAF7F2"/><rect x="6" y="32" width="6" height="6" fill="#B8976A"/><rect x="18" y="2" width="2" height="2" fill="#B8976A"/><rect x="22" y="2" width="2" height="2" fill="#B8976A"/><rect x="18" y="6" width="4" height="2" fill="#B8976A"/><rect x="18" y="10" width="2" height="4" fill="#B8976A"/><rect x="22" y="10" width="4" height="2" fill="#B8976A"/><rect x="2" y="18" width="2" height="4" fill="#B8976A"/><rect x="6" y="18" width="4" height="2" fill="#B8976A"/><rect x="2" y="24" width="4" height="2" fill="#B8976A"/><rect x="18" y="18" width="6" height="2" fill="#B8976A"/><rect x="18" y="22" width="2" height="6" fill="#B8976A"/><rect x="22" y="24" width="6" height="2" fill="#B8976A"/><rect x="26" y="18" width="2" height="4" fill="#B8976A"/><rect x="30" y="18" width="4" height="2" fill="#B8976A"/><rect x="34" y="28" width="4" height="2" fill="#B8976A"/><rect x="38" y="24" width="2" height="6" fill="#B8976A"/><rect x="34" y="34" width="6" height="2" fill="#B8976A"/><rect x="22" y="32" width="4" height="4" fill="#B8976A"/><rect x="8" y="32" width="2" height="6" fill="#B8976A"/><rect x="12" y="38" width="4" height="2" fill="#B8976A"/></svg></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOLDER ═══ -->
+<div class="pagina" id="pag-folder">
+  <div class="print-header no-print">
+    <div class="print-header-titulo">Folder A5 — <em>Capa e Interior</em></div>
+    <div class="print-header-acoes">
+      <button class="btn-voltar-nav" onclick="mostrar('nav')">← Voltar</button>
+      <button class="btn-print" onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+  <div class="instrucoes no-print">
+    <div class="instrucao-item"><strong>Tamanho:</strong> A5 (148 × 210mm) dobrado = A6 no bolso</div>
+    <div class="instrucao-item"><strong>Papel:</strong> Couchê 150g fosco frente e verso</div>
+    <div class="instrucao-item"><strong>Acabamento:</strong> Laminação fosca · sem corte especial</div>
+    <div class="instrucao-item"><strong>Quantidade sugerida:</strong> 50 unidades para começar</div>
+    <div class="instrucao-item"><strong>QR real:</strong> gerar em qr-code-generator.com antes de enviar para gráfica</div>
+  </div>
+  <div class="print-area">
+    <div class="folder-wrap">
+
+      <!-- CAPA -->
+      <div style="font-size:10px;color:rgba(61,56,48,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;">Capa (frente)</div>
+      <div class="folder">
+        <div class="folder-capa">
+          <div class="folder-grade"></div>
+          <svg class="folder-z-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+            <path fill="white" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/>
+            <polygon fill="white" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/>
+            <path fill="white" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/>
+            <path fill="white" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/>
+            <polygon fill="white" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/>
+          </svg>
+
+          <div class="folder-topo">
+            <div class="folder-logo-txt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.04 1080" style="width:120px;height:auto;">
+  <path fill="#c3a366" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+  <polygon fill="#c1a260" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+  <path fill="#c7a866" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+  <path fill="#a58346" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+  <polygon fill="#a38342" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+  <path fill="#c7a866" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+  <path fill="#c7a866" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+  <path fill="#c7a866" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+  <path fill="#c7a866" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+  <path fill="#c7a866" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+  <path fill="#c7a866" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+  <rect fill="#c7a866" x="803.09" y="583.52" width="4.57" height="62.25"/>
+  <path fill="#c7a866" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+  <rect fill="#c7a866" x="951.27" y="583.52" width="4.57" height="62.25"/>
+  <polygon fill="#c7a866" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+  <path fill="#c7a866" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+  <polygon fill="#c7a866" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+</svg></div>
+            <div class="folder-tipo">Diagnóstico Digital · Nova Friburgo</div>
+          </div>
+
+          <div class="folder-hero">
+            <div class="folder-pre">Presença Digital de Alto Padrão</div>
+            <h1 class="folder-titulo">Sua clínica<br>comunica o que<br><em>você representa?</em></h1>
+            <p class="folder-resumo">Uma análise gratuita da sua presença digital atual — e o que seria possível construir à altura da excelência que você já pratica.</p>
+          </div>
+
+          <div class="folder-divisor"></div>
+
+          <div class="folder-pilares">
+            <div class="folder-pilar">
+              <div class="folder-pilar-num">01</div>
+              <div class="folder-pilar-nome">Identidade</div>
+              <div class="folder-pilar-desc">Marca que reflete seu nível</div>
+            </div>
+            <div class="folder-pilar">
+              <div class="folder-pilar-num">02</div>
+              <div class="folder-pilar-nome">Conteúdo</div>
+              <div class="folder-pilar-desc">Presença consistente, sem improviso</div>
+            </div>
+            <div class="folder-pilar">
+              <div class="folder-pilar-num">03</div>
+              <div class="folder-pilar-nome">Atendimento</div>
+              <div class="folder-pilar-desc">Zyllah Flow — 24h no WhatsApp</div>
+            </div>
+          </div>
+
+          <div class="folder-rodape">
+            <div class="folder-contato">
+              <strong>Guilherme Caetano</strong><br>
+              <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbb1b2a7a7aaa3e5afa2aca2bfaaa78baca6aaa2a7e5a8a4a6">[email&#160;protected]</a><br>
+              Nova Friburgo · RJ · 2026
+            </div>
+            <div class="folder-qr-box">
+              <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="4" width="10" height="10" rx="0.5" fill="#1A1714"/><rect x="6" y="6" width="6" height="6" fill="#B8976A"/>
+                <rect x="28" y="2" width="14" height="14" rx="1" fill="#B8976A"/><rect x="30" y="4" width="10" height="10" rx="0.5" fill="#1A1714"/><rect x="32" y="6" width="6" height="6" fill="#B8976A"/>
+                <rect x="2" y="28" width="14" height="14" rx="1" fill="#B8976A"/><rect x="4" y="30" width="10" height="10" rx="0.5" fill="#1A1714"/><rect x="6" y="32" width="6" height="6" fill="#B8976A"/>
+                <rect x="18" y="2" width="2" height="2" fill="#B8976A"/><rect x="22" y="2" width="2" height="2" fill="#B8976A"/><rect x="18" y="6" width="4" height="2" fill="#B8976A"/><rect x="18" y="10" width="2" height="4" fill="#B8976A"/><rect x="22" y="10" width="4" height="2" fill="#B8976A"/><rect x="2" y="18" width="2" height="4" fill="#B8976A"/><rect x="6" y="18" width="4" height="2" fill="#B8976A"/><rect x="2" y="24" width="4" height="2" fill="#B8976A"/><rect x="18" y="18" width="6" height="2" fill="#B8976A"/><rect x="18" y="22" width="2" height="6" fill="#B8976A"/><rect x="22" y="24" width="6" height="2" fill="#B8976A"/><rect x="26" y="18" width="2" height="4" fill="#B8976A"/><rect x="30" y="18" width="4" height="2" fill="#B8976A"/><rect x="34" y="28" width="4" height="2" fill="#B8976A"/><rect x="38" y="24" width="2" height="6" fill="#B8976A"/><rect x="34" y="34" width="6" height="2" fill="#B8976A"/><rect x="22" y="32" width="4" height="4" fill="#B8976A"/><rect x="8" y="32" width="2" height="6" fill="#B8976A"/><rect x="12" y="38" width="4" height="2" fill="#B8976A"/>
+              </svg>
+              <div class="folder-qr-label">Site</div>
+              <div class="folder-qr-url">zyllahdigital.github.io</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- INTERIOR -->
+      <div style="font-size:10px;color:rgba(61,56,48,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;margin-top:16px;">Interior (verso)</div>
+      <div class="folder">
+        <div class="folder-interior">
+
+          <div class="folder-int-topo">
+            <div>
+              <div class="folder-int-pre">O Sistema Zyllah</div>
+              <h2 class="folder-int-titulo">Tudo que sua<br>clínica precisa,<br><em>integrado.</em></h2>
+              <p class="folder-int-sub">Não trabalhamos com volume. Trabalhamos com precisão. Cada elemento é construído para atrair o paciente certo — antes do primeiro contato.</p>
+            </div>
+          </div>
+
+          <div class="folder-servicos">
+            <div class="folder-servico">
+              <div class="folder-servico-num">01</div>
+              <div class="folder-servico-corpo">
+                <div class="folder-servico-nome">Identidade Visual + Brand Book</div>
+                <div class="folder-servico-desc">Logo, cores, tipografia e voz aplicados com consistência. Um manual que garante que tudo comunica o mesmo nível de excelência.</div>
+              </div>
+            </div>
+            <div class="folder-servico">
+              <div class="folder-servico-num">02</div>
+              <div class="folder-servico-corpo">
+                <div class="folder-servico-nome">Site Profissional</div>
+                <div class="folder-servico-desc">Uma página construída para converter visitantes em contatos. Rápida, elegante, otimizada para mobile.</div>
+              </div>
+            </div>
+            <div class="folder-servico">
+              <div class="folder-servico-num">03</div>
+              <div class="folder-servico-corpo">
+                <div class="folder-servico-nome">Gestão de Instagram e LinkedIn</div>
+                <div class="folder-servico-desc">Conteúdo estratégico, 3 vezes por semana. Você não improvisa nem perde tempo — nós cuidamos da consistência.</div>
+              </div>
+            </div>
+            <div class="folder-servico">
+              <div class="folder-servico-num">04</div>
+              <div class="folder-servico-corpo">
+                <div class="folder-servico-nome">Produção Audiovisual</div>
+                <div class="folder-servico-desc">Fotos e vídeos com olhar de 20 anos de experiência em produção. Uma sessão por mês gera conteúdo para o ciclo inteiro.</div>
+              </div>
+            </div>
+            <div class="folder-servico">
+              <div class="folder-servico-num">05</div>
+              <div class="folder-servico-corpo">
+                <div class="folder-servico-nome">Zyllah Flow · Atendimento 24h</div>
+                <div class="folder-servico-desc">Sistema de atendimento automatizado via WhatsApp. Qualifica, responde e agenda com a sofisticação que sua clínica exige — mesmo às 23h.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="folder-cta-box">
+            <div class="folder-cta-tag">Próximo passo</div>
+            <div class="folder-cta-texto">Diagnóstico digital<br><em>gratuito e sem compromisso.</em></div>
+            <div class="folder-cta-detalhe">
+              Analisamos sua presença atual e mostramos o que seria possível.<br>
+              <strong>20 minutos. Sem compromisso.</strong><br>
+              <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72080b1e1e131a5c161b151b06131e32151f131b1e5c111d1f">[email&#160;protected]</a> · Nova Friburgo, RJ
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function mostrar(tipo) {
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('pag-cartao').classList.remove('ativa');
+  document.getElementById('pag-folder').classList.remove('ativa');
+
+  if (tipo === 'nav') {
+    document.getElementById('nav').style.display = 'flex';
+  } else if (tipo === 'cartao') {
+    document.getElementById('pag-cartao').classList.add('ativa');
+  } else if (tipo === 'folder') {
+    document.getElementById('pag-folder').classList.add('ativa');
+  }
+}
+</script>
+</body>
+</html>

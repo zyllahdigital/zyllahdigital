@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festa e Monte — Formulário de Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dark: #8A6A3E;
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+  }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
+
+  .nav { background: var(--ink); padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--gold); letter-spacing: 0.2em; }
+  .nav-back { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px; }
+  .nav-back:hover { color: rgba(255,255,255,0.7); }
+
+  .hero { background: var(--ink); padding: 72px 80px 56px; }
+  .hero-tag { font-size: 12px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+  .hero-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4.5vw, 56px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 20px; }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.4); line-height: 1.8; max-width: 540px; }
+  .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin-top: 40px; }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 64px 48px 80px; }
+
+  .intro-box { background: rgba(184,151,106,0.07); border-left: 3px solid var(--gold); padding: 24px 28px; margin-bottom: 56px; }
+  .intro-box p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
+  .intro-box p strong { color: var(--ink); font-weight: 400; }
+
+  .bloco { margin-bottom: 48px; }
+  .bloco-titulo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--ink); margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(184,151,106,0.2); }
+  .bloco-titulo em { font-style: italic; color: var(--gold); }
+
+  .campo { margin-bottom: 28px; }
+  .campo-label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; display: block; }
+  .campo-hint { font-size: 13px; color: rgba(61,56,48,0.5); margin-bottom: 10px; font-style: italic; }
+  .campo-input {
+    width: 100%; background: white; border: 1px solid rgba(184,151,106,0.2);
+    border-bottom: 2px solid rgba(184,151,106,0.3);
+    padding: 14px 16px; font-family: 'Jost', sans-serif; font-size: 16px;
+    color: var(--ink); outline: none; transition: border-color 0.2s; resize: none;
+  }
+  .campo-input:focus { border-color: var(--gold); border-bottom-color: var(--gold); }
+  .campo-input::placeholder { color: rgba(61,56,48,0.3); }
+
+  .opcoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .opcao { padding: 8px 16px; background: white; border: 1px solid rgba(184,151,106,0.2); font-size: 14px; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; user-select: none; }
+  .opcao:hover { background: var(--cream-mid); border-color: var(--gold); }
+  .opcao.sel { background: var(--gold); color: white; border-color: var(--gold); }
+
+  .escala { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+  .escala-label { font-size: 13px; color: rgba(61,56,48,0.45); }
+  .escala-btn { width: 44px; height: 44px; background: white; border: 1px solid rgba(184,151,106,0.2); font-size: 15px; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+  .escala-btn:hover { border-color: var(--gold); }
+  .escala-btn.sel { background: var(--gold); color: white; border-color: var(--gold); }
+
+  .divisor { height: 1px; background: rgba(184,151,106,0.12); margin: 48px 0; }
+
+  .btn-imprimir { display: block; width: 100%; padding: 18px; background: var(--ink); color: var(--gold); border: none; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 48px; }
+  .btn-imprimir:hover { background: var(--ink-soft); }
+
+  @media print {
+    .nav, .btn-imprimir { display: none; }
+    .hero { padding: 40px; }
+    .container { padding: 32px; }
+    .campo-input { border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 600px) {
+    .hero, .container { padding-left: 24px; padding-right: 24px; }
+    .nav { padding: 14px 20px; }
+  }
+
+  /* ── SENHA ── */
+  #senha-tela {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #1A1714;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .senha-box {
+    width: 100%; max-width: 400px; padding: 48px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .senha-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(184,151,106,0.5); letter-spacing: 0.3em; }
+  .senha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: white; line-height: 1.1; }
+  .senha-titulo em { font-style: italic; color: #D4B896; }
+  .senha-input {
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1px solid rgba(184,151,106,0.35);
+    padding: 14px 0; font-family: 'Jost', sans-serif; font-size: 18px;
+    color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
+  }
+  .senha-input:focus { border-bottom-color: #B8976A; }
+  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-btn {
+    background: #B8976A; color: #1A1714; border: none;
+    padding: 14px 32px; font-family: 'Jost', sans-serif;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; align-self: flex-start;
+  }
+  .senha-btn:hover { background: #D4B896; }
+  .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
+  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+</style>
+
+<script>
+(function() {
+  var SENHA = 'mS!vt8BC6DNc';
+  var KEY = 'zh_fem_f';
+  if (sessionStorage.getItem(KEY) === '1') return;
+  var tela = document.getElementById('senha-tela');
+  if (tela) tela.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  window.verificarSenha = function() {
+    var inp = document.getElementById('senha-input');
+    var err = document.getElementById('senha-erro');
+    if (inp.value === SENHA) {
+      sessionStorage.setItem(KEY, '1');
+      tela.style.transition = 'opacity 0.3s';
+      tela.style.opacity = '0';
+      setTimeout(function() { tela.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+    } else {
+      err.textContent = 'Senha incorreta.';
+      inp.value = ''; inp.focus();
+      setTimeout(function() { err.textContent = ''; }, 2000);
+    }
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    var inp = document.getElementById('senha-input');
+    if (inp) { inp.focus(); inp.addEventListener('keydown', function(e) { if (e.key==='Enter') verificarSenha(); }); }
+  });
+})();
+</script>
+</head>
+<body>
+
+<div id="senha-tela" style="display:none;">
+  <div class="senha-box">
+    <div class="senha-logo">Zyllah Digital</div>
+    <div class="senha-titulo">Acesso<br><em>restrito</em></div>
+    <input id="senha-input" type="password" class="senha-input" placeholder="senha" autocomplete="off">
+    <div id="senha-erro" class="senha-erro"></div>
+    <button class="senha-btn" onclick="verificarSenha()">Entrar →</button>
+    <div class="senha-hint">Dificuldades? Entre em contato com a Zyllah Digital.</div>
+  </div>
+</div>
+
+
+<nav class="nav">
+  <div class="nav-logo">Zyllah Digital · Festa e Monte</div>
+  <a href="festaemont_briefing.html" class="nav-back">← Estratégia</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Formulário de Briefing</div>
+  <h1 class="hero-title">Conheça <em>sua marca</em><br>antes de criá-la</h1>
+  <p class="hero-sub">Respostas honestas aqui poupam retrabalho depois. Não existe certo ou errado — existe o que é verdadeiro para o seu negócio.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="container">
+  <form id="briefing-form" action="https://formspree.io/f/xlgwkvlz" method="POST">
+  <input type="hidden" name="_subject" value="Briefing Festa e Monte — Nova resposta">
+  <input type="hidden" name="_replyto" value="">
+
+  <div class="intro-box">
+    <p>Este formulário é o ponto de partida para criar a <strong>identidade visual</strong>, os <strong>templates de conteúdo</strong> e os <strong>textos de anúncio</strong> da Festa e Monte. Preencha com calma — pode ser feito em partes e revisado depois.</p>
+  </div>
+
+  <!-- BLOCO 1 — O NEGÓCIO -->
+  <div class="bloco">
+    <div class="bloco-titulo">01 · <em>O negócio</em></div>
+
+    <div class="campo">
+      <label class="campo-label">Como você se apresenta quando alguém pergunta o que você faz?</label>
+      <div class="campo-hint">Não o nome da empresa — o que você diz naturalmente numa conversa.</div>
+      <textarea class="campo-input" rows="3" placeholder="Ex: &quot;Eu alugo kits de decoração para festas infantis...&quot;"></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">O que você mais gosta no seu trabalho?</label>
+      <textarea class="campo-input" rows="3" placeholder="Pode ser um momento específico, uma sensação, um tipo de cliente..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">O que você menos gosta ou que te cansa?</label>
+      <textarea class="campo-input" rows="3" placeholder="Processo que toma tempo, tipo de pedido difícil, o que daria vontade de eliminar se pudesse..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Quais os temas mais pedidos hoje?</label>
+      <div class="campo-hint">Liste os 5 mais frequentes, em ordem de pedido.</div>
+      <textarea class="campo-input" rows="3" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Quais temas você NÃO tem e perde clientes por isso?</label>
+      <textarea class="campo-input" rows="3" placeholder="Os pedidos que chegam e você precisa recusar ou não consegue atender bem..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Qual o prazo mínimo que o cliente precisa reservar com antecedência?</label>
+      <input type="text" class="campo-input" placeholder="Ex: 3 dias, 1 semana...">
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">A maior dúvida ou reclamação que os clientes têm hoje</label>
+      <textarea class="campo-input" rows="3" placeholder="O que as pessoas perguntam com mais frequência antes de fechar?"></textarea>
+    </div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- BLOCO 2 — O CLIENTE -->
+  <div class="bloco">
+    <div class="bloco-titulo">02 · <em>Quem compra</em></div>
+
+    <div class="campo">
+      <label class="campo-label">Descreva o perfil da sua cliente típica</label>
+      <div class="campo-hint">Idade aproximada, se trabalha fora, como ela encontra você, o que ela valoriza.</div>
+      <textarea class="campo-input" rows="4" placeholder="Ex: &quot;Mãe de 28 a 40 anos, me encontra pelo Marketplace, quer festa bonita sem gastar muito...&quot;"></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Qual o evento mais comum que ela está organizando?</label>
+      <div class="opcoes" id="eventos">
+        <div class="opcao" onclick="toggle(this)">Aniversário infantil</div>
+        <div class="opcao" onclick="toggle(this)">Chá de bebê</div>
+        <div class="opcao" onclick="toggle(this)">Chá de fraldas</div>
+        <div class="opcao" onclick="toggle(this)">Chá de panela</div>
+        <div class="opcao" onclick="toggle(this)">Festa adulto</div>
+        <div class="opcao" onclick="toggle(this)">Outro</div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">O que faz ela escolher você em vez do concorrente?</label>
+      <div class="campo-hint">Mesmo que ainda não tenha certeza — qual a principal razão que ela dá?</div>
+      <textarea class="campo-input" rows="3" placeholder="Preço, indicação, localização, variedade de temas, atendimento..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">O que faz ela NÃO fechar quando entra em contato?</label>
+      <textarea class="campo-input" rows="3" placeholder="Vai pensar e some, pede desconto, não tem o tema, prefere outro lugar..."></textarea>
+    </div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- BLOCO 3 — IDENTIDADE VISUAL -->
+  <div class="bloco">
+    <div class="bloco-titulo">03 · <em>Visual e personalidade</em></div>
+
+    <div class="campo">
+      <label class="campo-label">Tem alguma cor que você ama para a marca?</label>
+      <textarea class="campo-input" rows="2" placeholder="Pode ser tom, sensação, referência: &quot;rosa claro, não pink&quot;, &quot;bege quente&quot;, &quot;não sei ainda&quot;..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Tem alguma cor que você detesta ou jamais usaria?</label>
+      <input type="text" class="campo-input" placeholder="Qualquer cor que não representa o que você quer transmitir...">
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Se o seu negócio fosse uma pessoa, como ela seria?</label>
+      <div class="campo-hint">Escolha os adjetivos que melhor descrevem a personalidade que você quer transmitir.</div>
+      <div class="opcoes" id="personalidade">
+        <div class="opcao" onclick="toggle(this)">Carinhosa</div>
+        <div class="opcao" onclick="toggle(this)">Divertida</div>
+        <div class="opcao" onclick="toggle(this)">Organizada</div>
+        <div class="opcao" onclick="toggle(this)">Acessível</div>
+        <div class="opcao" onclick="toggle(this)">Sofisticada</div>
+        <div class="opcao" onclick="toggle(this)">Criativa</div>
+        <div class="opcao" onclick="toggle(this)">Confiável</div>
+        <div class="opcao" onclick="toggle(this)">Alegre</div>
+        <div class="opcao" onclick="toggle(this)">Delicada</div>
+        <div class="opcao" onclick="toggle(this)">Prática</div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Existe alguma marca (qualquer setor) que você admira a comunicação visual?</label>
+      <div class="campo-hint">Não precisa ser de decoração. Pode ser uma loja, perfume, marca de roupa — qualquer coisa que você olha e pensa "quero algo assim".</div>
+      <textarea class="campo-input" rows="3" placeholder="Nome da marca + o que você gosta nela..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Tem algum perfil de Instagram de decoração de festas que você acha bonito?</label>
+      <input type="text" class="campo-input" placeholder="@perfil ou nome...">
+    </div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- BLOCO 4 — SONHO E DIREÇÃO -->
+  <div class="bloco">
+    <div class="bloco-titulo">04 · <em>Para onde vai</em></div>
+
+    <div class="campo">
+      <label class="campo-label">Daqui a 1 ano, como você imagina o negócio?</label>
+      <div class="campo-hint">Não precisa ser grande — pode ser só "estar recebendo mais pedidos" ou "ter um tema específico que domino".</div>
+      <textarea class="campo-input" rows="4" placeholder="Mais clientes, novo estoque, kits personalizados, outra cidade, renda maior..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Quanto você gostaria de faturar por mês com isso?</label>
+      <div class="campo-hint">Um número real, não um sonho. O que mudaria sua vida se você alcançasse?</div>
+      <input type="text" class="campo-input" placeholder="R$...">
+    </div>
+
+    <div class="campo">
+      <label class="campo-label">Tem alguma coisa que você quer acrescentar ao negócio que ainda não foi mencionada?</label>
+      <textarea class="campo-input" rows="4" placeholder="Ideias, dúvidas, coisas que estão na sua cabeça há tempo mas você não sabe como implementar..."></textarea>
+    </div>
+  </div>
+
+  <!-- ENVIO -->
+  <div style="margin-top:48px;border-top:1px solid rgba(184,151,106,0.15);padding-top:40px;">
+    <div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px;">Envio</div>
+    <p style="font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:24px;">Ao clicar em enviar, as respostas chegam diretamente à Zyllah Digital por e-mail. Campos não preenchidos são ignorados.</p>
+
+    <div class="campo">
+      <label class="campo-label">Seu nome</label>
+      <input type="text" name="nome" class="campo-input" placeholder="Como prefere ser chamada">
+    </div>
+    <div class="campo">
+      <label class="campo-label">Seu WhatsApp <span style="color:rgba(61,56,48,0.4);font-size:11px;letter-spacing:0;">(opcional)</span></label>
+      <input type="tel" name="whatsapp" class="campo-input" placeholder="(22) 99999-9999">
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;">
+      <button type="submit" class="btn-imprimir" style="flex:1;min-width:200px;margin-top:0;" id="btn-enviar">
+        Enviar respostas →
+      </button>
+      <button type="button" class="btn-imprimir" onclick="window.print()" style="flex:0;min-width:160px;margin-top:0;background:transparent;color:var(--ink);border:1px solid rgba(61,56,48,0.3);">
+        Salvar PDF
+      </button>
+    </div>
+
+    <div id="form-sucesso" style="display:none;margin-top:24px;background:rgba(100,180,100,0.08);border:1px solid rgba(100,180,100,0.2);padding:20px 24px;">
+      <p style="font-size:15px;color:rgba(80,160,80,0.9);line-height:1.7;">✓ &nbsp;Respostas enviadas com sucesso. A Zyllah Digital vai analisar e entrar em contato em breve.</p>
+    </div>
+    <div id="form-erro" style="display:none;margin-top:24px;background:rgba(180,80,80,0.07);border:1px solid rgba(180,80,80,0.2);padding:20px 24px;">
+      <p style="font-size:15px;color:rgba(200,100,100,0.9);line-height:1.7;">Erro ao enviar. Tente novamente ou salve como PDF e envie por WhatsApp.</p>
+    </div>
+  </div>
+
+</form>
+</div>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('sel');
+}
+
+// Formspree AJAX submit
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('briefing-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('btn-enviar');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    var data = new FormData(form);
+
+    // Collect selected options
+    ['eventos', 'personalidade'].forEach(function(id) {
+      var sel = document.querySelectorAll('#' + id + ' .opcao.sel');
+      var vals = Array.from(sel).map(function(o) { return o.textContent; }).join(', ');
+      if (vals) data.append(id, vals);
+    });
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        document.getElementById('form-sucesso').style.display = 'block';
+        form.reset();
+        document.querySelectorAll('.opcao.sel').forEach(function(o) { o.classList.remove('sel'); });
+      } else {
+        document.getElementById('form-erro').style.display = 'block';
+      }
+      btn.textContent = 'Enviar respostas →';
+      btn.disabled = false;
+    }).catch(function() {
+      document.getElementById('form-erro').style.display = 'block';
+      btn.textContent = 'Enviar respostas →';
+      btn.disabled = false;
+    });
+  });
+});
+</script>
+
+</body>
+</html>
