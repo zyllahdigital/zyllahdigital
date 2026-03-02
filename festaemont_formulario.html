@@ -180,28 +180,28 @@
     <div class="campo">
       <label class="campo-label">Como você se apresenta quando alguém pergunta o que você faz?</label>
       <div class="campo-hint">Não o nome da empresa — o que você diz naturalmente numa conversa.</div>
-      <textarea class="campo-input" rows="3" placeholder="Ex: &quot;Eu alugo kits de decoração para festas infantis...&quot;"></textarea>
+      <textarea name="apresentacao" class="campo-input" rows="3" placeholder="Ex: &quot;Eu alugo kits de decoração para festas infantis...&quot;"></textarea>
     </div>
 
     <div class="campo">
       <label class="campo-label">O que você mais gosta no seu trabalho?</label>
-      <textarea class="campo-input" rows="3" placeholder="Pode ser um momento específico, uma sensação, um tipo de cliente..."></textarea>
+      <textarea name="gosta" class="campo-input" rows="3" placeholder="Pode ser um momento específico, uma sensação, um tipo de cliente..."></textarea>
     </div>
 
     <div class="campo">
       <label class="campo-label">O que você menos gosta ou que te cansa?</label>
-      <textarea class="campo-input" rows="3" placeholder="Processo que toma tempo, tipo de pedido difícil, o que daria vontade de eliminar se pudesse..."></textarea>
+      <textarea name="nao_gosta" class="campo-input" rows="3" placeholder="Processo que toma tempo, tipo de pedido difícil, o que daria vontade de eliminar se pudesse..."></textarea>
     </div>
 
     <div class="campo">
       <label class="campo-label">Quais os temas mais pedidos hoje?</label>
       <div class="campo-hint">Liste os 5 mais frequentes, em ordem de pedido.</div>
-      <textarea class="campo-input" rows="3" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+      <textarea name="temas_pedidos" class="campo-input" rows="3" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
     </div>
 
     <div class="campo">
       <label class="campo-label">Quais temas você NÃO tem e perde clientes por isso?</label>
-      <textarea class="campo-input" rows="3" placeholder="Os pedidos que chegam e você precisa recusar ou não consegue atender bem..."></textarea>
+      <textarea name="temas_faltam" class="campo-input" rows="3" placeholder="Os pedidos que chegam e você precisa recusar ou não consegue atender bem..."></textarea>
     </div>
 
     <div class="campo">
@@ -211,7 +211,7 @@
 
     <div class="campo">
       <label class="campo-label">A maior dúvida ou reclamação que os clientes têm hoje</label>
-      <textarea class="campo-input" rows="3" placeholder="O que as pessoas perguntam com mais frequência antes de fechar?"></textarea>
+      <textarea name="duvida_reclamacao" class="campo-input" rows="3" placeholder="O que as pessoas perguntam com mais frequência antes de fechar?"></textarea>
     </div>
   </div>
 
@@ -224,7 +224,7 @@
     <div class="campo">
       <label class="campo-label">Descreva o perfil da sua cliente típica</label>
       <div class="campo-hint">Idade aproximada, se trabalha fora, como ela encontra você, o que ela valoriza.</div>
-      <textarea class="campo-input" rows="4" placeholder="Ex: &quot;Mãe de 28 a 40 anos, me encontra pelo Marketplace, quer festa bonita sem gastar muito...&quot;"></textarea>
+      <textarea name="perfil_cliente" class="campo-input" rows="4" placeholder="Ex: &quot;Mãe de 28 a 40 anos, me encontra pelo Marketplace, quer festa bonita sem gastar muito...&quot;"></textarea>
     </div>
 
     <div class="campo">
@@ -242,12 +242,12 @@
     <div class="campo">
       <label class="campo-label">O que faz ela escolher você em vez do concorrente?</label>
       <div class="campo-hint">Mesmo que ainda não tenha certeza — qual a principal razão que ela dá?</div>
-      <textarea class="campo-input" rows="3" placeholder="Preço, indicação, localização, variedade de temas, atendimento..."></textarea>
+      <textarea name="motivo_escolha" class="campo-input" rows="3" placeholder="Preço, indicação, localização, variedade de temas, atendimento..."></textarea>
     </div>
 
     <div class="campo">
       <label class="campo-label">O que faz ela NÃO fechar quando entra em contato?</label>
-      <textarea class="campo-input" rows="3" placeholder="Vai pensar e some, pede desconto, não tem o tema, prefere outro lugar..."></textarea>
+      <textarea name="motivo_nao_fechar" class="campo-input" rows="3" placeholder="Vai pensar e some, pede desconto, não tem o tema, prefere outro lugar..."></textarea>
     </div>
   </div>
 
@@ -259,7 +259,7 @@
 
     <div class="campo">
       <label class="campo-label">Tem alguma cor que você ama para a marca?</label>
-      <textarea class="campo-input" rows="2" placeholder="Pode ser tom, sensação, referência: &quot;rosa claro, não pink&quot;, &quot;bege quente&quot;, &quot;não sei ainda&quot;..."></textarea>
+      <textarea name="cor_ama" class="campo-input" rows="2" placeholder="Pode ser tom, sensação, referência: &quot;rosa claro, não pink&quot;, &quot;bege quente&quot;, &quot;não sei ainda&quot;..."></textarea>
     </div>
 
     <div class="campo">
@@ -287,7 +287,7 @@
     <div class="campo">
       <label class="campo-label">Existe alguma marca (qualquer setor) que você admira a comunicação visual?</label>
       <div class="campo-hint">Não precisa ser de decoração. Pode ser uma loja, perfume, marca de roupa — qualquer coisa que você olha e pensa "quero algo assim".</div>
-      <textarea class="campo-input" rows="3" placeholder="Nome da marca + o que você gosta nela..."></textarea>
+      <textarea name="marca_referencia" class="campo-input" rows="3" placeholder="Nome da marca + o que você gosta nela..."></textarea>
     </div>
 
     <div class="campo">
@@ -305,7 +305,7 @@
     <div class="campo">
       <label class="campo-label">Daqui a 1 ano, como você imagina o negócio?</label>
       <div class="campo-hint">Não precisa ser grande — pode ser só "estar recebendo mais pedidos" ou "ter um tema específico que domino".</div>
-      <textarea class="campo-input" rows="4" placeholder="Mais clientes, novo estoque, kits personalizados, outra cidade, renda maior..."></textarea>
+      <textarea name="visao_1_ano" class="campo-input" rows="4" placeholder="Mais clientes, novo estoque, kits personalizados, outra cidade, renda maior..."></textarea>
     </div>
 
     <div class="campo">
@@ -316,7 +316,7 @@
 
     <div class="campo">
       <label class="campo-label">Tem alguma coisa que você quer acrescentar ao negócio que ainda não foi mencionada?</label>
-      <textarea class="campo-input" rows="4" placeholder="Ideias, dúvidas, coisas que estão na sua cabeça há tempo mas você não sabe como implementar..."></textarea>
+      <textarea name="observacoes" class="campo-input" rows="4" placeholder="Ideias, dúvidas, coisas que estão na sua cabeça há tempo mas você não sabe como implementar..."></textarea>
     </div>
   </div>
 
@@ -328,6 +328,10 @@
     <div class="campo">
       <label class="campo-label">Seu nome</label>
       <input type="text" name="nome" class="campo-input" placeholder="Como prefere ser chamada">
+    </div>
+    <div class="campo">
+      <label class="campo-label">Seu e-mail <span style="color:rgba(61,56,48,0.4);font-size:11px;letter-spacing:0;">(opcional)</span></label>
+      <input type="email" name="_replyto" class="campo-input" placeholder="seu@email.com">
     </div>
     <div class="campo">
       <label class="campo-label">Seu WhatsApp <span style="color:rgba(61,56,48,0.4);font-size:11px;letter-spacing:0;">(opcional)</span></label>
