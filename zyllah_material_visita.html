@@ -334,6 +334,18 @@
   });
 })();
 </script>
+<script>
+function mostrar(id) {
+  document.querySelectorAll('.pagina').forEach(function(p) {
+    p.classList.remove('ativa');
+  });
+  var el = document.getElementById('pag-' + id);
+  if (el) el.classList.add('ativa');
+}
+document.addEventListener('DOMContentLoaded', function() {
+  mostrar('cartao');
+});
+</script>
 </head>
 <body>
 
