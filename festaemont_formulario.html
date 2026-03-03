@@ -363,43 +363,16 @@ function toggle(el) {
   el.classList.toggle('sel');
 }
 
-// Formspree AJAX submit
+// Collect opcoes before native submit
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('briefing-form');
   if (!form) return;
   form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('btn-enviar');
-    btn.textContent = 'Enviando...';
-    btn.disabled = true;
-
-    var data = new FormData(form);
-
-    // Collect selected options
     ['eventos', 'personalidade'].forEach(function(id) {
       var sel = document.querySelectorAll('#' + id + ' .opcao.sel');
       var vals = Array.from(sel).map(function(o) { return o.textContent; }).join(', ');
-      if (vals) data.append(id, vals);
-    });
-
-    fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r) {
-      if (r.ok) {
-        document.getElementById('form-sucesso').style.display = 'block';
-        form.reset();
-        document.querySelectorAll('.opcao.sel').forEach(function(o) { o.classList.remove('sel'); });
-      } else {
-        document.getElementById('form-erro').style.display = 'block';
-      }
-      btn.textContent = 'Enviar respostas →';
-      btn.disabled = false;
-    }).catch(function() {
-      document.getElementById('form-erro').style.display = 'block';
-      btn.textContent = 'Enviar respostas →';
-      btn.disabled = false;
+      var inp = document.getElementById('hidden_' + id);
+      if (inp) inp.value = vals;
     });
   });
 });
