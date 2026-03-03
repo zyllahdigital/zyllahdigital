@@ -4,144 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zyllah Digital — Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --gold: #B8976A; --gold-light: #D4B896;
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dark: #8A6A3E;
     --ink: #1A1714; --ink-soft: #3D3830;
     --cream: #FAF7F2; --cream-mid: #F0EBE1;
-    --green: rgba(100,200,120,0.7); --green-bg: rgba(100,180,100,0.05); --green-border: rgba(100,180,100,0.18);
-    --blue: rgba(100,150,220,0.7); --blue-bg: rgba(80,120,200,0.05); --blue-border: rgba(80,130,210,0.18);
-    --amber: rgba(220,170,80,0.8); --amber-bg: rgba(200,150,60,0.05); --amber-border: rgba(200,150,60,0.2);
-    --rose: rgba(200,120,120,0.7); --rose-bg: rgba(180,100,100,0.05); --rose-border: rgba(180,100,100,0.18);
   }
-  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--ink); color: var(--cream); min-height: 100vh; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 80px 48px; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
 
-  /* HEADER */
-  .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 64px; }
-  .top-logo svg { width: 110px; height: auto; }
-  .top-meta { text-align: right; }
-  .top-meta p { font-size: 12px; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); line-height: 1.8; }
-  .hero-tag { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; margin-bottom: 14px; }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.3); line-height: 1.8; max-width: 500px; margin-bottom: 56px; }
-
-  /* LEGENDA */
-  .legenda { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; padding: 18px 24px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); }
-  .legenda-item { display: flex; align-items: center; gap: 8px; }
-  .legenda-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .legenda-txt { font-size: 12px; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); }
-  .dot-interno { background: var(--amber); }
-  .dot-prospect { background: var(--blue); }
-  .dot-colaborador { background: var(--green); }
-  .dot-cliente { background: var(--rose); }
-  .dot-site { background: var(--gold); }
-
-  /* SEÇÕES */
-  .secao { margin-bottom: 48px; }
-  .secao-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .secao-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .secao-label { font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.4); flex: 1; }
-  .secao-badge { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 0; }
-  .badge-interno { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
-  .badge-prospect { background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--blue); }
-  .badge-colaborador { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
-  .badge-cliente { background: var(--rose-bg); border: 1px solid var(--rose-border); color: var(--rose); }
-  .badge-site { background: rgba(184,151,106,0.06); border: 1px solid rgba(184,151,106,0.2); color: var(--gold); }
-
-  /* AVISO DE SEÇÃO */
-  .secao-aviso { font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 0.05em; margin-bottom: 14px; padding-left: 24px; font-style: italic; }
-
-  /* CARDS */
-  .cards { display: flex; flex-direction: column; gap: 2px; }
-  .card { display: flex; align-items: stretch; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); transition: all 0.22s; text-decoration: none; }
-  .card:hover { background: rgba(184,151,106,0.05); border-color: rgba(184,151,106,0.3); transform: translateX(3px); }
-  .card-accent { width: 3px; flex-shrink: 0; transition: background 0.2s; }
-  .accent-interno { background: rgba(220,170,80,0.25); }
-  .accent-prospect { background: rgba(80,130,210,0.25); }
-  .accent-colaborador { background: rgba(100,180,100,0.25); }
-  .accent-cliente { background: rgba(180,100,100,0.25); }
-  .accent-site { background: rgba(184,151,106,0.25); }
-  .card:hover .card-accent { opacity: 1; }
-  .card:hover .accent-interno { background: var(--amber); }
-  .card:hover .accent-prospect { background: var(--blue); }
-  .card:hover .accent-colaborador { background: var(--green); }
-  .card:hover .accent-cliente { background: var(--rose); }
-  .card:hover .accent-site { background: var(--gold); }
-  .card-body { padding: 22px 26px; flex: 1; }
-  .card-tag { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(184,151,106,0.5); margin-bottom: 5px; display: block; }
-  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 300; color: white; margin-bottom: 3px; }
-  .card-desc { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.55; }
-  .card-right { padding: 22px 24px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .card-badge-tipo { font-size: 11px; letter-spacing: 0.12em; padding: 4px 10px; }
-  .card-arrow { color: rgba(184,151,106,0.35); font-size: 17px; transition: transform 0.2s; }
-  .card:hover .card-arrow { transform: translateX(3px); color: var(--gold); }
-
-  /* SEPARADOR */
-  .sep { display: flex; align-items: center; gap: 20px; margin: 44px 0; }
-  .sep-linha { flex: 1; height: 1px; background: rgba(184,151,106,0.08); }
-  .sep-mark { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(184,151,106,0.25); }
-
-  /* NOTA */
-  .nota { padding: 22px 26px; margin-top: 6px; }
-  .nota-interno { background: var(--amber-bg); border: 1px solid var(--amber-border); }
-  .nota-prospect { background: var(--blue-bg); border: 1px solid var(--blue-border); }
-  .nota-colaborador { background: var(--green-bg); border: 1px solid var(--green-border); }
-  .nota h4 { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 8px; }
-  .nota-interno h4 { color: var(--amber); }
-  .nota-prospect h4 { color: var(--blue); }
-  .nota-colaborador h4 { color: var(--green); }
-  .nota p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.65; }
-
-  /* CLIENTES ATIVOS */
-  .clientes-titulo { font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin: 32px 0 14px; padding-left: 2px; }
-
-  /* RODAPÉ */
-  .rodape { margin-top: 72px; padding-top: 28px; border-top: 1px solid rgba(184,151,106,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-  .rodape p { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
-
-  @media (max-width: 600px) {
-    .wrap { padding: 48px 20px; }
-    .hero-title { font-size: 36px; }
-    .top { flex-direction: column; gap: 20px; }
-    .top-meta { text-align: left; }
-    .card-right { display: none; }
-    .legenda { gap: 16px; }
-  }
-
-  /* ── SENHA ── */
-  #senha-tela {
-    position: fixed; inset: 0; z-index: 99999;
-    background: #1A1714;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .senha-box {
-    width: 100%; max-width: 400px; padding: 48px;
-    display: flex; flex-direction: column; gap: 20px;
-  }
+  /* SENHA */
+  #senha-tela { position: fixed; inset: 0; z-index: 99999; background: #1A1714; display: flex; align-items: center; justify-content: center; }
+  .senha-box { width: 100%; max-width: 400px; padding: 48px; display: flex; flex-direction: column; gap: 20px; }
   .senha-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(184,151,106,0.5); letter-spacing: 0.3em; }
   .senha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: white; line-height: 1.1; }
   .senha-titulo em { font-style: italic; color: #D4B896; }
-  .senha-input {
-    width: 100%; background: transparent;
-    border: none; border-bottom: 1px solid rgba(184,151,106,0.35);
-    padding: 14px 0; font-family: 'Jost', sans-serif; font-size: 18px;
-    color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
-  }
+  .senha-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(184,151,106,0.35); padding: 14px 0; font-family: 'Jost', sans-serif; font-size: 18px; color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s; }
   .senha-input:focus { border-bottom-color: #B8976A; }
   .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
-  .senha-btn {
-    background: #B8976A; color: #1A1714; border: none;
-    padding: 14px 32px; font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
-    cursor: pointer; transition: background 0.2s; align-self: flex-start;
-  }
+  .senha-btn { background: #B8976A; color: #1A1714; border: none; padding: 14px 32px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
   .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+
+  /* HEADER */
+  .header { background: var(--ink); padding: 56px 80px 48px; }
+  .header-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .header-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 12px; }
+  .header-titulo em { font-style: italic; color: var(--gold-light); }
+  .header-sub { font-size: 14px; color: rgba(255,255,255,0.3); max-width: 520px; line-height: 1.8; }
+  .header-regra { margin-top: 28px; padding: 16px 20px; background: rgba(184,151,106,0.07); border-left: 2px solid rgba(184,151,106,0.3); font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.75; max-width: 560px; }
+  .header-regra strong { color: rgba(255,255,255,0.55); font-weight: 400; }
+
+  /* CORPO */
+  .corpo { max-width: 900px; margin: 0 auto; padding: 64px 60px 100px; }
+
+  /* FUNDO */
+  .fundo { margin-bottom: 64px; }
+  .fundo-header { display: flex; align-items: center; gap: 20px; margin-bottom: 8px; }
+  .fundo-cor { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .fundo-nome { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); }
+  .fundo-nome em { font-style: italic; color: var(--gold); }
+  .fundo-regra { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 24px; padding: 12px 16px; background: rgba(184,151,106,0.05); border-left: 2px solid rgba(184,151,106,0.2); max-width: 600px; }
+  .fundo-regra strong { color: var(--ink); font-weight: 400; }
+
+  /* SUBFUNDO */
+  .subfundo { margin-bottom: 32px; }
+  .subfundo-titulo { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(184,151,106,0.12); }
+
+  /* DOCS GRID */
+  .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .doc {
+    background: white;
+    border: 1px solid rgba(184,151,106,0.15);
+    border-left: 3px solid rgba(184,151,106,0.3);
+    padding: 18px 20px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .doc:hover { border-left-color: var(--gold); box-shadow: 0 2px 12px rgba(184,151,106,0.1); }
+  .doc-nome { font-size: 15px; color: var(--ink); font-weight: 400; line-height: 1.3; }
+  .doc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+  .doc-badge { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-top: 4px; }
+
+  /* DIVISOR */
+  .divisor { height: 1px; background: rgba(184,151,106,0.12); margin: 56px 0; }
+
+  @media (max-width: 640px) {
+    .header { padding: 40px 24px 36px; }
+    .corpo { padding: 40px 20px 80px; }
+    .docs { grid-template-columns: 1fr; }
+  }
 </style>
 
 <script>
@@ -149,14 +86,17 @@
   var SENHA = 'hilP!hA9qfQ0';
   var KEY = 'zh_hub';
   if (sessionStorage.getItem(KEY) === '1') return;
-  var tela = document.getElementById('senha-tela');
-  if (tela) tela.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    var tela = document.getElementById('senha-tela');
+    if (tela) tela.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
   window.verificarSenha = function() {
     var inp = document.getElementById('senha-input');
     var err = document.getElementById('senha-erro');
     if (inp.value === SENHA) {
       sessionStorage.setItem(KEY, '1');
+      var tela = document.getElementById('senha-tela');
       tela.style.transition = 'opacity 0.3s';
       tela.style.opacity = '0';
       setTimeout(function() { tela.style.display = 'none'; document.body.style.overflow = ''; }, 300);
@@ -182,267 +122,171 @@
     <input id="senha-input" type="password" class="senha-input" placeholder="senha" autocomplete="off">
     <div id="senha-erro" class="senha-erro"></div>
     <button class="senha-btn" onclick="verificarSenha()">Entrar →</button>
-    <div class="senha-hint">Dificuldades? Entre em contato com a Zyllah Digital.</div>
+    <div class="senha-hint">Dificuldades? Entre em contato.</div>
   </div>
 </div>
 
-<div class="wrap">
+<div class="header">
+  <span class="header-tag">Uso interno · Zyllah Digital</span>
+  <h1 class="header-titulo">Hub de<br><em>documentos</em></h1>
+  <p class="header-sub">Organizado em três fundos. Cada documento tem um lugar. Quando chegar algo novo, a regra de cada fundo diz onde ele entra.</p>
+  <div class="header-regra">
+    <strong>Nunca compartilhe este link.</strong> Compartilhe sempre o link direto do documento específico — nunca o hub inteiro.
+  </div>
+</div>
 
-  <!-- HEADER -->
-  <div class="top">
-    <div class="top-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
-        <path fill="#c3a366" d="M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z"/>
-        <polygon fill="#c1a260" points="759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08"/>
-        <path fill="#c7a866" d="M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z"/>
-        <path fill="#a58346" d="M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z"/>
-        <polygon fill="#a38342" points="315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04"/>
-      </svg>
+<div class="corpo">
+
+  <!-- FUNDO 1: ZYLLAH -->
+  <div class="fundo">
+    <div class="fundo-header">
+      <div class="fundo-cor" style="background:#B8976A;"></div>
+      <div class="fundo-nome">Fundo <em>Zyllah</em></div>
     </div>
-    <div class="top-meta">
-      <p>Hub de Documentos<br>Uso interno · 2026<br>zyllahdigital.github.io</p>
+    <div class="fundo-regra">
+      <strong>Regra:</strong> entra aqui tudo que descreve como a Zyllah funciona, se posiciona e opera — independente de cliente. Se o documento existiria mesmo sem nenhum cliente ativo, é deste fundo.
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Identidade e estratégia</div>
+      <div class="docs">
+        <a href="zyllah_brandbook.html" class="doc">
+          <div class="doc-nome">Brand Book</div>
+          <div class="doc-desc">Logo, paleta, tipografia, tom de voz, regras de uso da marca</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_raciocinio.html" class="doc">
+          <div class="doc-nome">O Raciocínio por Trás</div>
+          <div class="doc-desc">Por que cada decisão foi tomada — para tomar as próximas sem depender de ninguém</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_conteudo_linkedin.html" class="doc">
+          <div class="doc-nome">Estratégia LinkedIn</div>
+          <div class="doc-desc">Posicionamento, cadência, tipos de post, como crescer no canal</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_conteudo_instagram.html" class="doc">
+          <div class="doc-nome">Estratégia Instagram</div>
+          <div class="doc-desc">Perfil, conteúdo, frequência, como construir presença visual</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_post_exemplo.html" class="doc">
+          <div class="doc-nome">Post Exemplo</div>
+          <div class="doc-desc">Referência de post bem construído — estrutura, linguagem, chamada para ação</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Operação e vendas</div>
+      <div class="docs">
+        <a href="zyllah_vendas.html" class="doc">
+          <div class="doc-nome">Playbook de Vendas</div>
+          <div class="doc-desc">Como abordar, qualificar, propor e fechar — do primeiro contato ao contrato</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_contratos.html" class="doc">
+          <div class="doc-nome">Contratos</div>
+          <div class="doc-desc">Três modelos de contrato por tier — Essencial, Presença, Referência</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_docs_producao.html" class="doc">
+          <div class="doc-nome">Documentos de Produção</div>
+          <div class="doc-desc">Autorização de uso de imagem, NDA, prazos saudáveis de entrega</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+        <a href="zyllah_material_visita.html" class="doc">
+          <div class="doc-nome">Material de Visita</div>
+          <div class="doc-desc">Cartão de visita e folder A5 — para imprimir e levar para reuniões</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <span class="hero-tag">Zyllah Digital · Central de Materiais</span>
-  <h1 class="hero-title">Documentos<br><em>por destinatário</em></h1>
-  <p class="hero-sub">Cada seção indica para quem o documento se destina. Nunca compartilhe o link deste hub — sempre o link direto do documento específico.</p>
+  <div class="divisor"></div>
 
-  <!-- LEGENDA -->
-  <div class="legenda">
-    <div class="legenda-item"><div class="legenda-dot dot-interno"></div><span class="legenda-txt">Uso interno — só você</span></div>
-    <div class="legenda-item"><div class="legenda-dot dot-prospect"></div><span class="legenda-txt">Envio a prospects</span></div>
-    <div class="legenda-item"><div class="legenda-dot dot-colaborador"></div><span class="legenda-txt">Envio a colaboradores</span></div>
-    <div class="legenda-item"><div class="legenda-dot dot-cliente"></div><span class="legenda-txt">Envio a clientes</span></div>
-    <div class="legenda-item"><div class="legenda-dot dot-site"></div><span class="legenda-txt">Site público</span></div>
-  </div>
+  <!-- FUNDO 2: CLIENTES -->
+  <div class="fundo">
+    <div class="fundo-header">
+      <div class="fundo-cor" style="background:#7A9E7E;"></div>
+      <div class="fundo-nome">Fundo <em>Clientes</em></div>
+    </div>
+    <div class="fundo-regra">
+      <strong>Regra:</strong> entra aqui tudo que foi criado para ou sobre um cliente específico — briefing preenchido, proposta enviada, materiais entregues. Cada cliente tem o seu subfundo. Quando fechar um novo cliente, ele ganha uma entrada aqui.
+    </div>
 
-  <!-- ① ESCRITÓRIO (INTERNO) -->
-  <div class="secao">
-    <div class="secao-header">
-      <div class="secao-dot dot-interno"></div>
-      <div class="secao-label">① Meu Escritório</div>
-      <span class="secao-badge badge-interno">Só você · Não compartilhar</span>
+    <div class="subfundo">
+      <div class="subfundo-titulo">Thayara — prospect ativo</div>
+      <div class="docs">
+        <a href="zyllah_thayara.html" class="doc">
+          <div class="doc-nome">Página Thayara</div>
+          <div class="doc-desc">Proposta personalizada, diagnóstico de presença digital e próximos passos</div>
+          <div class="doc-badge">Senha necessária · Pode compartilhar</div>
+        </a>
+        <a href="zyllah_briefing_rapido.html" class="doc">
+          <div class="doc-nome">Briefing Rápido — Thayara</div>
+          <div class="doc-desc">Formulário de briefing curto para preencher com ela na primeira conversa</div>
+          <div class="doc-badge">Senha necessária</div>
+        </a>
+      </div>
     </div>
-    <p class="secao-aviso">Estes documentos nunca saem. São ferramentas de gestão e referência interna da Zyllah.</p>
-    <div class="cards">
-      <a class="card" href="zyllah_brandbook.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Identidade</span>
-          <div class="card-title">Brand Book Zyllah</div>
-          <div class="card-desc">Logo, paleta, tipografia, tom de voz e regras de aplicação da marca Zyllah Digital.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_vendas.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Comercial</span>
-          <div class="card-title">Playbook de Vendas</div>
-          <div class="card-desc">Funil de 5 etapas, 3 planos com preços, respostas para objeções e estrutura do piloto.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_contratos.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Jurídico</span>
-          <div class="card-title">Contratos</div>
-          <div class="card-desc">3 modelos: Piloto (contrapartida), Mensal Padrão e Anual. Cláusulas de proteção incluídas.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_conteudo_instagram.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Estratégia</span>
-          <div class="card-title">Estratégia Instagram</div>
-          <div class="card-desc">5 tipos de conteúdo, rotação de 4 semanas, 14 textos prontos, anti-sistema de plágio.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_conteudo_linkedin.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Estratégia</span>
-          <div class="card-title">Estratégia LinkedIn</div>
-          <div class="card-desc">Dual account, 4 tipos de post, mecânica de algoritmo e banco de pautas.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_post_exemplo.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Referência visual</span>
-          <div class="card-title">Post Exemplo</div>
-          <div class="card-desc">Exemplos de layout e estilo visual para posts Instagram da Zyllah.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_material_visita.html" target="_blank">
-        <div class="card-accent accent-interno"></div>
-        <div class="card-body">
-          <span class="card-tag">Prospecção presencial</span>
-          <div class="card-title">Material de Visita</div>
-          <div class="card-desc">Cartão de visita e folder A5 para abordagem em clínicas de Nova Friburgo. Pronto para gráfica.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-    </div>
-    <div class="nota nota-interno">
-      <h4>🔒 Segurança</h4>
-      <p>Nunca compartilhe o link deste hub. Compartilhe sempre o link direto do documento específico. Playbook, contratos e estratégias contêm preços, margens e táticas que não devem ser expostos.</p>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Fernanda — Festa e Monte / Laçinho</div>
+      <div class="docs">
+        <a href="festaemont_briefing.html" class="doc">
+          <div class="doc-nome">Estratégia Festa e Monte</div>
+          <div class="doc-desc">Orientação estratégica, diagnóstico do negócio e plano de ação</div>
+          <div class="doc-badge">Senha necessária · Uso interno</div>
+        </a>
+        <a href="festaemont_formulario.html" class="doc">
+          <div class="doc-nome">Briefing — Fernanda</div>
+          <div class="doc-desc">Formulário para a Fernanda preencher — enviado por Formspree</div>
+          <div class="doc-badge">Senha necessária · Pode compartilhar com Fernanda</div>
+        </a>
+        <a href="lacinho_identidade.html" class="doc">
+          <div class="doc-nome">Identidade Verbal — Laçinho</div>
+          <div class="doc-desc">Proposta de nome, slogan, bio, tom de voz e exemplos de copy</div>
+          <div class="doc-badge">Senha necessária · Apresentar à Fernanda</div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <div class="sep"><div class="sep-linha"></div><div class="sep-mark">·</div><div class="sep-linha"></div></div>
+  <div class="divisor"></div>
 
-  <!-- ② PROSPECTS -->
-  <div class="secao">
-    <div class="secao-header">
-      <div class="secao-dot dot-prospect"></div>
-      <div class="secao-label">② Para Prospects</div>
-      <span class="secao-badge badge-prospect">Envio seletivo · Antes de fechar</span>
+  <!-- FUNDO 3: TEMPLATES -->
+  <div class="fundo">
+    <div class="fundo-header">
+      <div class="fundo-cor" style="background:#8A9BB5;"></div>
+      <div class="fundo-nome">Fundo <em>Templates</em></div>
     </div>
-    <p class="secao-aviso">Documentos que você envia antes da contratação. Cada prospect recebe o link direto do seu próprio documento — nunca vê o dos outros.</p>
-    <div class="cards">
-      <a class="card" href="zyllah_briefing_rapido.html" target="_blank">
-        <div class="card-accent accent-prospect"></div>
-        <div class="card-body">
-          <span class="card-tag">Qualificação</span>
-          <div class="card-title">Briefing Rápido</div>
-          <div class="card-desc">15 perguntas para entender o negócio do prospect antes da proposta. Enviar antes da reunião.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
+    <div class="fundo-regra">
+      <strong>Regra:</strong> entra aqui tudo que você copia antes de usar — nunca o original. Quando chegar um novo cliente, você duplica o template dele, personaliza e move para o fundo Clientes. O template fica intacto para o próximo.
+    </div>
+
+    <div class="docs">
+      <a href="zyllah_briefing.html" class="doc">
+        <div class="doc-nome">Briefing Completo — Modelo</div>
+        <div class="doc-desc">Briefing aprofundado para novos clientes Zyllah — duplicar e personalizar por nicho</div>
+        <div class="doc-badge">Senha necessária · Nunca editar o original</div>
       </a>
-      <a class="card" href="zyllah_thayara.html" target="_blank">
-        <div class="card-accent accent-prospect"></div>
-        <div class="card-body">
-          <span class="card-tag">Prospect ativo</span>
-          <div class="card-title">Dra. Thayara — Abordagem</div>
-          <div class="card-desc">4 mensagens de abordagem, condições do piloto e estratégia de aproximação. Personalizado.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
+      <a href="zyllah_briefing_rapido.html" class="doc">
+        <div class="doc-nome">Briefing Rápido — Modelo</div>
+        <div class="doc-desc">Versão curta para primeira conversa — duplicar para cada novo prospect</div>
+        <div class="doc-badge">Senha necessária · Nunca editar o original</div>
       </a>
+      <div class="doc" style="border-style:dashed;border-left-style:dashed;opacity:0.5;cursor:default;">
+        <div class="doc-nome">+ Formulário novo cliente</div>
+        <div class="doc-desc">Quando fechar um novo cliente, solicitar ID Formspree e gerar formulário personalizado aqui</div>
+        <div class="doc-badge">A criar conforme necessário</div>
+      </div>
     </div>
-    <div class="nota nota-prospect">
-      <h4>📤 Como usar</h4>
-      <p>Copie o link do documento específico e envie por WhatsApp ou e-mail. Para novos prospects, duplique o modelo Thayara e adapte. Nunca envie o link do hub.</p>
-    </div>
-  </div>
-
-  <div class="sep"><div class="sep-linha"></div><div class="sep-mark">·</div><div class="sep-linha"></div></div>
-
-  <!-- ③ COLABORADORES -->
-  <div class="secao">
-    <div class="secao-header">
-      <div class="secao-dot dot-colaborador"></div>
-      <div class="secao-label">③ Para Colaboradores</div>
-      <span class="secao-badge badge-colaborador">Envio técnico · Quem produz com você</span>
-    </div>
-    <p class="secao-aviso">Para fotógrafos, redatores, designers ou qualquer profissional que execute parte do trabalho.</p>
-    <div class="cards">
-      <a class="card" href="zyllah_briefing.html" target="_blank">
-        <div class="card-accent accent-colaborador"></div>
-        <div class="card-body">
-          <span class="card-tag">Briefing completo</span>
-          <div class="card-title">Briefing 30 Perguntas</div>
-          <div class="card-desc">Versão completa com todas as informações estratégicas do cliente para repasse ao colaborador.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="zyllah_docs_producao.html" target="_blank">
-        <div class="card-accent accent-colaborador"></div>
-        <div class="card-body">
-          <span class="card-tag">Documentos legais</span>
-          <div class="card-title">Docs de Produção Audiovisual</div>
-          <div class="card-desc">Autorização de imagem, autorização de ambiente e NDA. Assinar antes de qualquer gravação.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-    </div>
-    <div class="nota nota-colaborador">
-      <h4>📤 Como usar</h4>
-      <p>Envie o briefing completo preenchido para o colaborador entender o contexto do cliente. Os docs de produção precisam ser assinados antes de qualquer visita ou gravação.</p>
-    </div>
-  </div>
-
-  <div class="sep"><div class="sep-linha"></div><div class="sep-mark">·</div><div class="sep-linha"></div></div>
-
-  <!-- ④ CLIENTES -->
-  <div class="secao">
-    <div class="secao-header">
-      <div class="secao-dot dot-cliente"></div>
-      <div class="secao-label">④ Para Clientes</div>
-      <span class="secao-badge badge-cliente">Entrega formal · Após contratação</span>
-    </div>
-    <p class="secao-aviso">Documentos que você entrega ao cliente após o fechamento. Cada cliente recebe apenas o seu próprio material.</p>
-
-    <div class="clientes-titulo">Clientes ativos</div>
-    <div class="cards">
-      <a class="card" href="festaemont_briefing.html" target="_blank">
-        <div class="card-accent accent-cliente"></div>
-        <div class="card-body">
-          <span class="card-tag">Cliente · Festa e Monte</span>
-          <div class="card-title">Diagnóstico + Estratégia</div>
-          <div class="card-desc">Análise do negócio, posicionamento, estrutura de produtos, plano de ação e roteiro de fotografia.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-      <a class="card" href="festaemont_formulario.html" target="_blank">
-        <div class="card-accent accent-cliente"></div>
-        <div class="card-body">
-          <span class="card-tag">Cliente · Festa e Monte</span>
-          <div class="card-title">Formulário de Briefing</div>
-          <div class="card-desc">Perguntas para preencher com a Fernanda antes de criar identidade visual e conteúdo.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-    </div>
-
-    <div class="clientes-titulo" style="margin-top:28px;">Modelos para novos clientes</div>
-    <div class="cards">
-      <a class="card" style="opacity:0.4;pointer-events:none;" href="#" target="_blank">
-        <div class="card-accent accent-cliente"></div>
-        <div class="card-body">
-          <span class="card-tag">Modelo</span>
-          <div class="card-title">Brand Book do Cliente</div>
-          <div class="card-desc">Template para entregar identidade visual completa ao cliente após produção.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">→</span></div>
-      </a>
-    </div>
-  </div>
-
-  <div class="sep"><div class="sep-linha"></div><div class="sep-mark">·</div><div class="sep-linha"></div></div>
-
-  <!-- ⑤ SITE -->
-  <div class="secao">
-    <div class="secao-header">
-      <div class="secao-dot dot-site"></div>
-      <div class="secao-label">⑤ Site Oficial</div>
-      <span class="secao-badge badge-site">Público · zyllahdigital.github.io</span>
-    </div>
-    <div class="cards">
-      <a class="card" href="https://zyllahdigital.github.io" target="_blank">
-        <div class="card-accent accent-site"></div>
-        <div class="card-body">
-          <span class="card-tag">Site público</span>
-          <div class="card-title">zyllahdigital.github.io</div>
-          <div class="card-desc">Site oficial da Zyllah Digital. Visível para qualquer pessoa. Verificar periodicamente.</div>
-        </div>
-        <div class="card-right"><span class="card-arrow">↗</span></div>
-      </a>
-    </div>
-  </div>
-
-  <!-- RODAPÉ -->
-  <div class="rodape">
-    <p>Zyllah Digital · Hub Interno · 2026</p>
-    <p>Não compartilhe este link</p>
   </div>
 
 </div>
+
 </body>
 </html>
