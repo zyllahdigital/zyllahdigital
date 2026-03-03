@@ -754,97 +754,49 @@
     return dados;
   }
 
-  function formatarEmailBody(d) {
-    return `
-BRIEFING DE IDENTIDADE — ZYLLAH DIGITAL
-Recebido em: ${d.data}
-
-━━━ DADOS DO CLIENTE ━━━
-Nome: ${d.nome}
-Especialidade: ${d.especialidade}
-Clínica: ${d.clinica}
-WhatsApp: ${d.whatsapp}
-E-mail: ${d.email}
-
-━━━ IDENTIDADE ━━━
-1. Três palavras que descrevem a clínica:
-${d.p1_tres_palavras}
-
-2. Transformação real das pacientes:
-${d.p2_transformacao}
-
-3. Diferencial inimitável:
-${d.p3_diferencial}
-
-4. Posicionamento:
-Exclusividade (1–5): ${d.eixo_exclusividade}
-Sensorial vs. Clínico (1–5): ${d.eixo_emocional}
-
-━━━ PÚBLICO ━━━
-5. Paciente ideal:
-${d.p5_paciente_ideal}
-
-6. Perfil que não se encaixa:
-${d.p6_paciente_nao}
-
-━━━ IDENTIDADE VISUAL ━━━
-7. Referências de marcas:
-${d.p7_referencias}
-
-8. Ambiente equivalente:
-${d.p8_ambiente}
-
-9. Paleta instintiva escolhida: ${d.paleta}
-
-━━━ VOZ E COMUNICAÇÃO ━━━
-10. Tom de voz escolhido: ${d.tom}
-
-11. Nunca usar:
-${d.p11_nunca_usar}
-
-━━━ PRESENÇA DIGITAL ━━━
-12. Canais prioritários: ${d.canais}
-13. Disponibilidade para vídeo/foto: ${d.video}
-
-━━━ EXPECTATIVAS ━━━
-14. Resultado esperado em 6 meses:
-${d.p14_resultado}
-
-15. A uma coisa que tem que dar certo:
-${d.p15_uma_coisa}
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-Zyllah Digital · Briefing de Identidade v1.0
-    `.trim();
-  }
-
   function enviarBriefing() {
     const d = coletarRespostas();
     const btn = document.getElementById('btnEnviar');
     const status = document.getElementById('envioStatus');
 
     btn.disabled = true;
-    btn.textContent = 'Preparando…';
+    btn.textContent = 'Enviando…';
+    status.textContent = '';
+    status.className = 'envio-status';
 
-    const subject = encodeURIComponent(`Briefing de Identidade — ${d.nome} · ${d.clinica}`);
-    const body = encodeURIComponent(formatarEmailBody(d));
+    const formData = new FormData();
+    formData.append('_subject', `Briefing Rápido — ${d.nome} · ${d.clinica || d.especialidade}`);
+    Object.entries(d).forEach(([k, v]) => formData.append(k, v));
 
-    // ⚙️ SUBSTITUA o e-mail abaixo pelo seu e-mail real
-    const destinatario = 'zyllah.digital@gmail.com';
-
-    const mailtoLink = `mailto:${destinatario}?subject=${subject}&body=${body}`;
-
-    // Tenta abrir o cliente de e-mail
-    const link = document.createElement('a');
-    link.href = mailtoLink;
-    link.click();
-
-    setTimeout(() => {
-      btn.textContent = 'Enviar novamente';
+    fetch('https://formspree.io/f/{{FORMSPREE_ID}}', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(r => {
       btn.disabled = false;
-      status.textContent = '✓ Seu cliente de e-mail foi aberto com o briefing pronto. Clique em enviar no e-mail que abrirá.';
-      status.className = 'envio-status ok';
-    }, 1500);
+      btn.textContent = 'Enviar briefing para a Zyllah';
+      if (r.ok) {
+        status.textContent = '✓ Briefing enviado com sucesso! Guilherme entrará em contato em até 48 horas.';
+        status.className = 'envio-status ok';
+        btn.textContent = 'Enviado ✓';
+        btn.disabled = true;
+      } else {
+        r.json().then(data => {
+          status.textContent = 'Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.';
+          status.className = 'envio-status erro';
+        }).catch(() => {
+          status.textContent = 'Erro ao enviar. Tente novamente.';
+          status.className = 'envio-status erro';
+        });
+      }
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Enviar briefing para a Zyllah';
+      status.textContent = 'Erro de conexão. Verifique sua internet e tente novamente.';
+      status.className = 'envio-status erro';
+    });
   }
 
   // Inicializa
