@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festa e Monte — Roteiro de Fotos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dark: #8A6A3E;
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+    --rose: #C47A7A; --rose-light: #F5EDED;
+    --sage: #7A9B8A; --sage-light: #EDF5F2;
+    --white: #FFFFFF;
+  }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); line-height: 1.7; }
+
+  /* HERO */
+  .hero { background: var(--ink); padding: 72px 80px 64px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(184,151,106,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(184,151,106,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; position: relative; z-index: 2; }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 64px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 20px; position: relative; z-index: 2; }
+  .hero-titulo em { font-style: italic; color: var(--gold-light); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.4); max-width: 560px; line-height: 1.85; position: relative; z-index: 2; }
+  .hero-divider { width: 100%; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin-top: 48px; position: relative; z-index: 2; }
+
+  /* CORPO */
+  .corpo { max-width: 900px; margin: 0 auto; padding: 64px 60px 100px; }
+
+  /* BLOCO */
+  .bloco { margin-bottom: 56px; }
+  .bloco-tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+  .bloco-tag::after { content: ''; flex: 1; height: 1px; background: rgba(184,151,106,0.2); }
+  .bloco-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 36px); font-weight: 300; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
+  .bloco-titulo em { font-style: italic; color: var(--gold); }
+  .bloco-texto { font-size: 15px; color: var(--ink-soft); line-height: 1.85; max-width: 680px; }
+
+  /* ALERTA */
+  .alerta { background: var(--ink); padding: 28px 32px; margin: 32px 0; display: flex; gap: 20px; align-items: flex-start; }
+  .alerta-icone { font-size: 22px; flex-shrink: 0; }
+  .alerta-corpo p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+  .alerta-corpo p strong { color: var(--gold-light); font-weight: 400; }
+
+  /* SETUP */
+  .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
+  .setup-card { background: white; padding: 32px; border-top: 3px solid rgba(184,151,106,0.3); }
+  .setup-card.destaque { border-top-color: var(--gold); background: rgba(184,151,106,0.04); }
+  .setup-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .setup-titulo { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .setup-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+  .setup-desc strong { font-weight: 500; color: var(--ink); }
+
+  /* PASSOS */
+  .passos { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+  .passo { display: flex; gap: 0; background: white; }
+  .passo-num { background: var(--ink); width: 64px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .passo-num span { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: rgba(184,151,106,0.4); }
+  .passo-corpo { flex: 1; padding: 24px 28px; border-top: 1px solid rgba(184,151,106,0.1); }
+  .passo-titulo { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .passo-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+  .passo-dica { background: var(--sage-light); border-left: 2px solid var(--sage); padding: 10px 14px; margin-top: 12px; font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+
+  /* KIT CHECKLIST */
+  .kit-bloco { background: white; border-top: 3px solid rgba(184,151,106,0.3); margin-bottom: 2px; }
+  .kit-bloco.principal { border-top-color: var(--gold); }
+  .kit-header { padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(184,151,106,0.08); cursor: pointer; }
+  .kit-nome { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .kit-preco { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold); }
+  .kit-body { padding: 20px 28px 28px; }
+  .fotos-lista { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+  .foto-item { display: flex; gap: 16px; align-items: flex-start; }
+  .foto-num { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .foto-num span { font-size: 12px; color: var(--gold); font-weight: 500; }
+  .foto-desc { flex: 1; }
+  .foto-titulo { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .foto-instrucao { font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+  .foto-obs { font-size: 12px; color: var(--gold-dark); font-style: italic; margin-top: 4px; }
+
+  /* NÃO FAZER */
+  .nao-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 24px; }
+  .nao-item { background: var(--rose-light); padding: 20px 24px; display: flex; gap: 14px; align-items: flex-start; }
+  .nao-x { font-size: 16px; color: var(--rose); flex-shrink: 0; font-weight: 500; }
+  .nao-texto { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+  .nao-texto strong { color: var(--ink); font-weight: 500; }
+
+  /* REGRA DE OURO */
+  .regra-ouro { background: var(--ink); padding: 36px 40px; margin-top: 48px; }
+  .regra-ouro-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .regra-ouro-texto { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 300; color: white; line-height: 1.45; }
+  .regra-ouro-texto em { font-style: italic; color: var(--gold-light); }
+
+  /* RODAPÉ */
+  .rodape { background: var(--ink); padding: 36px 80px; display: flex; justify-content: space-between; align-items: center; margin-top: 0; }
+  .rodape-marca { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(184,151,106,0.5); letter-spacing: 0.2em; }
+  .rodape-nota { font-size: 12px; color:rgba(255,255,255,0.55); }
+
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px; }
+    .corpo { padding: 40px 20px 80px; }
+    .setup-grid, .nao-lista { grid-template-columns: 1fr; }
+    .rodape { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Festa e Monte · Guia Operacional</div>
+  <h1 class="hero-titulo">Como fotografar<br><em>seus kits</em></h1>
+  <p class="hero-sub">Um roteiro prático para tirar fotos que vendem — sem estúdio, sem equipamento caro, sem complicação. Celular bom e 1 hora já resolvem.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="corpo">
+
+  <!-- POR QUE IMPORTA -->
+  <div class="bloco">
+    <span class="bloco-tag">Por que isso importa</span>
+    <h2 class="bloco-titulo">A foto é o seu<br><em>vendedor silencioso</em></h2>
+    <p class="bloco-texto">No Marketplace, a prospect decide em menos de 3 segundos se vai clicar no seu anúncio ou no do concorrente. Ela não lê o texto primeiro — ela vê a foto. Uma foto que mostra claramente o que está incluso, em ambiente limpo, transmite profissionalismo e confiança antes de qualquer palavra.</p>
+
+    <div class="alerta">
+      <div class="alerta-icone">💡</div>
+      <div class="alerta-corpo">
+        <p><strong>O problema atual:</strong> a dúvida mais comum que você já recebeu — <em>"vai tudo que está na foto?"</em> — não vem da montagem em festa. Vem da foto do próprio kit, onde a cliente vê painel, cômoda, escada e acessórios juntos e não sabe se aluga tudo isso ou só parte. A solução é a foto acompanhada de um texto que lista explicitamente cada item incluso — sem deixar margem para interpretação.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="bloco">
+    <span class="bloco-tag">Preparação do espaço</span>
+    <h2 class="bloco-titulo">Montando o<br><em>mini estúdio</em></h2>
+    <p class="bloco-texto">Não precisa de nada especial. O objetivo é um fundo limpo que não dispute atenção com o kit.</p>
+
+    <div class="setup-grid">
+      <div class="setup-card destaque">
+        <div class="setup-label">Fundo</div>
+        <div class="setup-titulo">Parede branca ou bege</div>
+        <div class="setup-desc">Escolha a parede mais clara e limpa da casa. <strong>Sem quadros, sem tomadas visíveis, sem objetos ao fundo.</strong> Se não tiver parede limpa, um lençol branco esticado resolve.</div>
+      </div>
+      <div class="setup-card destaque">
+        <div class="setup-label">Chão</div>
+        <div class="setup-titulo">Tapete claro ou lençol</div>
+        <div class="setup-desc">O piso de mármore verde aparece em todas as fotos atuais e distrai. <strong>Um tapete bege, branco ou cinza claro</strong> já elimina esse problema. Não precisa ser grande — só o espaço do kit.</div>
+      </div>
+      <div class="setup-card">
+        <div class="setup-label">Luz</div>
+        <div class="setup-titulo">Luz natural de janela</div>
+        <div class="setup-desc">Monte o kit perto de uma janela, de lado (não de frente — cria sombras duras). <strong>Horário ideal: manhã entre 8h e 10h</strong> ou tarde entre 15h e 17h. Evite luz direta do sol batendo no kit.</div>
+      </div>
+      <div class="setup-card">
+        <div class="setup-label">Câmera</div>
+        <div class="setup-titulo">Celular no modo retrato</div>
+        <div class="setup-desc">Qualquer celular intermediário serve. <strong>Modo retrato</strong> ajuda a separar o kit do fundo. Limpe a lente antes de começar. Segure com as duas mãos ou apoie em algum lugar para não tremer.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSO A PASSO GERAL -->
+  <div class="bloco">
+    <span class="bloco-tag">Sequência de fotos</span>
+    <h2 class="bloco-titulo">3 fotos por kit,<br><em>sempre as mesmas</em></h2>
+    <p class="bloco-texto">Cada kit precisa de exatamente 3 fotos. Essa consistência cria reconhecimento e facilita comparar kits diferentes.</p>
+
+    <div class="passos">
+      <div class="passo">
+        <div class="passo-num"><span>1</span></div>
+        <div class="passo-corpo">
+          <div class="passo-titulo">Foto geral — kit completo</div>
+          <div class="passo-desc">Enquadramento de longe suficiente para aparecer tudo: painel, cômoda, escada, todos os acessórios no lugar. Posição da câmera: na altura do centro do kit, levemente abaixada. <strong>Essa é a foto principal do anúncio.</strong></div>
+          <div class="passo-dica">✓ Antes de fotografar: verifique se tem algum cabo, tomada ou objeto fora do kit no enquadramento. Se tiver, mova ou cubra.</div>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num"><span>2</span></div>
+        <div class="passo-corpo">
+          <div class="passo-titulo">Foto do painel — detalhe</div>
+          <div class="passo-desc">Aproxime até o painel preencher a maior parte do quadro. Mostra a qualidade da impressão e o tema com clareza. <strong>Essa foto responde "que tema é esse?" sem precisar ler o texto.</strong></div>
+          <div class="passo-dica">✓ Segure levemente inclinado para evitar reflexo se o painel tiver acabamento brilhante.</div>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num"><span>3</span></div>
+        <div class="passo-corpo">
+          <div class="passo-titulo">Foto da cômoda — detalhe dos acessórios</div>
+          <div class="passo-desc">Aproxime da cômoda com os acessórios organizados em cima. Mostra o que está incluso além do painel. <strong>Essa foto responde "o que vem no kit?" de forma visual.</strong></div>
+          <div class="passo-dica">✓ Organize os acessórios com cuidado antes de fotografar: prato de bolo centralizado, mini-itens posicionados com espaço entre eles.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POR KIT -->
+  <div class="bloco">
+    <span class="bloco-tag">Checklist por kit</span>
+    <h2 class="bloco-titulo">O que fotografar<br><em>em cada um</em></h2>
+
+    <!-- Mini Kit -->
+    <div class="kit-bloco" style="margin-top:32px">
+      <div class="kit-header">
+        <span class="kit-nome">Mini Kit — Acessórios temáticos</span>
+        <span class="kit-preco">R$ 50</span>
+      </div>
+      <div class="kit-body">
+        <div class="fotos-lista">
+          <div class="foto-item">
+            <div class="foto-num"><span>1</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Todos os acessórios organizados sobre a cômoda</div>
+              <div class="foto-instrucao">Monte tudo em cima da cômoda como se fosse uma mesa de festa real: prato de bolo, mini-itens temáticos, acessórios coordenados. Fundo limpo, sem painel.</div>
+              <div class="foto-obs">Essa foto, acompanhada de um texto listando cada item, elimina a dúvida mais comum: "vai tudo que está na foto?"</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>2</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Detalhe dos itens temáticos</div>
+              <div class="foto-instrucao">Aproxime dos itens com o tema visível: personagens, cores, estampas. Mostra a qualidade e o cuidado com a escolha dos acessórios.</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>3</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Vista de cima (flat lay)</div>
+              <div class="foto-instrucao">Coloque todos os itens no chão sobre o tapete claro e fotografe de cima, câmera paralela ao chão. Mostra tudo que está incluso de uma vez.</div>
+              <div class="foto-obs">Essa foto funciona muito bem para stories do Instagram também.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kit 1 Painel -->
+    <div class="kit-bloco principal">
+      <div class="kit-header">
+        <span class="kit-nome">Kit 1 Painel — Cômoda + estrutura completa</span>
+        <span class="kit-preco">R$ 75</span>
+      </div>
+      <div class="kit-body">
+        <div class="fotos-lista">
+          <div class="foto-item">
+            <div class="foto-num"><span>1</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Kit completo montado — foto geral</div>
+              <div class="foto-instrucao">Painel atrás, cômoda na frente com acessórios organizados, escada ou coluna ao lado. Tudo visível, nada fora do kit no enquadramento.</div>
+              <div class="foto-obs">Foto principal do anúncio. Precisa ser a mais cuidada das três.</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>2</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Detalhe do painel</div>
+              <div class="foto-instrucao">Aproxime até o painel ocupar 80% do quadro. Tema legível, impressão nítida, cores corretas.</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>3</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Detalhe da cômoda com acessórios</div>
+              <div class="foto-instrucao">Cômoda centralizada, acessórios organizados em cima. Mostra a qualidade da peça principal e o que acompanha.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kit 2 Painéis -->
+    <div class="kit-bloco">
+      <div class="kit-header">
+        <span class="kit-nome">Kit 2 Painéis — Estrutura completa</span>
+        <span class="kit-preco">R$ 85</span>
+      </div>
+      <div class="kit-body">
+        <div class="fotos-lista">
+          <div class="foto-item">
+            <div class="foto-num"><span>1</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Dois painéis visíveis + estrutura completa</div>
+              <div class="foto-instrucao">O diferencial deste kit é ter dois painéis. A foto principal precisa mostrar os dois claramente. Recue mais do que no kit de 1 painel para caber tudo.</div>
+              <div class="foto-obs">Se não tiver espaço suficiente em casa, use um corredor ou área externa com parede limpa.</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>2</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Detalhe dos dois painéis lado a lado</div>
+              <div class="foto-instrucao">Mostra a composição dos dois painéis juntos — o que torna esse kit visualmente diferente do de R$75.</div>
+            </div>
+          </div>
+          <div class="foto-item">
+            <div class="foto-num"><span>3</span></div>
+            <div class="foto-desc">
+              <div class="foto-titulo">Cômoda + acessórios em detalhe</div>
+              <div class="foto-instrucao">Mesmo padrão dos outros kits. Consistência visual entre os anúncios.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NÃO FAZER -->
+  <div class="bloco">
+    <span class="bloco-tag">Erros a evitar</span>
+    <h2 class="bloco-titulo">O que <em>não fazer</em></h2>
+
+    <div class="nao-lista">
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Fotografar em evento real como foto principal do anúncio.</strong> Flores, bolo, docinhos e outros itens do evento criam a expectativa errada. O cliente vai perguntar "vai tudo isso?"</div>
+      </div>
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Piso de mármore verde aparecendo.</strong> Distrai e passa imagem de ambiente improvisado. Tapete ou lençol no chão resolve completamente.</div>
+      </div>
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Cabos, tomadas ou móveis aleatórios no fundo.</strong> Tire 30 segundos para verificar o enquadramento antes de fotografar.</div>
+      </div>
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Foto escura ou com sombra dura.</strong> Luz natural de janela lateral resolve. Nunca fotografar de costas para a janela.</div>
+      </div>
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Kit incompleto na foto.</strong> Sempre montar o kit inteiro antes de fotografar — com todos os itens que serão alugados, e só eles.</div>
+      </div>
+      <div class="nao-item">
+        <span class="nao-x">✗</span>
+        <div class="nao-texto"><strong>Foto borrada ou tremida.</strong> Apoie o celular ou segure com as duas mãos. Tire 3 fotos de cada ângulo e escolha a mais nítida.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGRA DE OURO -->
+  <div class="regra-ouro">
+    <div class="regra-ouro-label">Regra de ouro</div>
+    <div class="regra-ouro-texto">A foto do anúncio precisa mostrar <em>exatamente</em> o que a cliente vai receber em casa — nem mais, nem menos. Quando ela abrir a caixa, deve ser igualzinho ao que viu na foto.</div>
+  </div>
+
+</div>
+
+<!-- RODAPÉ -->
+<footer class="rodape">
+  <div class="rodape-marca">Zyllah Digital · Festa e Monte</div>
+  <div class="rodape-nota">Guia Operacional · Roteiro de Fotos</div>
+</footer>
+
+
+<div id="senha-tela" style="position:fixed;inset:0;z-index:99999;background:#1A1714;display:flex;align-items:center;justify-content:center;">
+  <div style="width:100%;max-width:420px;padding:56px 48px;display:flex;flex-direction:column;gap:24px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(184,151,106,0.5);letter-spacing:0.4em;text-transform:uppercase;">Zyllah Digital</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:white;line-height:1.1;">Festa e Monte<br><em style="font-style:italic;color:#D4B896;">Roteiro de Fotos</em></div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.55);">Documento confidencial — acesso restrito</div>
+    <input id="senha-input" type="password" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')verificarSenha()" style="background:transparent;border:none;border-bottom:1px solid rgba(184,151,106,0.35);padding:14px 0;font-family:'Jost',sans-serif;font-size:18px;color:white;outline:none;letter-spacing:0.15em;">
+    <div id="senha-erro" style="font-size:13px;color:rgba(196,122,122,0.8);min-height:18px;"></div>
+    <button onclick="verificarSenha()" style="background:#B8976A;color:#1A1714;border:none;padding:16px 36px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.35em;text-transform:uppercase;cursor:pointer;align-self:flex-start;">Acessar</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('zyllah_fem_fotos')==='1'){
+    document.addEventListener('DOMContentLoaded',function(){
+      var t=document.getElementById('senha-tela');
+      if(t) t.style.display='none';
+    });
+  }
+})();
+function verificarSenha(){
+  var input=document.getElementById('senha-input').value.trim();
+  if(input==='fm02'){
+    sessionStorage.setItem('zyllah_fem_fotos','1');
+    document.getElementById('senha-tela').style.display='none';
+  } else {
+    document.getElementById('senha-erro').textContent='Senha incorreta.';
+    document.getElementById('senha-input').value='';
+  }
+}
+</script>
+</body>
+</html>

@@ -21,9 +21,9 @@
   .header-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--purple); }
   .header-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: white; line-height: 1.05; margin-bottom: 12px; }
   .header-title em { font-style: italic; color: rgba(200,185,220,0.8); }
-  .header-sub { font-size: 16px; color: rgba(255,255,255,0.3); max-width: 580px; line-height: 1.8; }
+  .header-sub { font-size: 16px; color:rgba(255,255,255,0.55); max-width: 580px; line-height: 1.8; }
   .header-meta { display: flex; gap: 32px; margin-top: 28px; flex-wrap: wrap; }
-  .header-meta-item { font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+  .header-meta-item { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
   .header-meta-item strong { color: rgba(200,185,220,0.6); font-weight: 400; }
 
   .corpo { max-width: 860px; margin: 0 auto; padding: 64px 60px; }
@@ -53,7 +53,7 @@
   .canal-tab { display: flex; gap: 2px; margin-bottom: 2px; }
   .canal-btn { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; padding: 12px 24px; border: none; cursor: pointer; font-family: 'Jost', sans-serif; transition: all 0.2s; }
   .canal-btn.ativo { background: var(--purple); color: white; }
-  .canal-btn:not(.ativo) { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.35); }
+  .canal-btn:not(.ativo) { background: rgba(255,255,255,0.04); color:rgba(255,255,255,0.55); }
   .canal-btn:hover:not(.ativo) { background: rgba(138,122,155,0.15); }
 
   .msg-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(138,122,155,0.12); padding: 36px; }
@@ -61,7 +61,7 @@
   .msg-label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(138,122,155,0.6); margin-bottom: 20px; }
   .msg-texto { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.9; white-space: pre-line; }
   .msg-texto strong { color: white; }
-  .msg-nota { font-size: 13px; color: rgba(255,255,255,0.2); margin-top: 24px; font-style: italic; line-height: 1.65; padding-top: 16px; border-top: 1px solid rgba(138,122,155,0.1); }
+  .msg-nota { font-size: 13px; color:rgba(255,255,255,0.55); margin-top: 24px; font-style: italic; line-height: 1.65; padding-top: 16px; border-top: 1px solid rgba(138,122,155,0.1); }
   .btn-copiar-msg {
     margin-top: 20px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
     background: transparent; border: 1px solid rgba(138,122,155,0.3);
@@ -93,14 +93,14 @@
   .piloto-cond { }
   .piloto-cond-label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(138,122,155,0.6); margin-bottom: 4px; }
   .piloto-cond-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; }
-  .piloto-cond-val s { color: rgba(255,255,255,0.2); font-size: 18px; }
+  .piloto-cond-val s { color:rgba(255,255,255,0.55); font-size: 18px; }
   .piloto-contrapartidas { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(138,122,155,0.15); }
   .piloto-contra-label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(138,122,155,0.6); margin-bottom: 12px; }
   .piloto-contra-itens { display: flex; flex-wrap: wrap; gap: 8px; }
   .piloto-contra-item { font-size: 13px; padding: 6px 16px; border: 1px solid rgba(138,122,155,0.2); color: rgba(255,255,255,0.45); }
 
   .rodape { margin-top: 72px; padding-top: 32px; border-top: 1px solid rgba(138,122,155,0.15); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .rodape p { font-size: 12px; color: rgba(255,255,255,0.2); }
+  .rodape p { font-size: 12px; color:rgba(255,255,255,0.55); }
   .voltar { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple); text-decoration: none; border-bottom: 1px solid rgba(138,122,155,0.3); padding-bottom: 2px; }
 
   @media (max-width: 700px) {
@@ -134,7 +134,7 @@
     color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
   }
   .senha-input:focus { border-bottom-color: #B8976A; }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.2em; }
   .senha-btn {
     background: #B8976A; color: #1A1714; border: none;
     padding: 14px 32px; font-family: 'Jost', sans-serif;
@@ -143,7 +143,7 @@
   }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
-  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  .senha-hint { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
 </style>
 
 <script>

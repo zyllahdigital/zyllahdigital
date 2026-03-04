@@ -39,7 +39,7 @@
 
   .campo { margin-bottom: 28px; }
   .campo-label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; display: block; }
-  .campo-hint { font-size: 13px; color: rgba(61,56,48,0.5); margin-bottom: 10px; font-style: italic; }
+  .campo-hint { font-size: 13px; color:rgba(61,56,48,0.65); margin-bottom: 10px; font-style: italic; }
   .campo-input {
     width: 100%; background: white; border: 1px solid rgba(184,151,106,0.2);
     border-bottom: 2px solid rgba(184,151,106,0.3);
@@ -47,7 +47,7 @@
     color: var(--ink); outline: none; transition: border-color 0.2s; resize: none;
   }
   .campo-input:focus { border-color: var(--gold); border-bottom-color: var(--gold); }
-  .campo-input::placeholder { color: rgba(61,56,48,0.3); }
+  .campo-input::placeholder { color:rgba(61,56,48,0.65); }
 
   .opcoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .opcao { padding: 8px 16px; background: white; border: 1px solid rgba(184,151,106,0.2); font-size: 14px; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; user-select: none; }
@@ -55,7 +55,7 @@
   .opcao.sel { background: var(--gold); color: white; border-color: var(--gold); }
 
   .escala { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
-  .escala-label { font-size: 13px; color: rgba(61,56,48,0.45); }
+  .escala-label { font-size: 13px; color:rgba(61,56,48,0.65); }
   .escala-btn { width: 44px; height: 44px; background: white; border: 1px solid rgba(184,151,106,0.2); font-size: 15px; color: var(--ink-soft); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
   .escala-btn:hover { border-color: var(--gold); }
   .escala-btn.sel { background: var(--gold); color: white; border-color: var(--gold); }
@@ -97,7 +97,7 @@
     color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
   }
   .senha-input:focus { border-bottom-color: #B8976A; }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.2em; }
   .senha-btn {
     background: #B8976A; color: #1A1714; border: none;
     padding: 14px 32px; font-family: 'Jost', sans-serif;
@@ -106,7 +106,7 @@
   }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
-  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  .senha-hint { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
 </style>
 
 <script>
@@ -329,11 +329,11 @@
       <input type="text" name="nome" class="campo-input" placeholder="Como prefere ser chamada">
     </div>
     <div class="campo">
-      <label class="campo-label">Seu e-mail <span style="color:rgba(61,56,48,0.4);font-size:11px;letter-spacing:0;">(opcional)</span></label>
+      <label class="campo-label">Seu e-mail <span style="color:rgba(61,56,48,0.65);font-size:11px;letter-spacing:0;">(opcional)</span></label>
       <input type="email" name="email" class="campo-input" placeholder="seu@email.com">
     </div>
     <div class="campo">
-      <label class="campo-label">Seu WhatsApp <span style="color:rgba(61,56,48,0.4);font-size:11px;letter-spacing:0;">(opcional)</span></label>
+      <label class="campo-label">Seu WhatsApp <span style="color:rgba(61,56,48,0.65);font-size:11px;letter-spacing:0;">(opcional)</span></label>
       <input type="tel" name="whatsapp" class="campo-input" placeholder="(22) 99999-9999">
     </div>
 

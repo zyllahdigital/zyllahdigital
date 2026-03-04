@@ -35,7 +35,7 @@
   }
   .header-logo svg { width: 80px; height: auto; }
   .header-progress { display: flex; align-items: center; gap: 16px; }
-  .progress-label { font-size: 12px; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); }
+  .progress-label { font-size: 12px; letter-spacing: 0.2em; color:rgba(255,255,255,0.55); }
   .progress-bar { width: 160px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; }
   .progress-fill { height: 100%; background: var(--gold); border-radius: 1px; transition: width 0.5s ease; width: 0%; }
   .progress-num { font-size: 12px; letter-spacing: 0.1em; color: var(--gold); min-width: 40px; text-align: right; }
@@ -65,7 +65,7 @@
   .capa-meta { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 56px; }
   .capa-meta-item { }
   .capa-meta-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--gold); line-height: 1; }
-  .capa-meta-label { font-size: 12px; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); }
+  .capa-meta-label { font-size: 12px; letter-spacing: 0.15em; color:rgba(255,255,255,0.55); }
 
   /* CAMPOS DADOS */
   .dados-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
@@ -105,7 +105,7 @@
     font-weight: 300; color: white; line-height: 1.2; margin-bottom: 12px;
   }
   .pergunta-texto em { font-style: italic; color: var(--gold-light); }
-  .pergunta-dica { font-size: 14px; color: rgba(255,255,255,0.3); line-height: 1.6; margin-bottom: 32px; font-style: italic; }
+  .pergunta-dica { font-size: 14px; color:rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 32px; font-style: italic; }
 
   /* RESPOSTA TEXTAREA */
   .resp-textarea {
@@ -142,7 +142,7 @@
 
   /* ESCALA VISUAL */
   .escala-wrap { margin-bottom: 8px; }
-  .escala-extremos { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.3); margin-bottom: 12px; letter-spacing: 0.05em; }
+  .escala-extremos { display: flex; justify-content: space-between; font-size: 12px; color:rgba(255,255,255,0.55); margin-bottom: 12px; letter-spacing: 0.05em; }
   .escala-botoes { display: flex; gap: 8px; }
   .escala-btn { flex: 1; position: relative; }
   .escala-btn input { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -151,7 +151,7 @@
     padding: 14px 8px;
     border: 1px solid rgba(184,151,106,0.18);
     cursor: pointer; transition: all 0.2s;
-    font-family: 'Cormorant Garamond', serif; font-size: 22px; color: rgba(255,255,255,0.3);
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; color:rgba(255,255,255,0.55);
   }
   .escala-btn-label:hover { border-color: var(--gold); color: white; }
   .escala-btn input:checked + .escala-btn-label { background: var(--gold); border-color: var(--gold); color: var(--ink); }
@@ -163,7 +163,7 @@
   .paleta-item-label { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
   .paleta-cor { width: 56px; height: 56px; border: 3px solid transparent; transition: all 0.2s; }
   .paleta-item input:checked + .paleta-item-label .paleta-cor { border-color: white; transform: scale(1.1); }
-  .paleta-nome { font-size: 12px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); text-align: center; }
+  .paleta-nome { font-size: 12px; letter-spacing: 0.1em; color:rgba(255,255,255,0.55); text-align: center; }
   .paleta-item input:checked + .paleta-item-label .paleta-nome { color: var(--gold); }
 
   /* NAVEGAÇÃO */
@@ -198,7 +198,7 @@
   }
   .btn-enviar:hover { background: var(--gold-light); }
   .btn-enviar:disabled { opacity: 0.5; cursor: not-allowed; }
-  .envio-status { font-size: 13px; color: rgba(255,255,255,0.3); text-align: center; min-height: 20px; }
+  .envio-status { font-size: 13px; color:rgba(255,255,255,0.55); text-align: center; min-height: 20px; }
   .envio-status.ok { color: var(--gold); }
   .envio-status.erro { color: #c07070; }
 
@@ -241,7 +241,7 @@
     color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
   }
   .senha-input:focus { border-bottom-color: #B8976A; }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.2em; }
   .senha-btn {
     background: #B8976A; color: #1A1714; border: none;
     padding: 14px 32px; font-family: 'Jost', sans-serif;
@@ -250,7 +250,7 @@
   }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
-  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  .senha-hint { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
 </style>
 
 <script>
@@ -680,7 +680,7 @@
     </button>
     <div class="envio-status" id="envioStatus"></div>
 
-    <p style="font-size:13px;color:rgba(255,255,255,0.2);margin-top:24px;line-height:1.6;">Suas informações são confidenciais e serão usadas exclusivamente para o desenvolvimento da sua identidade de marca.</p>
+    <p style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:24px;line-height:1.6;">Suas informações são confidenciais e serão usadas exclusivamente para o desenvolvimento da sua identidade de marca.</p>
   </div>
 </div>
 
@@ -754,49 +754,97 @@
     return dados;
   }
 
+  function formatarEmailBody(d) {
+    return `
+BRIEFING DE IDENTIDADE — ZYLLAH DIGITAL
+Recebido em: ${d.data}
+
+━━━ DADOS DO CLIENTE ━━━
+Nome: ${d.nome}
+Especialidade: ${d.especialidade}
+Clínica: ${d.clinica}
+WhatsApp: ${d.whatsapp}
+E-mail: ${d.email}
+
+━━━ IDENTIDADE ━━━
+1. Três palavras que descrevem a clínica:
+${d.p1_tres_palavras}
+
+2. Transformação real das pacientes:
+${d.p2_transformacao}
+
+3. Diferencial inimitável:
+${d.p3_diferencial}
+
+4. Posicionamento:
+Exclusividade (1–5): ${d.eixo_exclusividade}
+Sensorial vs. Clínico (1–5): ${d.eixo_emocional}
+
+━━━ PÚBLICO ━━━
+5. Paciente ideal:
+${d.p5_paciente_ideal}
+
+6. Perfil que não se encaixa:
+${d.p6_paciente_nao}
+
+━━━ IDENTIDADE VISUAL ━━━
+7. Referências de marcas:
+${d.p7_referencias}
+
+8. Ambiente equivalente:
+${d.p8_ambiente}
+
+9. Paleta instintiva escolhida: ${d.paleta}
+
+━━━ VOZ E COMUNICAÇÃO ━━━
+10. Tom de voz escolhido: ${d.tom}
+
+11. Nunca usar:
+${d.p11_nunca_usar}
+
+━━━ PRESENÇA DIGITAL ━━━
+12. Canais prioritários: ${d.canais}
+13. Disponibilidade para vídeo/foto: ${d.video}
+
+━━━ EXPECTATIVAS ━━━
+14. Resultado esperado em 6 meses:
+${d.p14_resultado}
+
+15. A uma coisa que tem que dar certo:
+${d.p15_uma_coisa}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+Zyllah Digital · Briefing de Identidade v1.0
+    `.trim();
+  }
+
   function enviarBriefing() {
     const d = coletarRespostas();
     const btn = document.getElementById('btnEnviar');
     const status = document.getElementById('envioStatus');
 
     btn.disabled = true;
-    btn.textContent = 'Enviando…';
-    status.textContent = '';
-    status.className = 'envio-status';
+    btn.textContent = 'Preparando…';
 
-    const formData = new FormData();
-    formData.append('_subject', `Briefing Rápido — ${d.nome} · ${d.clinica || d.especialidade}`);
-    Object.entries(d).forEach(([k, v]) => formData.append(k, v));
+    const subject = encodeURIComponent(`Briefing de Identidade — ${d.nome} · ${d.clinica}`);
+    const body = encodeURIComponent(formatarEmailBody(d));
 
-    fetch('https://formspree.io/f/{{FORMSPREE_ID}}', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(r => {
+    // ⚙️ SUBSTITUA o e-mail abaixo pelo seu e-mail real
+    const destinatario = 'zyllah.digital@gmail.com';
+
+    const mailtoLink = `mailto:${destinatario}?subject=${subject}&body=${body}`;
+
+    // Tenta abrir o cliente de e-mail
+    const link = document.createElement('a');
+    link.href = mailtoLink;
+    link.click();
+
+    setTimeout(() => {
+      btn.textContent = 'Enviar novamente';
       btn.disabled = false;
-      btn.textContent = 'Enviar briefing para a Zyllah';
-      if (r.ok) {
-        status.textContent = '✓ Briefing enviado com sucesso! Guilherme entrará em contato em até 48 horas.';
-        status.className = 'envio-status ok';
-        btn.textContent = 'Enviado ✓';
-        btn.disabled = true;
-      } else {
-        r.json().then(data => {
-          status.textContent = 'Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.';
-          status.className = 'envio-status erro';
-        }).catch(() => {
-          status.textContent = 'Erro ao enviar. Tente novamente.';
-          status.className = 'envio-status erro';
-        });
-      }
-    })
-    .catch(() => {
-      btn.disabled = false;
-      btn.textContent = 'Enviar briefing para a Zyllah';
-      status.textContent = 'Erro de conexão. Verifique sua internet e tente novamente.';
-      status.className = 'envio-status erro';
-    });
+      status.textContent = '✓ Seu cliente de e-mail foi aberto com o briefing pronto. Clique em enviar no e-mail que abrirá.';
+      status.className = 'envio-status ok';
+    }, 1500);
   }
 
   // Inicializa

@@ -43,9 +43,9 @@
   .cover-label { font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
   .cover-title { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 16px; }
   .cover-title em { font-style: italic; color: var(--gold-light); }
-  .cover-sub { font-size: 13px; letter-spacing: 0.15em; color: rgba(255,255,255,0.3); margin-bottom: 60px; }
+  .cover-sub { font-size: 13px; letter-spacing: 0.15em; color:rgba(255,255,255,0.55); margin-bottom: 60px; }
   .cover-line { width: 60px; height: 1px; background: var(--gold); margin-bottom: 32px; }
-  .cover-version { font-size: 13px; letter-spacing: 0.2em; color: rgba(255,255,255,0.2); }
+  .cover-version { font-size: 13px; letter-spacing: 0.2em; color:rgba(255,255,255,0.55); }
 
   /* NAVEGAÇÃO LATERAL */
   .layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
@@ -132,7 +132,7 @@
   .logo-card.white-bg { background: var(--white); }
   .logo-card svg { max-width: 280px; height: auto; }
   .logo-caption { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
-  .logo-caption.light { color: rgba(255,255,255,0.3); }
+  .logo-caption.light { color:rgba(255,255,255,0.55); }
   .logo-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
   .logo-rule { padding: 32px; background: var(--cream-mid); }
   .logo-rule h4 { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
@@ -225,7 +225,7 @@
     color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
   }
   .senha-input:focus { border-bottom-color: #B8976A; }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.2em; }
   .senha-btn {
     background: #B8976A; color: #1A1714; border: none;
     padding: 14px 32px; font-family: 'Jost', sans-serif;
@@ -234,7 +234,7 @@
   }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
-  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  .senha-hint { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
 </style>
 
 <script>
@@ -792,7 +792,7 @@
 
       <div style="padding:60px;background:var(--ink);margin-top:48px;text-align:center;">
         <p style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);line-height:1.5;max-width:600px;margin:0 auto 32px;">Em dúvida se uma peça está dentro do padrão Zyllah? Pergunte: <em style="color:var(--gold-light);">"Isso parece de alto padrão ou parece comum?"</em></p>
-        <p style="font-size:13px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;">Se a resposta for "comum" — refaça.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.55);letter-spacing:0.1em;">Se a resposta for "comum" — refaça.</p>
       </div>
 
       <div style="margin-top:60px;padding-top:40px;border-top:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
@@ -884,7 +884,7 @@
 
       <div style="margin-top:2px;padding:40px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;">
         <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--white);line-height:1.4;max-width:560px;">O atendimento da sua paciente começa antes do primeiro contato humano. <em style="color:var(--gold-light);">O Zyllah Flow cuida desse momento.</em></p>
-        <div style="font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-align:right;">Tecnologia:<br>n8n · WhatsApp API<br>Inteligência Artificial</div>
+        <div style="font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.55);text-align:right;">Tecnologia:<br>n8n · WhatsApp API<br>Inteligência Artificial</div>
       </div>
 
       <div style="margin-top:60px;padding-top:40px;border-top:1px solid rgba(184,151,106,0.15);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
@@ -918,28 +918,28 @@
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#B8976A;margin-bottom:16px;">Título principal</p>
               <p style="font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(255,255,255,1);margin-bottom:8px;">Exemplo de título</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.5);">Valor: <strong style="color:#D4B896;">white / rgba(255,255,255,1.0)</strong></p>
-              <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;">Nunca abaixo de 0.85</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">Nunca abaixo de 0.85</p>
             </div>
 
             <div style="background:rgba(255,255,255,0.04);padding:28px 24px;border-left:3px solid #B8976A;">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#B8976A;margin-bottom:16px;">Corpo de texto</p>
               <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:rgba(255,255,255,0.75);margin-bottom:8px;line-height:1.7;">Texto corrido, parágrafos, descrições e qualquer conteúdo que o leitor precisa ler com conforto.</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.5);">Valor: <strong style="color:#D4B896;">rgba(255,255,255,0.75)</strong></p>
-              <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;">Nunca abaixo de 0.65</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">Nunca abaixo de 0.65</p>
             </div>
 
             <div style="background:rgba(255,255,255,0.04);padding:28px 24px;border-left:3px solid rgba(184,151,106,0.4);">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#B8976A;margin-bottom:16px;">Texto secundário / apoio</p>
               <p style="font-family:'Jost',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);margin-bottom:8px;">Labels, datas, informações complementares, badges.</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.5);">Valor: <strong style="color:#D4B896;">rgba(255,255,255,0.55)</strong></p>
-              <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;">Nunca abaixo de 0.45</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">Nunca abaixo de 0.45</p>
             </div>
 
             <div style="background:rgba(255,255,255,0.04);padding:28px 24px;border-left:3px solid rgba(184,151,106,0.4);">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#B8976A;margin-bottom:16px;">Ornamental / decorativo</p>
-              <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.25);margin-bottom:8px;">Separadores, numerais de fundo, elementos que existem para textura — não para leitura.</p>
+              <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);margin-bottom:8px;">Separadores, numerais de fundo, elementos que existem para textura — não para leitura.</p>
               <p style="font-size:13px;color:rgba(255,255,255,0.5);">Valor: <strong style="color:#D4B896;">rgba(255,255,255,0.20–0.30)</strong></p>
-              <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;">Único contexto onde baixa opacidade é permitida</p>
+              <p style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;">Único contexto onde baixa opacidade é permitida</p>
             </div>
 
           </div>
@@ -955,28 +955,28 @@
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8A6A3E;margin-bottom:16px;">Título principal</p>
               <p style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#1A1714;margin-bottom:8px;">Exemplo de título</p>
               <p style="font-size:13px;color:#3D3830;">Valor: <strong style="color:#8A6A3E;">#1A1714 (Ink)</strong></p>
-              <p style="font-size:12px;color:rgba(61,56,48,0.5);margin-top:4px;">Sempre sólido</p>
+              <p style="font-size:12px;color:rgba(61,56,48,0.65);margin-top:4px;">Sempre sólido</p>
             </div>
 
             <div style="background:rgba(26,23,20,0.04);padding:28px 24px;border-left:3px solid #B8976A;">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8A6A3E;margin-bottom:16px;">Corpo de texto</p>
               <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:#3D3830;margin-bottom:8px;line-height:1.7;">Texto corrido, parágrafos, descrições e qualquer conteúdo que o leitor precisa ler com conforto.</p>
               <p style="font-size:13px;color:#3D3830;">Valor: <strong style="color:#8A6A3E;">#3D3830 (Ink Soft)</strong></p>
-              <p style="font-size:12px;color:rgba(61,56,48,0.5);margin-top:4px;">Nunca mais claro que #5A5248</p>
+              <p style="font-size:12px;color:rgba(61,56,48,0.65);margin-top:4px;">Nunca mais claro que #5A5248</p>
             </div>
 
             <div style="background:rgba(26,23,20,0.04);padding:28px 24px;border-left:3px solid rgba(184,151,106,0.4);">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8A6A3E;margin-bottom:16px;">Texto secundário / apoio</p>
               <p style="font-family:'Jost',sans-serif;font-size:14px;font-weight:300;color:rgba(61,56,48,0.65);margin-bottom:8px;">Labels, datas, informações complementares, badges.</p>
               <p style="font-size:13px;color:#3D3830;">Valor: <strong style="color:#8A6A3E;">rgba(61,56,48,0.65)</strong></p>
-              <p style="font-size:12px;color:rgba(61,56,48,0.5);margin-top:4px;">Nunca abaixo de 0.55</p>
+              <p style="font-size:12px;color:rgba(61,56,48,0.65);margin-top:4px;">Nunca abaixo de 0.55</p>
             </div>
 
             <div style="background:rgba(26,23,20,0.04);padding:28px 24px;border-left:3px solid rgba(184,151,106,0.4);">
               <p style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8A6A3E;margin-bottom:16px;">Ornamental / decorativo</p>
-              <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:rgba(61,56,48,0.2);margin-bottom:8px;">Separadores, numerais de fundo, linhas decorativas — elementos que existem para textura.</p>
+              <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:rgba(61,56,48,0.65);margin-bottom:8px;">Separadores, numerais de fundo, linhas decorativas — elementos que existem para textura.</p>
               <p style="font-size:13px;color:#3D3830;">Valor: <strong style="color:#8A6A3E;">rgba(61,56,48,0.15–0.25)</strong></p>
-              <p style="font-size:12px;color:rgba(61,56,48,0.5);margin-top:4px;">Único contexto onde baixa opacidade é permitida</p>
+              <p style="font-size:12px;color:rgba(61,56,48,0.65);margin-top:4px;">Único contexto onde baixa opacidade é permitida</p>
             </div>
 
           </div>

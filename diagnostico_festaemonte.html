@@ -34,14 +34,14 @@
   .senha-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(184,151,106,0.5); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 8px; }
   .senha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.1; }
   .senha-titulo em { font-style: italic; color: var(--gold-light); }
-  .senha-sub { font-size: 14px; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+  .senha-sub { font-size: 14px; color:rgba(255,255,255,0.55); letter-spacing: 0.05em; }
   .senha-input {
     width: 100%; background: transparent; border: none;
     border-bottom: 1px solid rgba(184,151,106,0.35);
     padding: 14px 0; font-family: 'Jost', sans-serif;
     font-size: 18px; color: white; outline: none; letter-spacing: 0.15em;
   }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.25em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.25em; }
   .senha-btn {
     background: var(--gold); color: var(--ink); border: none;
     padding: 16px 36px; font-family: 'Jost', sans-serif;
@@ -104,7 +104,7 @@
   .dado-card { background: rgba(184,151,106,0.05); border-top: 2px solid rgba(184,151,106,0.3); padding: 28px 24px; }
   .dado-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
   .dado-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: white; font-weight: 300; }
-  .dado-sub { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+  .dado-sub { font-size: 13px; color:rgba(255,255,255,0.55); margin-top: 4px; }
 
   /* ── DIAGNÓSTICO ── */
   .diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
@@ -140,7 +140,7 @@
   .conv-card { background: white; padding: 32px; border-top: 2px solid rgba(184,151,106,0.2); }
   .conv-nome { font-size: 13px; font-weight: 500; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 16px; }
   .conv-mensagem { font-size: 13px; color: var(--ink-soft); line-height: 1.75; border-left: 2px solid rgba(184,151,106,0.2); padding-left: 16px; margin-bottom: 10px; }
-  .conv-obs { font-size: 12px; color: rgba(61,56,48,0.5); font-style: italic; margin-top: 12px; }
+  .conv-obs { font-size: 12px; color:rgba(61,56,48,0.65); font-style: italic; margin-top: 12px; }
   .conv-status { display: inline-block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; margin-top: 8px; }
   .conv-status.fechou { background: var(--sage-light); color: var(--sage); }
   .conv-status.perdeu { background: var(--rose-light); color: var(--rose); }
@@ -167,7 +167,7 @@
   .produto-nome { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--ink); margin-bottom: 10px; }
   .produto-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 16px; }
   .produto-preco { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--gold); }
-  .produto-preco-sub { font-size: 12px; color: rgba(61,56,48,0.4); letter-spacing: 0.1em; }
+  .produto-preco-sub { font-size: 12px; color:rgba(61,56,48,0.65); letter-spacing: 0.1em; }
 
   /* ── INSTAGRAM ── */
   .ig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
@@ -192,16 +192,16 @@
   /* ── CONCORRÊNCIA ── */
   .conc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
   .conc-card { padding: 40px 36px; }
-  .conc-card.valeria { background: rgba(196,122,122,0.04); border-top: 3px solid rgba(196,122,122,0.4); }
-  .conc-card.fernanda { background: rgba(122,155,138,0.04); border-top: 3px solid var(--sage); }
+  .conc-card.valeria { background: rgba(255,255,255,0.04); border-top: 3px solid rgba(196,122,122,0.6); }
+  .conc-card.fernanda { background: rgba(122,155,138,0.08); border-top: 3px solid var(--sage); }
   .conc-nome { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 20px; }
-  .conc-card.valeria .conc-nome { color: var(--rose); }
+  .conc-card.valeria .conc-nome { color: rgba(196,122,122,0.85); }
   .conc-card.fernanda .conc-nome { color: var(--sage); }
   .conc-stat { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
-  .conc-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--ink); }
-  .conc-stat-label { font-size: 13px; color: var(--ink-soft); }
-  .conc-conclusao { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(184,151,106,0.15); font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
-  .conc-conclusao strong { font-weight: 500; color: var(--ink); }
+  .conc-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: rgba(255,255,255,0.85); }
+  .conc-stat-label { font-size: 13px; color: rgba(255,255,255,0.45); }
+  .conc-conclusao { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(184,151,106,0.15); font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; }
+  .conc-conclusao strong { font-weight: 500; color: rgba(255,255,255,0.8); }
 
   /* ── PLANO DE AÇÃO ── */
   .plano { display: flex; flex-direction: column; gap: 2px; }
@@ -219,7 +219,7 @@
   /* ── RODAPÉ ── */
   .rodape { background: var(--ink); padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; }
   .rodape-marca { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(184,151,106,0.5); letter-spacing: 0.2em; }
-  .rodape-nota { font-size: 12px; color: rgba(255,255,255,0.2); }
+  .rodape-nota { font-size: 12px; color:rgba(255,255,255,0.55); }
 
   @media (max-width: 768px) {
     .hero, .secao { padding: 48px 24px; }
@@ -276,8 +276,9 @@
     <a href="#posicionamento" class="nav-item">05 · Posicionamento</a>
     <a href="#produtos" class="nav-item">06 · Produtos</a>
     <a href="#instagram" class="nav-item">07 · Instagram</a>
-    <a href="#concorrencia" class="nav-item">08 · Concorrência</a>
-    <a href="#plano" class="nav-item">09 · Plano de Ação</a>
+    <a href="#nome" class="nav-item">08 · Nome</a>
+    <a href="#concorrencia" class="nav-item">09 · Concorrência</a>
+    <a href="#plano" class="nav-item">10 · Plano de Ação</a>
   </nav>
 
   <!-- 01 SITUAÇÃO ATUAL -->
@@ -638,8 +639,44 @@
   </section>
 
   <!-- 08 CONCORRÊNCIA -->
+
+  <!-- SOBRE O NOME -->
+  <section class="secao secao-mid" id="nome">
+    <span class="secao-tag">08 · Sobre o Nome</span>
+    <h2 class="secao-titulo">Festa e Monte —<br><em>manter ou evoluir?</em></h2>
+    <p class="secao-intro">O nome não é o problema central agora. Mas merece uma análise honesta antes de qualquer decisão futura.</p>
+
+    <div class="anuncio-grid">
+      <div class="anuncio-card">
+        <div class="anuncio-header"><span class="anuncio-titulo">O que funciona no nome atual</span><span class="tag ok">Manter por agora</span></div>
+        <div class="anuncio-body">
+          <p>✓ Descritivo — diz exatamente o que é o negócio</p>
+          <p style="margin-top:8px">✓ Fácil de lembrar e de falar</p>
+          <p style="margin-top:8px">✓ Já tem histórico de perfil, seguidores e anúncios associados</p>
+          <p style="margin-top:8px">✓ Original — sem conflito de marca identificado</p>
+        </div>
+      </div>
+      <div class="anuncio-card">
+        <div class="anuncio-header"><span class="anuncio-titulo">O que limita o nome</span><span class="tag corrigir">Observar</span></div>
+        <div class="anuncio-body">
+          <p>✗ Não transmite qualidade nem personalidade — é funcional, não aspiracional</p>
+          <p style="margin-top:8px">✗ “Monte” soa como instrução, não como marca</p>
+          <p style="margin-top:8px">✗ Difícil de criar identidade visual forte em torno dele</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foto-tip" style="margin-top:24px">
+      <div class="foto-tip-icone">💡</div>
+      <div class="foto-tip-corpo">
+        <h4>Recomendação</h4>
+        <p>A prioridade agora não é o nome — é a identidade visual, a consistência do conteúdo e o produto personalizado. Mudar o nome tem custo real: perde o histórico do perfil, confunde quem já conhece, exige recriar tudo. Quando o negócio crescer e o posicionamento estiver consolidado, aí sim a decisão faz sentido. Por enquanto, o trabalho é fazer o “Festa e Monte” valer mais.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="secao secao-dark" id="concorrencia">
-    <span class="secao-tag">08 · Análise da Concorrência</span>
+    <span class="secao-tag">09 · Análise da Concorrência</span>
     <h2 class="secao-titulo light">O terreno que<br><em>não se deve disputar</em></h2>
     <p class="secao-intro light">Entender a concorrência não é para copiar — é para encontrar o espaço que eles não ocupam.</p>
 
@@ -649,18 +686,18 @@
         <div class="conc-stat"><span class="conc-num">12.500</span><span class="conc-stat-label">seguidores</span></div>
         <div class="conc-stat"><span class="conc-num">1.469</span><span class="conc-stat-label">posts publicados</span></div>
         <div class="conc-stat"><span class="conc-num">300+</span><span class="conc-stat-label">temas disponíveis</span></div>
-        <p style="font-size:14px;color:var(--ink-soft);line-height:1.75;margin-top:16px">Loja física, posicionamento em volume e preço. "O melhor preço de toda a cidade." Feed profissional, destaques organizados, presença consolidada. É a líder do segmento em Nova Friburgo.</p>
-        <div class="conc-conclusao"><strong>Conclusão:</strong> Competir em preço e volume com a Valéria seria um erro estratégico. Ela tem escala, estoque e histórico que a Fernanda não tem — e não precisa ter.</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-top:16px">Loja física, posicionamento em volume e preço. "O melhor preço de toda a cidade." Feed profissional, destaques organizados, presença consolidada. Referência dominante no segmento em Nova Friburgo.</p>
+        <div class="conc-conclusao"><strong>Tendência do mercado local:</strong> O segmento tende a se dividir entre quem compete por volume/preço e quem ocupa o espaço de qualidade e personalização. A Valéria ocupa o primeiro. O segundo está em aberto.</div>
       </div>
 
       <div class="conc-card fernanda">
         <div class="conc-nome">O caminho da Fernanda</div>
         <div class="conc-stat"><span class="conc-num" style="color:var(--sage)">Atenção</span></div>
-        <p style="font-size:14px;color:var(--ink-soft);line-height:1.75;margin-top:4px;margin-bottom:16px">O que a Valéria, pelo volume, não consegue entregar.</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-top:4px;margin-bottom:16px">O que a Valéria, pelo volume, não consegue entregar.</p>
         <div class="conc-stat"><span class="conc-num" style="color:var(--sage)">Personalização</span></div>
-        <p style="font-size:14px;color:var(--ink-soft);line-height:1.75;margin-top:4px;margin-bottom:16px">Kit personalizado com nome e tema exato. Ninguém oferece isso de forma organizada em Friburgo.</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-top:4px;margin-bottom:16px">Kit personalizado com nome e tema exato. Ninguém oferece isso de forma organizada em Friburgo.</p>
         <div class="conc-stat"><span class="conc-num" style="color:var(--sage)">Agilidade</span></div>
-        <p style="font-size:14px;color:var(--ink-soft);line-height:1.75;margin-top:4px;margin-bottom:16px">Resposta rápida, atendimento próximo, processo sem surpresa.</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-top:4px;margin-bottom:16px">Resposta rápida, atendimento próximo, processo sem surpresa.</p>
         <div class="conc-conclusao"><strong>Diferencial real:</strong> Não ser a maior — ser a mais atenciosa. A mãe que contrata a Fernanda não busca a mais barata. Busca alguém que entende o que ela quer e entrega exatamente isso.</div>
       </div>
     </div>
@@ -668,7 +705,7 @@
 
   <!-- 09 PLANO DE AÇÃO -->
   <section class="secao secao-cream" id="plano">
-    <span class="secao-tag">09 · Plano de Ação</span>
+    <span class="secao-tag">10 · Plano de Ação</span>
     <h2 class="secao-titulo">O que fazer,<br><em>em que ordem</em></h2>
     <p class="secao-intro">Sem pressão. Cada passo no tempo certo. Prioridade definida pelo impacto imediato no faturamento.</p>
 
@@ -758,7 +795,35 @@
   </section>
 
   <!-- RODAPÉ -->
-  <footer class="rodape">
+  
+  <!-- VISLUMBRE DE POSSIBILIDADE -->
+  <section class="secao secao-dark" style="border-bottom:none;">
+    <span class="secao-tag">Para o futuro</span>
+    <h2 class="secao-titulo light">Um vislumbre<br><em>de possibilidade</em></h2>
+    <p class="secao-intro light">O negócio que está sendo construído aqui pode, em algum momento, ter um nome que carregue mais personalidade e posicionamento. Não é urgente — é uma semente. Dois nomes foram verificados e estão disponíveis.</p>
+
+    <div class="conc-grid" style="margin-top:8px;">
+      <div style="background:rgba(255,255,255,0.04);border-top:3px solid rgba(184,151,106,0.5);padding:40px 36px;">
+        <p style="font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(184,151,106,0.7);margin-bottom:20px;">Opção A</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:white;line-height:1;margin-bottom:20px;">Lacinho</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.8;">Delicado, feminino, imediato. Conecta diretamente com o universo de festas infantis e o público de mães. Fácil de falar, fácil de lembrar. Sugere cuidado e acabamento — o laço como detalhe que faz a diferença.</p>
+        <p style="font-size:12px;color:rgba(184,151,106,0.5);margin-top:20px;letter-spacing:0.1em;">Originalidade verificada · disponível</p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04);border-top:3px solid rgba(184,151,106,0.5);padding:40px 36px;">
+        <p style="font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:rgba(184,151,106,0.7);margin-bottom:20px;">Opção B</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:white;line-height:1;margin-bottom:20px;">Doninha</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.8;">Inusitado, com personalidade própria. Carrega afeto e leveza sem ser óbvio. Cria identidade visual única — mais difícil de confundir com qualquer outro negócio do segmento. Para uma marca que quer ser lembrada.</p>
+        <p style="font-size:12px;color:rgba(184,151,106,0.5);margin-top:20px;letter-spacing:0.1em;">Originalidade verificada · disponível</p>
+      </div>
+    </div>
+
+    <div style="background:rgba(184,151,106,0.06);border:1px solid rgba(184,151,106,0.15);padding:28px 36px;margin-top:2px;">
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.85;font-style:italic;">Nenhuma decisão precisa ser tomada agora. O nome atual funciona e tem histórico. Esta nota existe apenas para registrar que há possibilidades — e que quando o momento certo chegar, o caminho já foi explorado.</p>
+    </div>
+  </section>
+
+<footer class="rodape">
     <div class="rodape-marca">Zyllah Digital</div>
     <div class="rodape-nota">Diagnóstico Festa e Monte · Março de 2026 · Confidencial</div>
   </footer>
@@ -767,8 +832,8 @@
 
 <script>
 (function() {
-  const SENHA = 'festamonte2026';
-  const KEY = 'zyllah_fem_diag';
+  const SENHA = 'fm01';
+  const KEY = 'zyllah_fem_diag2';
   if (sessionStorage.getItem(KEY) === '1') {
     document.getElementById('senha-tela').style.display = 'none';
     document.getElementById('conteudo').style.display = 'block';
@@ -781,8 +846,8 @@
 })();
 
 function verificarSenha() {
-  const SENHA = 'festamonte2026';
-  const KEY = 'zyllah_fem_diag';
+  const SENHA = 'fm01';
+  const KEY = 'zyllah_fem_diag2';
   var input = document.getElementById('senha-input').value.trim();
   if (input === SENHA) {
     sessionStorage.setItem(KEY, '1');

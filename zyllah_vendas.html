@@ -50,7 +50,7 @@
   }
   .header-nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: white; letter-spacing: 0.15em; }
   .header-nav-links { display: flex; gap: 36px; }
-  .header-nav-links a { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .header-nav-links a { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color:rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
   .header-nav-links a:hover { color: var(--gold); }
 
   .header-content { position: relative; z-index: 2; max-width: 1100px; }
@@ -70,8 +70,8 @@
   }
   .header-target-label { font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(184,151,106,0.5); margin-bottom: 8px; }
   .header-target-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--gold); line-height: 1; }
-  .header-target-sub { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 4px; letter-spacing: 0.08em; }
-  .header-scroll { position: absolute; bottom: 72px; right: 80px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.2); writing-mode: vertical-rl; transform: rotate(180deg); }
+  .header-target-sub { font-size: 12px; color:rgba(255,255,255,0.55); margin-top: 4px; letter-spacing: 0.08em; }
+  .header-scroll { position: absolute; bottom: 72px; right: 80px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color:rgba(255,255,255,0.55); writing-mode: vertical-rl; transform: rotate(180deg); }
 
   /* ── CORPO ─────────────────────────────────────────── */
   .wrap { max-width: 1100px; margin: 0 auto; padding: 0 80px; }
@@ -154,9 +154,9 @@
   .expansao .plano-preco-wrap { border-color: rgba(184,151,106,0.15); }
 
   .plano-preco-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
-  .base .plano-preco-label { color: rgba(61,56,48,0.5); }
+  .base .plano-preco-label { color:rgba(61,56,48,0.65); }
   .principal .plano-preco-label { color: rgba(184,151,106,0.6); }
-  .expansao .plano-preco-label { color: rgba(61,56,48,0.5); }
+  .expansao .plano-preco-label { color:rgba(61,56,48,0.65); }
 
   .plano-preco { display: flex; align-items: baseline; gap: 4px; }
   .plano-preco-rs { font-size: 18px; font-weight: 400; margin-top: 4px; }
@@ -167,11 +167,11 @@
   .base .plano-preco-num { color: var(--ink); }
   .principal .plano-preco-num { color: white; }
   .expansao .plano-preco-num { color: var(--ink); }
-  .plano-preco-sub { font-size: 12px; color: rgba(61,56,48,0.4); margin-top: 4px; display: block; }
-  .principal .plano-preco-sub { color: rgba(255,255,255,0.25); }
+  .plano-preco-sub { font-size: 12px; color:rgba(61,56,48,0.65); margin-top: 4px; display: block; }
+  .principal .plano-preco-sub { color:rgba(255,255,255,0.55); }
   .plano-preco-implantacao { font-size: 12px; margin-top: 8px; }
   .base .plano-preco-implantacao { color: var(--ink-soft); }
-  .principal .plano-preco-implantacao { color: rgba(255,255,255,0.35); }
+  .principal .plano-preco-implantacao { color:rgba(255,255,255,0.55); }
   .expansao .plano-preco-implantacao { color: var(--ink-soft); }
 
   .plano-itens { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
@@ -229,7 +229,7 @@
   .piloto-cond { margin-bottom: 16px; }
   .piloto-cond-label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
   .piloto-cond-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; }
-  .piloto-cond-val s { color: rgba(255,255,255,0.2); font-size: 18px; }
+  .piloto-cond-val s { color:rgba(255,255,255,0.55); font-size: 18px; }
 
   /* ── CHECKLIST REUNIÃO ───────────────────────────── */
   .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
@@ -244,7 +244,7 @@
 
   /* ── RODAPÉ ─────────────────────────────────────────── */
   .rodape { background: var(--ink-2); padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; border-top: 1px solid rgba(184,151,106,0.1); }
-  .rodape-esq { font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+  .rodape-esq { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
   .voltar { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(184,151,106,0.3); padding-bottom: 2px; }
 
   @media (max-width: 900px) {
@@ -285,7 +285,7 @@
     color: white; outline: none; letter-spacing: 0.1em; transition: border-color 0.2s;
   }
   .senha-input:focus { border-bottom-color: #B8976A; }
-  .senha-input::placeholder { color: rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.2em; }
+  .senha-input::placeholder { color:rgba(255,255,255,0.55); font-size: 14px; letter-spacing: 0.2em; }
   .senha-btn {
     background: #B8976A; color: #1A1714; border: none;
     padding: 14px 32px; font-family: 'Jost', sans-serif;
@@ -294,7 +294,7 @@
   }
   .senha-btn:hover { background: #D4B896; }
   .senha-erro { font-size: 13px; color: rgba(210,100,100,0.9); letter-spacing: 0.08em; min-height: 18px; }
-  .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  .senha-hint { font-size: 12px; color:rgba(255,255,255,0.55); letter-spacing: 0.08em; }
 </style>
 
 <script>
