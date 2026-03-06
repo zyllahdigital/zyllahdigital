@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière — Identidade Visual</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --branco: #FAFAF8;
+  --gelo: #F0EDE8;
+  --pedra: #C8BFB4;
+  --terra: #8A7B6F;
+  --carvao: #2A2420;
+  --rosa-cinza: #D4C5BC;
+  --salvia: #7A8C78;
+  --acento: #B85C38;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--branco); color: var(--carvao); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+
+.capa { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+.capa-esquerda { padding: 80px 64px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--pedra); }
+.capa-direita { background: var(--carvao); display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 64px; position: relative; overflow: hidden; }
+.capa-direita::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 55%; background: linear-gradient(180deg, rgba(184,92,56,0.07) 0%, transparent 100%); }
+
+.capa-tag { font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--terra); }
+.capa-nome { font-family: 'DM Serif Display', serif; font-size: clamp(72px, 9vw, 120px); line-height: 0.9; color: var(--carvao); letter-spacing: -0.02em; }
+.capa-nome-i { font-style: italic; color: var(--acento); }
+.capa-rodape-e { font-size: 11px; color: var(--terra); line-height: 2; letter-spacing: 0.08em; }
+
+.capa-num { position: absolute; top: 64px; right: 64px; font-family: 'DM Serif Display', serif; font-size: 11px; color: rgba(250,250,248,0.15); letter-spacing: 0.3em; }
+.capa-frase { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(20px, 2.2vw, 30px); color: rgba(250,250,248,0.8); line-height: 1.45; margin-bottom: 40px; position: relative; z-index: 1; }
+.capa-linha { width: 36px; height: 2px; background: var(--acento); margin-bottom: 20px; position: relative; z-index: 1; }
+.capa-sub-d { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(250,250,248,0.25); position: relative; z-index: 1; }
+
+.secao { padding: 96px 80px; }
+.secao.gelo { background: var(--gelo); }
+.secao.escura { background: var(--carvao); color: var(--branco); }
+.secao-num { font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--acento); margin-bottom: 16px; display: block; }
+.secao-titulo { font-family: 'DM Serif Display', serif; font-size: clamp(40px, 4.5vw, 64px); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 48px; }
+.secao.escura .secao-titulo { color: var(--branco); }
+.secao-titulo em { font-style: italic; color: var(--acento); }
+.secao-intro { font-size: 15px; line-height: 1.9; color: var(--terra); max-width: 580px; margin-bottom: 64px; }
+.secao.escura .secao-intro { color: rgba(250,250,248,0.45); }
+
+.trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+.trio-card { padding: 40px 36px; background: white; }
+.trio-card.dark { background: var(--carvao); }
+.trio-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--acento); display: block; margin-bottom: 20px; }
+.trio-texto { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.35; color: var(--carvao); }
+.trio-card.dark .trio-texto { font-style: italic; color: rgba(250,250,248,0.85); }
+
+.paleta { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 2px; }
+.cor { aspect-ratio: 1/1.3; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; }
+.cor-nome { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 3px; }
+.cor-hex { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 13px; }
+
+.tipo-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+.tipo-bloco { padding: 56px 48px; }
+.tipo-bloco.claro { background: var(--gelo); }
+.tipo-bloco.dark { background: #1E1A17; }
+.tipo-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--acento); margin-bottom: 32px; display: block; }
+.tipo-display { font-family: 'DM Serif Display', serif; font-size: clamp(44px, 5vw, 68px); line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 20px; }
+.tipo-bloco.claro .tipo-display { color: var(--carvao); }
+.tipo-bloco.dark .tipo-display { color: var(--branco); }
+.tipo-it { font-style: italic; color: var(--acento); }
+.tipo-body-ex { font-size: clamp(16px, 1.8vw, 24px); font-weight: 200; line-height: 1.65; margin-bottom: 20px; }
+.tipo-bloco.claro .tipo-body-ex { color: var(--terra); }
+.tipo-bloco.dark .tipo-body-ex { color: rgba(250,250,248,0.35); }
+.tipo-fonte-nome { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--pedra); }
+
+.apps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 48px; }
+.app { padding: 48px 40px; min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; }
+.app-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; }
+.app-titulo { font-family: 'DM Serif Display', serif; font-size: 20px; line-height: 1.2; margin-top: 40px; margin-bottom: 10px; }
+.app-desc { font-size: 12px; line-height: 1.7; }
+
+.nota { position: fixed; bottom: 32px; right: 32px; background: white; border-left: 3px solid var(--acento); box-shadow: 0 8px 40px rgba(0,0,0,0.1); padding: 20px 24px; max-width: 230px; z-index: 999; }
+.nota-titulo { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--acento); margin-bottom: 12px; display: block; }
+.nota-item { font-size: 12px; color: var(--terra); line-height: 1.8; padding-left: 14px; position: relative; }
+.nota-item::before { content: '·'; position: absolute; left: 4px; color: var(--pedra); }
+.cursor { display: inline-block; width: 1.5px; height: 12px; background: var(--acento); margin-left: 2px; vertical-align: middle; animation: piscar 1s step-end infinite; }
+@keyframes piscar { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="capa-esquerda">
+    <span class="capa-tag">Manual de Identidade Visual · 2026</span>
+    <div class="capa-nome">LUM<span class="capa-nome-i">ière</span></div>
+    <div class="capa-rodape-e">Medicina Estética<br>São Paulo · SP<br>Versão 2.1 — Revisão final</div>
+  </div>
+  <div class="capa-direita">
+    <span class="capa-num">Doc 001</span>
+    <div class="capa-linha"></div>
+    <p class="capa-frase">"O resultado mais sofisticado é aquele que ninguém consegue nomear."</p>
+    <span class="capa-sub-d">Dra. Camille Rocha · Fundadora</span>
+  </div>
+</div>
+
+<div class="secao gelo">
+  <span class="secao-num">01 · Essência</span>
+  <h2 class="secao-titulo">Medicina que<br><em>escuta primeiro.</em></h2>
+  <p class="secao-intro">A Lumière não trabalha com protocolos universais. Cada consulta começa por uma pergunta: como você quer se sentir? O procedimento vem depois.</p>
+  <div class="trio">
+    <div class="trio-card">
+      <span class="trio-label">Propósito</span>
+      <p class="trio-texto">Revelar — nunca substituir — o que já existe em cada pessoa.</p>
+    </div>
+    <div class="trio-card">
+      <span class="trio-label">Posicionamento</span>
+      <p class="trio-texto">Alta estética para quem prefere a discrição à ostentação.</p>
+    </div>
+    <div class="trio-card dark">
+      <span class="trio-label">Promessa</span>
+      <p class="trio-texto">Você sai diferente. Mas ninguém sabe dizer o quê.</p>
+    </div>
+  </div>
+</div>
+
+<div class="secao">
+  <span class="secao-num">02 · Cores</span>
+  <h2 class="secao-titulo">Seis tons.<br><em>Nenhum grita.</em></h2>
+  <div class="paleta">
+    <div class="cor" style="background:var(--carvao);aspect-ratio:1/1.5">
+      <span class="cor-nome" style="color:rgba(250,250,248,0.35)">Carvão</span>
+      <span class="cor-hex" style="color:rgba(250,250,248,0.2)">#2A2420</span>
+    </div>
+    <div class="cor" style="background:var(--branco);border:1px solid var(--gelo)">
+      <span class="cor-nome" style="color:var(--terra)">Branco</span>
+      <span class="cor-hex" style="color:var(--pedra)">#FAFAF8</span>
+    </div>
+    <div class="cor" style="background:var(--acento)">
+      <span class="cor-nome" style="color:rgba(250,250,248,0.6)">Terracota</span>
+      <span class="cor-hex" style="color:rgba(250,250,248,0.35)">#B85C38</span>
+    </div>
+    <div class="cor" style="background:var(--rosa-cinza)">
+      <span class="cor-nome" style="color:rgba(42,36,32,0.5)">Rosa Cinza</span>
+      <span class="cor-hex" style="color:rgba(42,36,32,0.3)">#D4C5BC</span>
+    </div>
+    <div class="cor" style="background:var(--salvia)">
+      <span class="cor-nome" style="color:rgba(250,250,248,0.6)">Sálvia</span>
+      <span class="cor-hex" style="color:rgba(250,250,248,0.35)">#7A8C78</span>
+    </div>
+  </div>
+</div>
+
+<div class="secao escura">
+  <span class="secao-num">03 · Tipografia</span>
+  <h2 class="secao-titulo">Duas famílias.<br><em>Zero ornamento.</em></h2>
+  <div class="tipo-duo">
+    <div class="tipo-bloco dark">
+      <span class="tipo-label">Display · Headlines</span>
+      <div class="tipo-display">Lum<span class="tipo-it">ière</span></div>
+      <span class="tipo-fonte-nome">DM Serif Display</span>
+    </div>
+    <div class="tipo-bloco claro">
+      <span class="tipo-label" style="color:var(--acento)">Corpo · Labels · Navegação</span>
+      <p class="tipo-body-ex">Precisão antes de qualquer coisa.</p>
+      <span class="tipo-fonte-nome" style="color:var(--terra)">DM Sans · Peso 200–400</span>
+    </div>
+  </div>
+</div>
+
+<div class="secao gelo">
+  <span class="secao-num">04 · Aplicações</span>
+  <h2 class="secao-titulo">A marca<br><em>em uso.</em></h2>
+  <div class="apps">
+    <div class="app" style="background:var(--carvao)">
+      <span class="app-label" style="color:rgba(201,169,110,0.3)">Instagram · Feed</span>
+      <div>
+        <h3 class="app-titulo" style="color:var(--branco)">Carvão + terracota como único acento</h3>
+        <p class="app-desc" style="color:rgba(250,250,248,0.3)">1:1 e 4:5. Margem 72px. Máximo 2 cores por frame.</p>
+      </div>
+    </div>
+    <div class="app" style="background:white;border:1px solid var(--gelo)">
+      <span class="app-label" style="color:var(--terra)">Papelaria · Receituário</span>
+      <div>
+        <h3 class="app-titulo" style="color:var(--carvao)">Fundo branco, relevo seco no logo</h3>
+        <p class="app-desc" style="color:var(--terra)">Munken 120g. Sem dourado. Sem brilho.</p>
+      </div>
+    </div>
+    <div class="app" style="background:var(--acento)">
+      <span class="app-label" style="color:rgba(250,250,248,0.5)">Sinalização</span>
+      <div>
+        <h3 class="app-titulo" style="color:white">Aço escovado sobre gesso cimentício</h3>
+        <p class="app-desc" style="color:rgba(255,255,255,0.65)">DM Serif Display, mín. 6cm. Sem iluminação.</p>
+      </div>
+    </div>
+    <div class="app" style="background:var(--rosa-cinza)">
+      <span class="app-label" style="color:rgba(42,36,32,0.4)">Stories · Instagram</span>
+      <div>
+        <h3 class="app-titulo" style="color:var(--carvao)">Rosa Cinza para conteúdo educativo</h3>
+        <p class="app-desc" style="color:rgba(42,36,32,0.5)">9:16. Tom suave para bastidores e dicas.</p>
+      </div>
+    </div>
+    <div class="app" style="background:var(--salvia)">
+      <span class="app-label" style="color:rgba(250,250,248,0.5)">Comunicados · Email</span>
+      <div>
+        <h3 class="app-titulo" style="color:white">Sálvia em lançamentos sazonais</h3>
+        <p class="app-desc" style="color:rgba(255,255,255,0.6)">Uso restrito: máximo 1× por mês.</p>
+      </div>
+    </div>
+    <div class="app" style="background:var(--gelo)">
+      <span class="app-label" style="color:var(--terra)">Cartão · Padrão</span>
+      <div>
+        <h3 class="app-titulo" style="color:var(--carvao)">Mínimo absoluto</h3>
+        <p class="app-desc" style="color:var(--terra)">DM Sans 200. Nome, especialidade, contato. Nada mais.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nota">
+  <span class="nota-titulo">Em revisão<span class="cursor"></span></span>
+  <p class="nota-item">Confirmar tom sálvia aprovado</p>
+  <p class="nota-item">Ajustar espaçamento seção 04</p>
+  <p class="nota-item">Aguardando foto da clínica</p>
+</div>
+
+</body>
+</html>
