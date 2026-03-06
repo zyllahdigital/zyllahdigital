@@ -24,7 +24,7 @@
     --white: #ffffff;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); }
+  body { font-family: 'Outfit', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); overflow-x: hidden; }
 
   @media print {
     .no-print { display: none; }
@@ -233,10 +233,11 @@
   .post-card { aspect-ratio: 1; padding: 36px; display: flex; flex-direction: column; border: 1px solid rgba(201,168,76,0.12); }
 
   @media (max-width: 960px) {
-    .layout { grid-template-columns: 1fr; }
+    .layout { display: block; width: 100%; }
     .sidebar { display: none; }
-    .section { padding: 48px 32px; }
-    .cover { padding: 48px 32px; min-height: 100svh; width: 100%; margin-left: 0; }
+    .main { width: 100%; }
+    .section { padding: 48px 24px; }
+    .cover { padding: 48px 32px; min-height: 100svh; width: 100vw; margin-left: 0; }
     .color-grid { grid-template-columns: repeat(3,1fr); }
     .type-specs { grid-template-columns: 1fr; }
     .voice-grid { grid-template-columns: 1fr; }
