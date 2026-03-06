@@ -245,12 +245,13 @@
     .rule-grid { grid-template-columns: 1fr; }
     .index-grid { grid-template-columns: 1fr 1fr; }
     .hier-item { grid-template-columns: 1fr; }
-    .posts-grid { grid-template-columns: 1fr 1fr; }
+    .posts-grid { grid-template-columns: 1fr; }
     .contrast-grid { grid-template-columns: 1fr; }
-    .section { max-width: 100%; }
-    * { max-width: 100%; word-break: break-word; }
+    .index-grid { grid-template-columns: 1fr; }
+    .section { max-width: 100%; overflow: hidden; }
     .cover-title { white-space: normal; }
-    .keyword { flex-shrink: 0; }
+    /* Grids internos de seção — coluna única no mobile */
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
