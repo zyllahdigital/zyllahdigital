@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Zyllah — Apresentação de Vendas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1714;
+    --gold: #B8976A;
+    --gold-light: #D4B896;
+    --cream: #FAF7F2;
+    --cream-mid: #F0EBE1;
+    --brown: #4A3F35;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; font-family: 'Jost', sans-serif; font-weight: 300; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 40px 20px 80px; }
+
+  h2.label { color: #555; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 32px 0 8px; align-self: flex-start; margin-left: calc(50% - 960px); }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* CANTONEIRAS */
+  .corner { position: absolute; width: 28px; height: 28px; border-color: var(--gold); border-style: solid; opacity: 0.5; z-index: 10; }
+  .corner.tl { top: 56px; left: 80px; border-width: 1px 0 0 1px; }
+  .corner.tr { top: 56px; right: 80px; border-width: 1px 1px 0 0; }
+  .corner.bl { bottom: 56px; left: 80px; border-width: 0 0 1px 1px; }
+  .corner.br { bottom: 56px; right: 80px; border-width: 0 1px 1px 0; }
+
+  /* LOGO RODAPÉ */
+  .logo-rodape { position: absolute; bottom: 80px; right: 110px; z-index: 10; }
+
+  /* CONTADOR */
+  .counter { position: absolute; bottom: 84px; left: 110px; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 2px; opacity: 0.4; z-index: 10; }
+
+  /* GRADE */
+  .grade { position: absolute; inset: 0; background-image: linear-gradient(rgba(184,151,106,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,151,106,0.04) 1px, transparent 1px); background-size: 54px 54px; }
+
+  /* ── SLIDE 1 — CAPA ── */
+  .s1 { background: var(--ink); }
+  .s1 .counter { color: var(--gold); }
+  .s1 .content {
+    position: absolute;
+    bottom: 140px;
+    left: 160px;
+    right: 800px;
+  }
+  .s1 .pretag {
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .s1 .pretag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .s1 h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 1.0;
+    color: white;
+    margin-bottom: 36px;
+  }
+  .s1 .sub {
+    font-size: 22px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    max-width: 680px;
+  }
+
+  /* ── SLIDE 2 — O PROBLEMA ── */
+  .s2 { background: var(--cream); }
+  .s2 .counter { color: var(--ink); opacity: 0.3; }
+  .s2 .corner { border-color: var(--ink); opacity: 0.15; }
+  .s2 .content {
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    right: 160px;
+    transform: translateY(-50%);
+  }
+  .s2 .tag {
+    font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; display: block;
+  }
+  .s2 h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+  .s2 .linha { width: 56px; height: 1px; background: var(--gold); margin-bottom: 32px; }
+  .s2 .corpo {
+    font-size: 26px;
+    color: var(--brown);
+    line-height: 1.8;
+    max-width: 960px;
+  }
+  .num-fantasma {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 700px;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.05;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    user-select: none;
+  }
+
+  /* ── SLIDE 3 — A SOLUÇÃO ── */
+  .s3 { background: var(--ink); }
+  .s3 .counter { color: var(--gold); }
+  .s3 .content {
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    right: 160px;
+    transform: translateY(-50%);
+  }
+  .s3 .tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block; }
+  .s3 h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 36px;
+  }
+  .s3 .linha { width: 56px; height: 1px; background: var(--gold); margin-bottom: 32px; opacity: 0.6; }
+  .s3 .corpo { font-size: 26px; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 1100px; }
+  .s3 .corpo strong { color: var(--gold-light); font-weight: 400; }
+
+  /* ── SLIDES DE PLANO ── */
+  .s-plano { background: var(--cream); }
+  .s-plano .counter { color: var(--ink); opacity: 0.3; }
+  .s-plano .corner { border-color: var(--ink); opacity: 0.15; }
+  .s-plano .content {
+    position: absolute;
+    top: 110px;
+    left: 160px;
+    right: 160px;
+    bottom: 110px;
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  .s-plano .col-esq { flex: 0 0 420px; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+  .s-plano .col-dir { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .s-plano .plano-tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  .s-plano .plano-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .s-plano .plano-sub { font-size: 15px; color: rgba(74,63,53,0.6); margin-bottom: 32px; letter-spacing: 0.05em; line-height: 1.5; }
+  .s-plano .linha { width: 56px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+  .s-plano .preco-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .s-plano .preco {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .s-plano .preco-label { font-size: 16px; color: rgba(74,63,53,0.55); }
+  .s-plano .implantacao { font-size: 13px; color: rgba(74,63,53,0.5); letter-spacing: 0.05em; }
+  .s-plano .itens { display: flex; flex-direction: column; gap: 14px; }
+  .s-plano .item { display: flex; align-items: flex-start; gap: 14px; font-size: 19px; color: var(--brown); line-height: 1.4; }
+  .s-plano .item::before { content: '✦'; color: var(--gold); opacity: 0.7; font-size: 10px; margin-top: 6px; flex-shrink: 0; }
+
+  /* PLANO INK (Autoridade) */
+  .s-plano-ink { background: var(--ink); }
+  .s-plano-ink .counter { color: var(--gold); }
+  .s-plano-ink .corner { border-color: var(--gold); opacity: 0.4; }
+  .s-plano-ink .plano-nome { color: white; }
+  .s-plano-ink .plano-sub { color: rgba(255,255,255,0.4); }
+  .s-plano-ink .plano-tag { color: var(--gold); }
+  .s-plano-ink .preco-label { color: rgba(255,255,255,0.4); }
+  .s-plano-ink .implantacao { color: rgba(255,255,255,0.35); }
+  .s-plano-ink .item { color: rgba(255,255,255,0.65); }
+
+  /* ── SLIDE PILOTO ── */
+  .s-piloto { background: var(--ink); }
+  .s-piloto .counter { color: var(--gold); }
+  .s-piloto .content {
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    right: 160px;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  .s-piloto .tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: block; }
+  .s-piloto h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 40px;
+  }
+  .s-piloto .linha { width: 56px; height: 1px; background: var(--gold); margin: 0 auto 40px; opacity: 0.5; }
+  .s-piloto .precos-row { display: flex; justify-content: center; gap: 120px; margin-bottom: 40px; }
+  .s-piloto .preco-item { text-align: center; }
+  .s-piloto .preco-item .nome { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .s-piloto .preco-item .de { font-size: 18px; color: rgba(255,255,255,0.25); text-decoration: line-through; margin-bottom: 4px; }
+  .s-piloto .preco-item .por {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 60px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .s-piloto .condicoes { font-size: 18px; color: rgba(255,255,255,0.45); line-height: 1.8; }
+  .s-piloto .condicoes strong { color: var(--gold-light); font-weight: 400; }
+
+  /* ── SLIDE CTA ── */
+  .s-cta { background: var(--cream); }
+  .s-cta .counter { color: var(--ink); opacity: 0.3; }
+  .s-cta .corner { border-color: var(--ink); opacity: 0.15; }
+  .s-cta .content {
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    right: 160px;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  .s-cta .tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: block; }
+  .s-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .s-cta .linha { width: 56px; height: 1px; background: var(--gold); margin: 0 auto 40px; }
+  .s-cta .proximos { font-size: 22px; color: var(--brown); line-height: 2.0; }
+  .s-cta .proximos strong { color: var(--ink); font-weight: 400; }
+
+  @media print {
+    body { background: none !important; padding: 0 !important; gap: 0 !important; }
+    h2.label { display: none !important; }
+    .slide { page-break-after: always; margin: 0 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG logo inline reutilizável -->
+<svg style="display:none">
+  <symbol id="logo-svg" viewBox="0 0 1451.04 1080">
+    <defs><style>.cl1{fill:#c3a366}.cl2{fill:#c1a260}.cl3{fill:#c7a866}.cl4{fill:#a58346}.cl5{fill:#a38342}</style></defs>
+    <path class="cl1" d="M109.72,379.36l-2.14-89.96,301.48-.47-116.04,167.8h-37.51l92.37-135.5-.26-2.05-209.52.94s-5.44,17.21-7.92,28.54c-2.66,12.16-6.81,30.6-6.81,30.6l-13.66.1Z"/>
+    <polygon class="cl2" points="462.05 288.05 358.71 458.18 334.04 458.32 462.05 288.05"/>
+    <path class="cl3" d="M136.37,525.99c5.29-7.07,16.14-18.73,28.68-29.87,21.13-18.76,43.55-27.43,65.7-29.71,38.59-3.98,78.24,13.89,119.03,14.95,40.42,1.05,61.94-13.12,91.96-35.44-17.34,21.74-46.65,46.78-75.93,51.31-7.21,1.23-14.06,1.22-21.3.58-25.23-2.19-60.93-10.88-88.75-13.25-27.82-1.18-54.75,4.57-80.47,17.31-11.84,5.86-32,18.17-38.87,24.1h-.05Z"/>
+    <path class="cl4" d="M462.54,616.14l3.52,92.6-319.47,2.26,135.21-196.13h35.34l-112.44,164.22.97,2.99,226.87-1.7s5.79-15.43,9.85-32.83c3.28-14.06,5.39-31.17,5.39-31.17l14.77-.23Z"/>
+    <polygon class="cl5" points="91.97 707.77 214.37 513.64 241.88 513.49 91.97 707.77"/>
+    <path class="cl3" d="M643.13,506.97l-5.71,33.88h-114.76l90.4-131.73h-59.08s-10.21-.38-17.44,7.61-8.38,15.61-8.38,15.61l4.19-34.26s1.32,1.74,5.33,2.28c.42.06,2.56.33,5.93.33,22.19,0,95.34.81,95.34.81l-90.61,132.49,65.73-.76s10.41.38,16.88-6.47c6.47-6.85,12.18-19.8,12.18-19.8Z"/>
+    <path class="cl3" d="M649.09,401.77h50.76s-9.9,3.55-11.17,8.12c-1.27,4.57,37.82,64.21,37.82,64.21,0,0,36.55-54.31,37.06-63.45.51-9.14-13.2-8.88-13.2-8.88h42.39s-7.61,2.03-11.93,6.35c-4.31,4.31-48.22,73.6-48.22,73.6l-.51,48.73s-.44,4.01,4.89,6.57c2.35,1.13,9.75,1.63,9.75,1.63v1.77l-46.95.18.13-1.77s5.9-.31,8.95-2.02,4.19-4.57,4.19-4.57l-.38-47.78s0-.95-.95-2.47-44.54-68.15-44.54-68.15c0,0-1.71-3.81-6.47-6.28s-11.6-4.19-11.6-4.19v-1.6Z"/>
+    <path class="cl3" d="M804.95,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+    <path class="cl3" d="M932.51,401.73h49.49v1.62s-6.09-.67-10.18,2.19c-4.09,2.86-4.47,5.33-4.47,5.33l-.1,117.83s-.07,1.79,1.33,3.33c1.73,1.9,3.52,1.9,3.52,1.9l49.87.19s6.47.38,13.71-8.95c7.23-9.33,9.14-17.8,9.14-17.8h1.33l-6.76,33.41h-103.93s5.67-.16,10.47-5.14c3.39-3.52,2.95-7.61,2.95-7.61l-.19-114.12s.1-4-5.33-6.95c-5.43-2.95-10.85-3.9-10.85-3.9v-1.33Z"/>
+    <path class="cl3" d="M1198.18,537.91c-3.05-.76-4.82-2.03-8.12-6.85-3.3-4.82-63.07-131.73-63.07-131.73,0,0-54.31,126.98-57.22,131.31-2.9,4.33-6.38,6.52-9.23,7.76-2.86,1.24-6.77,1-6.77,1v1.38l40.36-.21.25-1.65s-6.6-.25-10.41-2.54c-3.81-2.28-3.81-1.78-3.81-6.85s15.48-40.1,15.48-40.1l54.06.25s18.15,37.06,18.15,40.36-.25,6.09-3.05,7.49c-2.79,1.4-8.63,1.02-8.63,1.02v2.03h48.6v-2.03s-3.55.13-6.6-.63ZM1098.51,484.14l24.03-59.28,25.89,59.14-49.92.15Z"/>
+    <path class="cl3" d="M1215.69,402.04h46.92v1.52s-6.19-.38-9.04,1.9-4.76,5.14-4.76,7.8-.1,52.35-.1,52.35h78.05s0-54.25,0-54.25c0,0,.76-3.33-4.28-6-5.04-2.66-11.61-2.09-11.61-2.09l.1-1.24h49.02v1.43s-9.52-.48-11.99,1.81-2.76,4-2.76,5.33,0,118.02,0,119.83.1,3.81,5.14,6.47c5.04,2.66,9.61,2.09,9.61,2.09v1.33h-47.68l.1-1.33s7.42.19,9.71-.67c2.28-.86,3.05-1.71,3.71-3.24s1.24-1.81,1.24-6.76.1-56.35.1-56.35l-79-.1v58.63c0,2.09.48,4.09,4.95,6.09s9.61,1.9,9.61,1.9v1.81h-47.49v-1.71s7.71,1.14,11.04-1.9c3.33-3.05,3.9-4.47,3.9-6.28s-.1-116.97-.1-118.69-1.33-4.09-5.14-6-9.71-2.66-9.71-2.66l.48-1.05Z"/>
+    <path class="cl3" d="M730.78,583.52h-24.39v62.25h27.79c14.85,0,24.75-14.72,24.75-22.27v-18.46c0-13.32-14.63-21.51-28.15-21.51ZM754.67,620.25c0,12.92-11.96,20.18-20.3,20.18h-23.22v-52.35h21.73c10.47,0,21.8,9.27,21.8,18.65v13.52Z"/>
+    <rect class="cl3" x="803.09" y="583.52" width="4.57" height="62.25"/>
+    <path class="cl3" d="M907.73,643.86v-30.46h-25.7v3.81h19.99v13.13c0,4.76-10.07,11.04-15.4,11.04s-6.68.19-11.82.19-20.94-7.42-20.94-22.84,0-3.33,0-8.85c0-8.76,12.01-23.32,25.14-23.32,0,0-.39,0,3.41,0,7.5,0,11.17,2.6,13.4,4.52,3.28,2.81,4.7,4.44,6.21,6.9h4s-2-4.22-6.41-8.86c-5.26-5.53-10.16-7.32-18.82-7.32-12.28,0-31.12,8.97-31.12,29.31,0,15.42,0,3.43,0,8.57,0,6.09,2.66,12.56,6.09,16.18,5.19,5.48,10.28,9.9,20.56,9.9s7.8,0,7.8,0c0,0,4.34.31,10.85-2.66,6.16-2.82,9.53-7.48,9.53-7.48v8.24s3.23,0,3.23,0Z"/>
+    <rect class="cl3" x="951.27" y="583.52" width="4.57" height="62.25"/>
+    <polygon class="cl3" points="1045.13 583.52 1022.78 583.52 1018.22 583.52 995.73 583.52 995.73 588.08 1018.22 588.08 1018.22 645.76 1022.78 645.76 1022.78 588.08 1045.13 588.08 1045.13 583.52"/>
+    <path class="cl3" d="M1105.2,582.56h-3.24l-28.17,63.2h4.76l8.38-18.85h34.45l9.33,18.85h3.43l-28.93-63.2ZM1088.19,623.13l15.35-35.8,16.89,35.8h-32.25Z"/>
+    <polygon class="cl3" points="1176.15 641.19 1176.15 583.52 1171.58 583.52 1171.58 641.19 1171.58 645.76 1176.15 645.76 1212.64 645.76 1212.64 641.19 1176.15 641.19"/>
+  </symbol>
+</svg>
+
+<!-- SLIDE 1 — CAPA -->
+<h2 class="label">01 · Capa</h2>
+<div class="slide s1">
+  <div class="grade"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter" style="color:rgba(184,151,106,0.4)">01 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="content">
+    <div class="pretag">Presença digital para saúde</div>
+    <h1>Uma presença à altura<br>do trabalho que você<br>já entrega.</h1>
+    <div class="sub">Identidade, conteúdo, consistência.<br>Sem templates genéricos. Com método.</div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — O PROBLEMA -->
+<h2 class="label">02 · O problema</h2>
+<div class="slide s2">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter">02 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="num-fantasma">?</div>
+  <div class="content">
+    <span class="tag">O diagnóstico</span>
+    <h2>Você entrega mais<br>do que aparece.</h2>
+    <div class="linha"></div>
+    <div class="corpo">
+      O paciente pesquisa seu nome antes de ligar.<br>
+      O que ele encontra hoje representa o que você é?<br><br>
+      Profissionais que mais estudaram costumam ter<br>
+      a presença digital mais fraca. Não é coincidência —<br>
+      é que nunca foi ensinado como fazer.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — A SOLUÇÃO -->
+<h2 class="label">03 · A solução</h2>
+<div class="slide s3">
+  <div class="grade"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter" style="color:rgba(184,151,106,0.4)">03 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="content">
+    <span class="tag">O método Zyllah</span>
+    <h2>Um sistema.<br>Não um serviço avulso.</h2>
+    <div class="linha"></div>
+    <div class="corpo">
+      Diagnóstico → Identidade → Conteúdo → Consistência.<br><br>
+      <strong>Identidade:</strong> brand book, visual, linguagem — tudo calibrado para o seu nicho de saúde.<br>
+      <strong>Conteúdo:</strong> planejado, produzido e publicado. Você aparece uma vez por mês.<br>
+      <strong>Consistência:</strong> o sistema não para quando você está ocupado.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — PLANO ESSENCIAL -->
+<h2 class="label">04 · Plano Essencial</h2>
+<div class="slide s-plano">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter">04 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="num-fantasma" style="font-size:900px;opacity:0.03">E</div>
+  <div class="content">
+    <div class="col-esq">
+      <span class="plano-tag">Plano 01</span>
+      <div class="plano-nome">Essencial</div>
+      <div class="plano-sub">Identidade + presença funcional<br>Mínimo 6 meses</div>
+      <div class="linha"></div>
+      <div class="preco-row">
+        <div class="preco">R$ 1.800</div>
+        <div class="preco-label">/mês</div>
+      </div>
+      <div class="implantacao">+ R$ 1.200 de implantação na contratação</div>
+    </div>
+    <div class="col-dir">
+      <div class="itens">
+        <div class="item">Sua identidade visual definida — como você aparece em qualquer lugar</div>
+        <div class="item">Instagram ativo toda semana, sem você precisar pensar no que postar</div>
+        <div class="item">Fotos profissionais do seu consultório e do seu trabalho, a cada trimestre</div>
+        <div class="item">Você sabe todo mês o que funcionou e o que melhorou</div>
+        <div class="item">Canal direto com a equipe em dias úteis</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — PLANO PRESENÇA -->
+<h2 class="label">05 · Plano Presença Completa</h2>
+<div class="slide s-plano">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter">05 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="num-fantasma" style="font-size:900px;opacity:0.03">P</div>
+  <div class="content">
+    <div class="col-esq">
+      <span class="plano-tag">Plano 02 · Recomendado</span>
+      <div class="plano-nome">Presença<br>Completa</div>
+      <div class="plano-sub">O sistema Zyllah inteiro<br>Mínimo 6 meses</div>
+      <div class="linha"></div>
+      <div class="preco-row">
+        <div class="preco">R$ 2.800</div>
+        <div class="preco-label">/mês</div>
+      </div>
+      <div class="implantacao">+ R$ 1.800 de implantação na contratação</div>
+    </div>
+    <div class="col-dir">
+      <div class="itens">
+        <div class="item">Tudo do Essencial</div>
+        <div class="item">Site que representa quem você é — pronto para receber paciente novo</div>
+        <div class="item">Vídeos curtos que mostram sua autoridade, editados e publicados</div>
+        <div class="item">Presença construída no Instagram e no LinkedIn simultaneamente</div>
+        <div class="item">Mensagens fora do horário respondidas automaticamente — você acorda com pacientes encaminhados</div>
+        <div class="item">Fotos profissionais todo mês</div>
+        <div class="item">Uma conversa por mês para ajustar o rumo juntos</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — PLANO AUTORIDADE -->
+<h2 class="label">06 · Plano Autoridade</h2>
+<div class="slide s-plano-ink s-plano">
+  <div class="grade"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter">06 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="num-fantasma" style="font-size:900px;opacity:0.025;color:var(--gold)">A</div>
+  <div class="content">
+    <div class="col-esq">
+      <span class="plano-tag">Plano 03</span>
+      <div class="plano-nome">Autoridade</div>
+      <div class="plano-sub">Para quem quer dominar o digital<br>Mínimo 12 meses</div>
+      <div class="linha"></div>
+      <div class="preco-row">
+        <div class="preco">R$ 4.500</div>
+        <div class="preco-label">/mês</div>
+      </div>
+      <div class="implantacao">+ R$ 2.500 de implantação na contratação</div>
+    </div>
+    <div class="col-dir">
+      <div class="itens">
+        <div class="item">Tudo do Presença Completa</div>
+        <div class="item">Anúncios que alcançam pacientes que ainda não sabem que você existe</div>
+        <div class="item">Vídeos semanais de curta duração que mantêm sua autoridade em evidência</div>
+        <div class="item">WhatsApp que qualifica e encaminha o paciente sozinho, em qualquer horário</div>
+        <div class="item">LinkedIn posicionado para colegas, hospitais e imprensa — não só para pacientes</div>
+        <div class="item">Reuniões quinzenais e visão clara de resultados a qualquer momento</div>
+        <div class="item">Atendimento prioritário — você nunca espera</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 — PILOTO -->
+<h2 class="label">07 · Projeto piloto</h2>
+<div class="slide s-piloto">
+  <div class="grade"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter" style="color:rgba(184,151,106,0.4)">07 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="content">
+    <span class="tag">Condições de lançamento · 3 vagas</span>
+    <h2>Projeto piloto.</h2>
+    <div class="linha"></div>
+    <div class="precos-row">
+      <div class="preco-item">
+        <div class="nome">Essencial</div>
+        <div class="de">R$ 1.800</div>
+        <div class="por">R$ 900</div>
+      </div>
+      <div class="preco-item">
+        <div class="nome">Presença</div>
+        <div class="de">R$ 2.800</div>
+        <div class="por">R$ 1.400</div>
+      </div>
+      <div class="preco-item">
+        <div class="nome">Implantação</div>
+        <div class="de">cobrada</div>
+        <div class="por" style="font-size:40px">isenta</div>
+      </div>
+    </div>
+    <div class="condicoes">
+      Em troca: <strong>liberdade criativa</strong> para aplicar o método,<br>
+      <strong>depoimento</strong> após 60 dias e <strong>autorização</strong> para usar o trabalho como case.<br>
+      Não é desconto por insegurança — é troca consciente por portfólio.
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — PRÓXIMOS PASSOS -->
+<h2 class="label">08 · Próximos passos</h2>
+<div class="slide s-cta">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="counter">08 · 08</div>
+  <div class="logo-rodape"><svg style="width:110px;height:auto"><use href="#logo-svg"/></svg></div>
+  <div class="content">
+    <span class="tag">Para começar</span>
+    <h2>Simples e sem burocracia.</h2>
+    <div class="linha"></div>
+    <div class="proximos">
+      <strong>01 · Diagnóstico</strong> — conversa de 30 minutos sobre sua situação atual<br>
+      <strong>02 · Proposta</strong> — plano e investimento alinhados ao seu perfil<br>
+      <strong>03 · Contrato</strong> — assinatura digital, sem papel<br>
+      <strong>04 · Implantação</strong> — começa em até 7 dias úteis<br><br>
+      zyllah.com.br
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
