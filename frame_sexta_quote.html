@@ -15,7 +15,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #2a2a2a;
+    background: #1a1a1a;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,6 +98,35 @@
     color: var(--gold);
     opacity: 0.9;
   }
+  @page {
+    size: 1080px 1080px;
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      width: 1080px;
+      height: 1080px;
+      margin: 0;
+      padding: 0;
+      background: none !important;
+      overflow: hidden;
+    }
+    h2 { display: none !important; }
+    .slide {
+      page-break-after: always;
+      break-after: page;
+      margin: 0 !important;
+      box-shadow: none !important;
+    }
+  }
+
+
+  @media print {
+    body { background: none !important; padding: 0 !important; margin: 0 !important; gap: 0 !important; }
+    h2 { display: none !important; }
+    .slide { page-break-after: always; margin: 0 !important; }
+  }
+
 </style>
 </head>
 <body>
