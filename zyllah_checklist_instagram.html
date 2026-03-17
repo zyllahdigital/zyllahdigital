@@ -588,6 +588,27 @@ body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--crea
 </div>
 
 <script>
+var STORAGE_KEY = 'zyl_checklist_v1';
+
+function salvar() {
+  var estado = {};
+  document.querySelectorAll('.check-item').forEach(function(item, i) {
+    estado[i] = item.classList.contains('done');
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); } catch(e) {}
+}
+
+function carregar() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    var estado = JSON.parse(raw);
+    document.querySelectorAll('.check-item').forEach(function(item, i) {
+      if (estado[i]) item.classList.add('done');
+    });
+  } catch(e) {}
+}
+
 function mostrarSemana(id, btn) {
   document.querySelectorAll('.semana-panel').forEach(p => p.classList.remove('ativo'));
   document.querySelectorAll('.semana-tab').forEach(b => b.classList.remove('ativo'));
@@ -598,6 +619,7 @@ function mostrarSemana(id, btn) {
 
 function toggle(item) {
   item.classList.toggle('done');
+  salvar();
   const semanaAtiva = document.querySelector('.semana-panel.ativo').id;
   atualizarProgresso(semanaAtiva);
 }
@@ -613,15 +635,31 @@ function atualizarProgresso(semanaId) {
   if (label) label.textContent = feitos.length + ' de ' + todos.length + ' itens concluídos';
 }
 
-// Inicializar progresso
-document.querySelectorAll('.semana-panel').forEach(p => {
-  const id = p.id;
-  const fill = document.getElementById('prog-' + id);
-  const label = document.getElementById('prog-label-' + id);
-  const todos = p.querySelectorAll('.check-item');
-  if (fill) fill.style.width = '0%';
-  if (label) label.textContent = '0 de ' + todos.length + ' itens concluídos';
+function resetarTudo() {
+  if (!confirm('Apagar todos os checks e começar nova semana?')) return;
+  document.querySelectorAll('.check-item').forEach(function(item) {
+    item.classList.remove('done');
+  });
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  document.querySelectorAll('.semana-panel').forEach(function(p) {
+    atualizarProgresso(p.id);
+  });
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', function() {
+  carregar();
+  document.querySelectorAll('.semana-panel').forEach(function(p) {
+    atualizarProgresso(p.id);
+  });
 });
 </script>
+
+<!-- BOTÃO RESET -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:200;">
+  <button onclick="resetarTudo()" style="background:var(--ink);color:rgba(255,255,255,0.4);border:1px solid rgba(184,151,106,0.2);padding:10px 16px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;">
+    ↺ Nova semana
+  </button>
+</div>
 </body>
 </html>
