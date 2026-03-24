@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frame 3 — Ginecologista</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;background:#1e1e1e;}
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.quadro{
+  width:min(56vh,96vw);
+  height:min(100vh,177.8vw);
+  overflow:hidden;
+  background-color:#f0ece6;
+  background-image:radial-gradient(circle,#b0a89a 1.2px,transparent 1.2px);
+  background-size:24px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.postit{
+  font-family:'Caveat',cursive;
+  font-weight:700;
+  line-height:1.4;
+  padding:clamp(22px,5vw,42px) clamp(20px,4.5vw,38px);
+  box-shadow:4px 6px 18px rgba(0,0,0,0.2),0 2px 4px rgba(0,0,0,0.08);
+  width:clamp(200px,64%,310px);
+  min-height:clamp(180px,52%,270px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transform:rotate(-1.5deg) scale(0.88);
+  opacity:0;
+  transition:opacity 0.4s ease,transform 0.45s cubic-bezier(0.22,1,0.36,1);
+  position:relative;
+  background:#f5b8c8;color:#2a0615;
+}
+.postit.visivel{opacity:1;transform:rotate(-1.5deg) scale(1);}
+.postit::after{
+  content:'';
+  position:absolute;
+  bottom:0;right:0;
+  width:20px;height:20px;
+  background:linear-gradient(225deg,rgba(0,0,0,0.13) 50%,transparent 50%);
+}
+.texto{font-size:clamp(20px,5.8vw,40px);}
+.tag{
+  font-size:clamp(9px,2vw,13px);
+  font-weight:400;
+  margin-top:12px;
+  opacity:0.45;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  font-family:'Jost',sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="quadro">
+  <div class="postit">
+    <span class="texto">Quero ser referência<br>para a mulher que<br>ainda não sabe<br>que precisa de mim.</span>
+    <span class="tag">Ginecologista</span>
+  </div>
+</div>
+<script>
+  setTimeout(()=>document.querySelector('.postit').classList.add('visivel'),80);
+</script>
+</body>
+</html>
