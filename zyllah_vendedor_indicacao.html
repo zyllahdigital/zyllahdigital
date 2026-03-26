@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Zyllah — Vendedor e Zyllah Confiança</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --gold: #B8976A; --gold-light: #D4B896;
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; color: var(--ink); padding: 0 0 100px; }
+
+  .header { background: var(--ink); padding: 56px 80px 48px; }
+  .header-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .header-titulo { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: white; line-height: 1.05; margin-bottom: 12px; }
+  .header-titulo em { font-style: italic; color: var(--gold-light); }
+  .header-sub { font-size: 14px; color: rgba(255,255,255,0.5); max-width: 580px; line-height: 1.85; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+
+  .secao-tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin: 56px 0 12px; display: flex; align-items: center; gap: 12px; }
+  .secao-tag::after { content: ''; flex: 1; height: 1px; background: rgba(184,151,106,0.2); }
+  .secao-titulo { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: var(--ink); margin-bottom: 28px; }
+  .secao-titulo em { font-style: italic; color: var(--gold); }
+
+  .intro-box { background: var(--ink); padding: 32px 36px; margin: 40px 0 0; }
+  .intro-box p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.85; }
+  .intro-box p + p { margin-top: 12px; }
+  .intro-box strong { color: var(--gold-light); font-weight: 400; }
+
+  .card { background: white; border: 1px solid rgba(184,151,106,0.12); margin-bottom: 16px; padding: 28px; }
+  .card-titulo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; font-weight: 300; color: var(--ink); margin-bottom: 20px; }
+  .label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(61,56,48,0.45); margin-bottom: 8px; display: block; margin-top: 20px; }
+  .label:first-of-type { margin-top: 0; }
+  .texto { font-size: 15px; line-height: 1.85; color: var(--ink-soft); }
+  .texto strong { font-weight: 400; color: var(--ink); }
+  .gatilho { background: rgba(184,151,106,0.07); border-left: 3px solid var(--gold); padding: 12px 16px; font-size: 13px; line-height: 1.7; color: var(--ink-soft); margin-top: 12px; }
+  .alerta { background: rgba(196,100,100,0.06); border-left: 3px solid #c46464; padding: 12px 16px; font-size: 13px; line-height: 1.7; color: var(--ink-soft); margin-top: 12px; }
+  .destaque { background: rgba(184,151,106,0.07); border: 1px solid rgba(184,151,106,0.2); padding: 24px 28px; margin: 24px 0 0; }
+  .destaque p { font-size: 15px; line-height: 1.85; color: var(--ink-soft); }
+  .destaque p + p { margin-top: 10px; }
+  .destaque strong { font-weight: 400; color: var(--ink); }
+
+  .script-box { background: var(--ink); padding: 28px 32px; margin-top: 20px; }
+  .script-box p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.9; font-style: italic; }
+  .script-label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; font-style: normal; }
+
+  .tabela { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .tabela th { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); padding: 10px 14px; border-bottom: 1px solid rgba(184,151,106,0.2); text-align: left; }
+  .tabela td { font-size: 14px; color: var(--ink-soft); padding: 12px 14px; border-bottom: 1px solid rgba(184,151,106,0.08); line-height: 1.6; vertical-align: top; }
+  .tabela tr:last-child td { border-bottom: none; }
+  .tabela td:first-child { color: var(--ink); font-weight: 400; white-space: nowrap; }
+
+  .regra-item { display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(184,151,106,0.1); }
+  .regra-item:last-child { border-bottom: none; }
+  .regra-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: rgba(184,151,106,0.3); flex-shrink: 0; width: 32px; line-height: 1; }
+  .regra-corpo { flex: 1; }
+  .regra-titulo { font-size: 14px; color: var(--ink); font-weight: 400; margin-bottom: 4px; }
+  .regra-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+  .divisor { height: 1px; background: rgba(184,151,106,0.12); margin: 56px 0; }
+  .data { font-size: 11px; color: rgba(61,56,48,0.4); margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(184,151,106,0.1); }
+
+  .confianca-logo { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--ink); margin-bottom: 4px; }
+  .confianca-logo em { font-style: italic; color: var(--gold); }
+  .confianca-sub { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-tag">Operação · Uso interno</span>
+  <h1 class="header-titulo">Vendedor e<br><em>Zyllah Confiança</em></h1>
+  <p class="header-sub">Como estruturar parceria com vendedor externo e o programa de indicação entre clientes. Dois sistemas distintos, mesma lógica: ampliar alcance sem comprometer o posicionamento.</p>
+</div>
+
+<div class="container">
+
+  <div class="intro-box">
+    <p><strong>Contexto:</strong> este documento cobre dois caminhos de crescimento que não dependem exclusivamente da prospecção direta do Guilherme. O vendedor externo amplia o alcance comercial. O Zyllah Confiança transforma clientes satisfeitos em fonte de novos clientes.</p>
+    <p><strong>Timing:</strong> vendedor pode ser ativado a qualquer momento, mas é mais eficaz após o primeiro case. O Zyllah Confiança só faz sentido com clientes ativos — ative quando tiver o segundo cliente fechado.</p>
+  </div>
+
+  <!-- PARCERIA VENDEDOR -->
+  <div class="secao-tag">Parte 1</div>
+  <h2 class="secao-titulo">Parceria com<br><em>vendedor externo</em></h2>
+
+  <div class="card">
+    <span class="label">Por que considerar</span>
+    <p class="texto">A dificuldade de prospectar não é falta de produto — é o desconforto com a abordagem fria e com o fechamento. Um vendedor resolve exatamente essa parte sem comprometer a entrega, que continua sendo do Guilherme. O risco é contratar alguém que não entenda o posicionamento e desvalorize o produto na conversa.</p>
+
+    <span class="label">Perfil ideal agora</span>
+    <p class="texto">Não é o vendedor com maior carteira — é o vendedor que consegue aprender a metodologia e comunicar alto padrão sem parecer agressivo. Perfis que fazem sentido para este estágio: profissional em transição de carreira com experiência em serviços B2B, estudante avançado de marketing ou comunicação com perfil consultivo, ou alguém do próprio círculo de contatos que acredite no projeto.</p>
+
+    <div class="alerta">Vendedor experiente com carteira consolidada não aceita 100% comissão para uma agência sem cases. Não tente atrair esse perfil agora — o fit é ruim para os dois lados.</div>
+  </div>
+
+  <div class="card">
+    <span class="label">Onde encontrar</span>
+    <p class="texto">LinkedIn — busca por "SDR", "closer" ou "executivo de contas" em Nova Friburgo e região serrana. Grupos de marketing digital no WhatsApp e Telegram — profissionais em início de carreira. Cursos de vendas e marketing — alunos na fase de estágio ou primeiro emprego. Indicação do próprio círculo pessoal.</p>
+
+    <span class="label">Como abordar</span>
+    <p class="texto">Não anuncie como vaga formal ainda. Aborde como conversa exploratória: <em>"Estou montando uma agência de presença digital para médicos em Nova Friburgo e quero entender se faz sentido ter alguém focado em prospecção. Posso te contar como funciona?"</em> Quem pedir currículo e processo seletivo formal não é o perfil — o perfil certo vai querer ouvir primeiro.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Estrutura da proposta ao vendedor</div>
+
+    <span class="label">Modelo de remuneração</span>
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Valor</th>
+          <th>Condição</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Comissão de fechamento</td>
+          <td>20% da mensalidade do primeiro mês</td>
+          <td>Pago após o cliente pagar a primeira fatura</td>
+        </tr>
+        <tr>
+          <td>Comissão recorrente</td>
+          <td>10% da mensalidade mensal</td>
+          <td>Enquanto o cliente permanecer ativo — até 12 meses</td>
+        </tr>
+        <tr>
+          <td>Fixo simbólico</td>
+          <td>R$500–800/mês</td>
+          <td>Apenas quando houver caixa — não oferecer no início</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="gatilho">💡 Com três clientes ativos no Plano Presença (R$2.800), o vendedor recebe R$840/mês recorrente só de comissão — sem precisar fechar mais nada. Esse é o argumento que convence o perfil certo.</div>
+
+    <span class="label">O que o vendedor recebe além da comissão</span>
+    <p class="texto">Treinamento completo na metodologia Zyllah, acesso aos documentos de vendas (script, objeções, apresentação), suporte do Guilherme nas primeiras reuniões e material de prospecção pronto. Ele não precisa criar nada — só executar o processo.</p>
+
+    <div class="alerta">Nunca compartilhe o hub inteiro com o vendedor. Compartilhe apenas: script de reunião, banco de objeções, apresentação e material de visita. O brand book, contratos e documentos internos ficam restritos.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Script de apresentação da proposta ao vendedor</div>
+    <div class="script-box">
+      <span class="script-label">Como apresentar a oportunidade</span>
+      <p>"A Zyllah atende médicos especialistas que querem uma presença digital à altura de quem eles já são. Ticket entre R$1.800 e R$4.500 por mês. O ciclo de venda é curto — uma reunião de 45 minutos com uma proposta enviada em 24h. Eu cuido da entrega, você cuida da prospecção e do fechamento. A comissão é recorrente enquanto o cliente fica — não é um pagamento único. Com cinco clientes ativos você tem uma renda mensal previsível sem precisar fechar mais ninguém naquele mês."</p>
+    </div>
+
+    <div class="gatilho" style="margin-top:16px;">💡 Não mencione que está começando nem que não tem cases ainda — a menos que ele pergunte diretamente. Se perguntar, seja honesto: "Estou nos primeiros clientes. É exatamente por isso que a comissão é mais generosa do que o mercado pratica — você entra cedo e constrói a recorrência junto."</div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- ZYLLAH CONFIANÇA -->
+  <div class="secao-tag">Parte 2</div>
+  <h2 class="secao-titulo">Programa<br><em>Zyllah Confiança</em></h2>
+
+  <div class="card">
+    <div class="confianca-logo">Zyllah <em>Confiança</em></div>
+    <div class="confianca-sub">Programa de indicação entre clientes</div>
+
+    <span class="label">Conceito</span>
+    <p class="texto">Na medicina, indicação é o ato de confiar o seu nome a outro. O Zyllah Confiança reconhece isso com um benefício mútuo — quem indica e quem é indicado ganham algo de valor, sem que o ato de indicar pareça transacional. Não é "programa de desconto". É reconhecimento de uma relação de confiança.</p>
+
+    <span class="label">Quando ativar</span>
+    <p class="texto">Apenas com clientes ativos e satisfeitos. Não antes do segundo cliente fechado. A indicação precisa vir de quem já experimentou o resultado — não de quem ainda está no onboarding.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Como funciona — as regras</div>
+
+    <div class="regra-item">
+      <div class="regra-num">1</div>
+      <div class="regra-corpo">
+        <div class="regra-titulo">O indicado precisa fechar e pagar o primeiro mês</div>
+        <div class="regra-desc">O benefício só é ativado após a primeira fatura paga pelo indicado. Evita indicações sem intenção real de contratar.</div>
+      </div>
+    </div>
+    <div class="regra-item">
+      <div class="regra-num">2</div>
+      <div class="regra-corpo">
+        <div class="regra-titulo">O benefício do indicador é creditado no mês seguinte</div>
+        <div class="regra-desc">Não no mesmo mês — isso dá tempo para confirmar o pagamento e evita desconto antes da receita entrar.</div>
+      </div>
+    </div>
+    <div class="regra-item">
+      <div class="regra-num">3</div>
+      <div class="regra-corpo">
+        <div class="regra-titulo">Não é acumulável</div>
+        <div class="regra-desc">Uma indicação que fecha gera um benefício. Indicações múltiplas no mesmo mês não acumulam — cada uma gera seu próprio ciclo de benefício no mês seguinte ao fechamento de cada indicado.</div>
+      </div>
+    </div>
+    <div class="regra-item">
+      <div class="regra-num">4</div>
+      <div class="regra-corpo">
+        <div class="regra-titulo">Nunca dinheiro — sempre benefício no serviço</div>
+        <div class="regra-desc">Comissão em dinheiro para médico que indica colega cria constrangimento e pode soar como propina. O benefício é sempre creditado como mensalidade — ele recebe o serviço, não o cheque.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Tabela de benefícios por plano</div>
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>Plano do indicador</th>
+          <th>Benefício do indicador</th>
+          <th>Benefício do indicado</th>
+          <th>Custo real Zyllah</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Essencial · R$1.800</td>
+          <td>1 mês grátis</td>
+          <td>20% off no 1º mês</td>
+          <td>R$1.800 + R$360</td>
+        </tr>
+        <tr>
+          <td>Presença · R$2.800</td>
+          <td>1 mês grátis</td>
+          <td>20% off no 1º mês</td>
+          <td>R$2.800 + R$560</td>
+        </tr>
+        <tr>
+          <td>Autoridade · R$4.500</td>
+          <td>1 mês grátis</td>
+          <td>20% off no 1º mês</td>
+          <td>R$4.500 + R$900</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="gatilho" style="margin-top:16px;">💡 O custo total de uma indicação é menor do que qualquer custo de aquisição via anúncio — e o cliente indicado chega com pré-disposição positiva que nenhum anúncio cria.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Como plantar a semente na reunião de fechamento</div>
+    <div class="script-box">
+      <span class="script-label">Após combinar o próximo passo — 30 segundos, sem pressão</span>
+      <p>"E só um detalhe: quando você estiver satisfeito com o resultado — o que vai acontecer — existe um benefício para quem indica um colega. Te conto mais quando chegar lá."</p>
+    </div>
+    <div class="alerta" style="margin-top:16px;">Não explique o programa completo no fechamento. A frase acima planta a curiosidade sem parecer que você já está contando com a indicação antes de entregar resultado. O programa é apresentado em detalhe na reunião do primeiro mês — quando ele já viu o onboarding e está animado.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-titulo">Como apresentar o programa na reunião do primeiro mês</div>
+    <div class="script-box">
+      <span class="script-label">Na reunião mensal — após mostrar os primeiros resultados</span>
+      <p>"Agora que você já viu como funciona na prática, quero te apresentar o Zyllah Confiança. Se você indicar um colega especialista e ele fechar conosco, você recebe um mês de mensalidade gratuitamente — e ele começa com 20% de desconto no primeiro mês. Não tem formulário, não tem processo: você me apresenta, eu cuido do resto. O único critério é que ele feche e pague o primeiro mês. Faz sentido?"</p>
+    </div>
+  </div>
+
+  <p class="data">Documento criado em 25 de março de 2026 · Zyllah Digital · Uso interno</p>
+
+</div>
+</body>
+</html>
