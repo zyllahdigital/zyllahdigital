@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyllah · Quiz Conselhos de Saúde</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1714; --ink-soft: #3D3830;
+    --gold: #B8976A; --gold-light: #D4B896; --gold-dim: rgba(184,151,106,0.15);
+    --cream: #FAF7F2; --cream-mid: #F0EBE1;
+    --green: #4A7C59; --green-light: #EAF2ED;
+    --red: #8B3A3A; --red-light: #F5EAEA;
+    --blue: #3A5F8B; --blue-light: #EAF0F8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--ink); color: var(--cream); min-height: 100vh; }
+
+  /* TELA INICIAL */
+  #tela-inicio { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 24px; text-align: center; }
+  .logo-quiz { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+  .titulo-quiz { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 6vw, 56px); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
+  .titulo-quiz em { font-style: italic; color: var(--gold-light); }
+  .sub-quiz { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.85; max-width: 440px; margin: 0 auto 40px; }
+
+  .streak-display { display: flex; gap: 32px; justify-content: center; margin-bottom: 40px; }
+  .streak-item { text-align: center; }
+  .streak-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--gold); line-height: 1; }
+  .streak-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 4px; }
+
+  .niveis { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+  .nivel-btn { background: transparent; border: 1px solid rgba(184,151,106,0.3); color: rgba(255,255,255,0.6); padding: 12px 24px; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.15em; cursor: pointer; transition: all 0.2s; }
+  .nivel-btn:hover, .nivel-btn.ativo { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .nivel-btn.bloqueado { opacity: 0.3; cursor: not-allowed; }
+
+  .btn-comecar { background: var(--gold); color: var(--ink); border: none; padding: 16px 48px; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; font-weight: 500; }
+  .btn-comecar:hover { background: var(--gold-light); }
+  .btn-comecar:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* TELA QUIZ */
+  #tela-quiz { display: none; min-height: 100vh; flex-direction: column; }
+  .quiz-header { padding: 20px 28px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(184,151,106,0.1); }
+  .quiz-back { background: none; border: none; color: rgba(255,255,255,0.4); font-size: 20px; cursor: pointer; padding: 4px 8px; transition: color 0.2s; }
+  .quiz-back:hover { color: var(--gold); }
+  .progresso-barra { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+  .progresso-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.4s ease; }
+  .quiz-contador { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; white-space: nowrap; }
+  .quiz-vidas { display: flex; gap: 4px; }
+  .vida { font-size: 16px; }
+
+  .quiz-corpo { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 40px 28px; max-width: 680px; margin: 0 auto; width: 100%; }
+  .quiz-nivel-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .quiz-tema { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
+  .quiz-pergunta { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 4vw, 30px); font-weight: 300; line-height: 1.4; margin-bottom: 36px; color: white; }
+
+  .opcoes { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .opcao-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); padding: 16px 20px; text-align: left; font-family: 'Jost', sans-serif; font-size: 14px; line-height: 1.5; cursor: pointer; transition: all 0.15s; display: flex; align-items: flex-start; gap: 14px; }
+  .opcao-btn:hover:not(:disabled) { background: rgba(184,151,106,0.1); border-color: rgba(184,151,106,0.4); color: white; }
+  .opcao-btn.correta { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .opcao-btn.errada { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .opcao-btn.revelada { background: rgba(184,151,106,0.08); border-color: rgba(184,151,106,0.3); color: var(--gold-light); }
+  .opcao-letra { font-size: 11px; letter-spacing: 0.2em; font-weight: 500; flex-shrink: 0; margin-top: 2px; opacity: 0.5; }
+  .opcao-btn.correta .opcao-letra, .opcao-btn.errada .opcao-letra, .opcao-btn.revelada .opcao-letra { opacity: 1; }
+
+  .feedback-box { padding: 16px 20px; margin-bottom: 20px; display: none; }
+  .feedback-box.certo { background: var(--green-light); border-left: 3px solid var(--green); color: var(--green); }
+  .feedback-box.errado { background: var(--red-light); border-left: 3px solid var(--red); color: var(--red); }
+  .feedback-titulo { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .feedback-texto { font-size: 13px; line-height: 1.7; opacity: 0.85; }
+  .feedback-norma { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; opacity: 0.6; }
+
+  .btn-proximo { background: var(--gold); color: var(--ink); border: none; padding: 14px 36px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; font-weight: 500; display: none; width: 100%; }
+  .btn-proximo:hover { background: var(--gold-light); }
+
+  .loading-pergunta { text-align: center; padding: 60px 20px; }
+  .loading-spinner { width: 32px; height: 32px; border: 2px solid rgba(184,151,106,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-texto { font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; }
+
+  /* TELA RESULTADO */
+  #tela-resultado { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
+  .resultado-nota { font-family: 'Cormorant Garamond', serif; font-size: 96px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+  .resultado-label { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 32px; }
+  .resultado-msg { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: white; margin-bottom: 8px; line-height: 1.3; }
+  .resultado-msg em { font-style: italic; color: var(--gold-light); }
+  .resultado-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 40px; line-height: 1.7; max-width: 400px; }
+
+  .pontos-fracos { background: rgba(255,255,255,0.03); border: 1px solid rgba(184,151,106,0.15); padding: 24px; max-width: 480px; width: 100%; margin: 0 auto 32px; text-align: left; }
+  .pf-titulo { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .pf-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+  .pf-item:last-child { border-bottom: none; }
+  .pf-tema { color: rgba(255,255,255,0.7); }
+  .pf-barra { display: flex; gap: 4px; }
+  .pf-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+  .pf-dot.cheio { background: var(--gold); }
+  .pf-dot.erro { background: var(--red); }
+
+  .btn-refazer { background: transparent; border: 1px solid rgba(184,151,106,0.4); color: var(--gold); padding: 14px 36px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; margin-right: 12px; }
+  .btn-refazer:hover { background: var(--gold-dim); }
+  .btn-novo { background: var(--gold); color: var(--ink); border: none; padding: 14px 36px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; font-weight: 500; }
+  .btn-novo:hover { background: var(--gold-light); }
+
+  .erro-box { background: rgba(139,58,58,0.15); border: 1px solid rgba(139,58,58,0.3); padding: 20px; color: rgba(255,200,200,0.8); font-size: 13px; line-height: 1.7; margin-bottom: 20px; max-width: 480px; }
+</style>
+</head>
+<body>
+
+<!-- TELA INÍCIO -->
+<div id="tela-inicio">
+  <div class="logo-quiz">Zyllah Digital · Treinamento</div>
+  <h1 class="titulo-quiz">Conselhos de<br><em>Saúde & Publicidade</em></h1>
+  <p class="sub-quiz">Questões progressivas sobre CFM, CFP, CFO e CRN aplicadas ao marketing digital. Estilo FGV — sem decoreba, com raciocínio.</p>
+
+  <div class="streak-display">
+    <div class="streak-item">
+      <div class="streak-num" id="streak-num">0</div>
+      <div class="streak-label">🔥 Streak dias</div>
+    </div>
+    <div class="streak-item">
+      <div class="streak-num" id="melhor-nota-display">—</div>
+      <div class="streak-label">Melhor nota</div>
+    </div>
+    <div class="streak-item">
+      <div class="streak-num" id="total-sessoes">0</div>
+      <div class="streak-label">Sessões</div>
+    </div>
+  </div>
+
+  <div class="niveis">
+    <button class="nivel-btn ativo" data-nivel="1" onclick="selecionarNivel(1)">Nível 1 · Básico</button>
+    <button class="nivel-btn" data-nivel="2" onclick="selecionarNivel(2)" id="btn-nivel-2">Nível 2 · Intermediário</button>
+    <button class="nivel-btn bloqueado" data-nivel="3" onclick="selecionarNivel(3)" id="btn-nivel-3">Nível 3 · Avançado</button>
+  </div>
+
+  <div id="erro-inicio" class="erro-box" style="display:none;max-width:440px;margin-bottom:20px;"></div>
+  <button class="btn-comecar" id="btn-comecar" onclick="iniciarQuiz()">Começar sessão →</button>
+</div>
+
+<!-- TELA QUIZ -->
+<div id="tela-quiz">
+  <div class="quiz-header">
+    <button class="quiz-back" onclick="voltarInicio()">←</button>
+    <div class="progresso-barra"><div class="progresso-fill" id="progresso-fill" style="width:0%"></div></div>
+    <div class="quiz-contador" id="quiz-contador">1 / 10</div>
+    <div class="quiz-vidas" id="quiz-vidas"></div>
+  </div>
+  <div class="quiz-corpo" id="quiz-corpo">
+    <div class="loading-pergunta">
+      <div class="loading-spinner"></div>
+      <div class="loading-texto">Gerando questão...</div>
+    </div>
+  </div>
+</div>
+
+<!-- TELA RESULTADO -->
+<div id="tela-resultado">
+  <div class="logo-quiz">Zyllah Digital · Resultado</div>
+  <div class="resultado-nota" id="resultado-nota">—</div>
+  <div class="resultado-label">Nota da sessão</div>
+  <div class="resultado-msg" id="resultado-msg">Sessão <em>concluída</em></div>
+  <p class="resultado-sub" id="resultado-sub"></p>
+  <div class="pontos-fracos" id="pontos-fracos-box"></div>
+  <div>
+    <button class="btn-refazer" onclick="refazerSessao()">Refazer nível</button>
+    <button class="btn-novo" onclick="voltarInicio()">Novo treino</button>
+  </div>
+</div>
+
+<script>
+// ── ESTADO ──────────────────────────────────────────────────────────────────
+const QUESTOES_POR_SESSAO = 10;
+const VIDAS_TOTAL = 3;
+
+let estado = {
+  nivel: 1,
+  questaoAtual: 0,
+  respostas: [],
+  vidas: VIDAS_TOTAL,
+  respondeu: false,
+  questoes: [],
+  errosPorTema: {}
+};
+
+// ── STORAGE ─────────────────────────────────────────────────────────────────
+function carregarDados() {
+  try {
+    const raw = localStorage.getItem('zyllah_quiz_conselhos');
+    return raw ? JSON.parse(raw) : { streak: 0, ultimoDia: null, melhorNota: null, sessoes: 0, nivelDesbloqueado: 1, temasFracos: {} };
+  } catch { return { streak: 0, ultimoDia: null, melhorNota: null, sessoes: 0, nivelDesbloqueado: 1, temasFracos: {} }; }
+}
+
+function salvarDados(dados) {
+  try { localStorage.setItem('zyllah_quiz_conselhos', JSON.stringify(dados)); } catch {}
+}
+
+function atualizarStreak(dados) {
+  const hoje = new Date().toDateString();
+  if (dados.ultimoDia === hoje) return dados;
+  const ontem = new Date(Date.now() - 86400000).toDateString();
+  dados.streak = dados.ultimoDia === ontem ? (dados.streak || 0) + 1 : 1;
+  dados.ultimoDia = hoje;
+  return dados;
+}
+
+// ── UI INÍCIO ────────────────────────────────────────────────────────────────
+function renderizarInicio() {
+  const dados = carregarDados();
+  document.getElementById('streak-num').textContent = dados.streak || 0;
+  document.getElementById('melhor-nota-display').textContent = dados.melhorNota !== null ? dados.melhorNota : '—';
+  document.getElementById('total-sessoes').textContent = dados.sessoes || 0;
+
+  const desbloqueado = dados.nivelDesbloqueado || 1;
+  document.getElementById('btn-nivel-2').classList.toggle('bloqueado', desbloqueado < 2);
+  document.getElementById('btn-nivel-3').classList.toggle('bloqueado', desbloqueado < 3);
+}
+
+function selecionarNivel(n) {
+  const dados = carregarDados();
+  if (n > (dados.nivelDesbloqueado || 1)) return;
+  estado.nivel = n;
+  document.querySelectorAll('.nivel-btn').forEach(b => b.classList.toggle('ativo', parseInt(b.dataset.nivel) === n));
+}
+
+// ── INICIAR ──────────────────────────────────────────────────────────────────
+async function iniciarQuiz() {
+  document.getElementById('erro-inicio').style.display = 'none';
+  document.getElementById('btn-comecar').disabled = true;
+  document.getElementById('btn-comecar').textContent = 'Preparando...';
+
+  estado.questaoAtual = 0;
+  estado.respostas = [];
+  estado.vidas = VIDAS_TOTAL;
+  estado.questoes = [];
+  estado.errosPorTema = {};
+
+  mostrarTela('quiz');
+  await carregarProximaQuestao();
+}
+
+// ── API CLAUDE ───────────────────────────────────────────────────────────────
+const TEMAS_POR_NIVEL = {
+  1: ['publicidade médica proibida CFM', 'o que médico pode postar nas redes sociais', 'antes e depois em publicidade médica', 'depoimentos de pacientes', 'garantia de resultado médico', 'uso de título de especialista CFM', 'publicidade enganosa CFM', 'preço em publicidade médica'],
+  2: ['Resolução CFM 2336/2023', 'penalidades por infração publicidade médica', 'CFO e publicidade odontológica', 'CFP e divulgação psicólogo', 'distinção entre informação e propaganda médica', 'uso de redes sociais pelo psicólogo CFP', 'publicidade em telemedicina', 'comparação com concorrentes CFM'],
+  3: ['diferenças CFM CFO CFP CRN na publicidade', 'casos práticos infrações publicidade médica', 'regulamentação influenciadores médicos', 'compliance publicidade saúde digital', 'jurisprudência CFM publicidade', 'marketing de conteúdo vs propaganda CFM', 'patrocínio e publicidade médica', 'plataformas digitais e normas CFM']
+};
+
+function gerarPrompt(nivel, temaUsado) {
+  const temas = TEMAS_POR_NIVEL[nivel];
+  const temaAleatorio = temas[Math.floor(Math.random() * temas.length)];
+  const nivelTexto = ['', 'básico — candidato iniciante', 'intermediário — candidato com algum conhecimento', 'avançado — candidato experiente'][nivel];
+
+  return `Você é um elaborador de questões de concurso estilo FGV sobre normas de publicidade e marketing para profissionais de saúde no Brasil (CFM, CFP, CFO, CRN).
+
+Gere UMA questão de múltipla escolha sobre o tema: "${temaAleatorio}"
+Nível de dificuldade: ${nivelTexto}
+
+REGRAS OBRIGATÓRIAS:
+- 4 alternativas (A, B, C, D)
+- Apenas UMA alternativa correta
+- Questão baseada em normas reais dos conselhos brasileiros
+- Estilo FGV: situação prática ou afirmação para julgar, não decoreba
+- Alternativas plausíveis, não absurdas
+- Explicação da resposta correta citando a norma específica quando possível
+
+RESPONDA APENAS com este JSON válido, sem markdown, sem texto fora:
+{
+  "tema": "nome curto do tema (máx 4 palavras)",
+  "pergunta": "texto da pergunta",
+  "alternativas": ["texto A", "texto B", "texto C", "texto D"],
+  "correta": 0,
+  "explicacao": "por que a resposta está correta, citando a norma",
+  "norma": "ex: Resolução CFM 2336/2023, Art. 4º"
+}`;
+}
+
+async function carregarProximaQuestao() {
+  renderizarLoading();
+
+  const prompt = gerarPrompt(estado.nivel, null);
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API error ' + response.status);
+    const data = await response.json();
+    const texto = data.content[0].text.trim();
+    const clean = texto.replace(/```json|```/g, '').trim();
+    const questao = JSON.parse(clean);
+    estado.questoes.push(questao);
+    renderizarQuestao(questao);
+  } catch (err) {
+    renderizarErroQuestao();
+  }
+}
+
+// ── RENDER QUESTÃO ───────────────────────────────────────────────────────────
+function renderizarLoading() {
+  document.getElementById('quiz-corpo').innerHTML = `
+    <div class="loading-pergunta">
+      <div class="loading-spinner"></div>
+      <div class="loading-texto">Gerando questão...</div>
+    </div>`;
+}
+
+function renderizarErroQuestao() {
+  document.getElementById('quiz-corpo').innerHTML = `
+    <div class="erro-box" style="margin:0 0 20px;">
+      Não foi possível gerar a questão. Verifique sua conexão.
+    </div>
+    <button class="btn-comecar" onclick="carregarProximaQuestao()">Tentar novamente →</button>`;
+}
+
+function renderizarQuestao(q) {
+  const idx = estado.questaoAtual;
+  const progresso = (idx / QUESTOES_POR_SESSAO) * 100;
+
+  document.getElementById('progresso-fill').style.width = progresso + '%';
+  document.getElementById('quiz-contador').textContent = `${idx + 1} / ${QUESTOES_POR_SESSAO}`;
+  renderizarVidas();
+
+  const letras = ['A', 'B', 'C', 'D'];
+  const opcoesHTML = q.alternativas.map((alt, i) => `
+    <button class="opcao-btn" onclick="responder(${i})" id="opcao-${i}">
+      <span class="opcao-letra">${letras[i]}</span>
+      <span>${alt}</span>
+    </button>`).join('');
+
+  document.getElementById('quiz-corpo').innerHTML = `
+    <div class="quiz-nivel-tag">Nível ${estado.nivel} · ${['', 'Básico', 'Intermediário', 'Avançado'][estado.nivel]}</div>
+    <div class="quiz-tema">${q.tema || 'Conselhos de Saúde'}</div>
+    <div class="quiz-pergunta">${q.pergunta}</div>
+    <div class="opcoes">${opcoesHTML}</div>
+    <div class="feedback-box" id="feedback-box">
+      <div class="feedback-titulo" id="feedback-titulo"></div>
+      <div class="feedback-texto" id="feedback-texto"></div>
+      <div class="feedback-norma" id="feedback-norma"></div>
+    </div>
+    <button class="btn-proximo" id="btn-proximo" onclick="proximaQuestao()">
+      ${idx + 1 < QUESTOES_POR_SESSAO ? 'Próxima questão →' : 'Ver resultado →'}
+    </button>`;
+
+  estado.respondeu = false;
+}
+
+function renderizarVidas() {
+  const container = document.getElementById('quiz-vidas');
+  let html = '';
+  for (let i = 0; i < VIDAS_TOTAL; i++) {
+    html += `<span class="vida">${i < estado.vidas ? '❤️' : '🖤'}</span>`;
+  }
+  container.innerHTML = html;
+}
+
+// ── RESPONDER ────────────────────────────────────────────────────────────────
+function responder(indice) {
+  if (estado.respondeu) return;
+  estado.respondeu = true;
+
+  const q = estado.questoes[estado.questaoAtual];
+  const correta = q.correta;
+  const acertou = indice === correta;
+
+  // Desabilitar todos os botões
+  document.querySelectorAll('.opcao-btn').forEach(b => b.disabled = true);
+
+  // Colorir
+  document.getElementById('opcao-' + indice).classList.add(acertou ? 'correta' : 'errada');
+  if (!acertou) document.getElementById('opcao-' + correta).classList.add('revelada');
+
+  // Registrar
+  estado.respostas.push({ acertou, tema: q.tema });
+  if (!acertou) {
+    estado.errosPorTema[q.tema] = (estado.errosPorTema[q.tema] || 0) + 1;
+    estado.vidas--;
+    renderizarVidas();
+  }
+
+  // Feedback
+  const fb = document.getElementById('feedback-box');
+  fb.className = 'feedback-box ' + (acertou ? 'certo' : 'errado');
+  fb.style.display = 'block';
+  document.getElementById('feedback-titulo').textContent = acertou ? '✓ Correto!' : '✗ Incorreto';
+  document.getElementById('feedback-texto').textContent = q.explicacao;
+  document.getElementById('feedback-norma').textContent = q.norma || '';
+
+  document.getElementById('btn-proximo').style.display = 'block';
+
+  // Sem vidas — encerrar
+  if (estado.vidas <= 0 && !acertou) {
+    setTimeout(() => encerrarSessao(true), 1500);
+  }
+}
+
+async function proximaQuestao() {
+  estado.questaoAtual++;
+  if (estado.questaoAtual >= QUESTOES_POR_SESSAO || estado.vidas <= 0) {
+    encerrarSessao(false);
+  } else {
+    await carregarProximaQuestao();
+  }
+}
+
+// ── RESULTADO ────────────────────────────────────────────────────────────────
+function encerrarSessao(semVidas) {
+  const acertos = estado.respostas.filter(r => r.acertou).length;
+  const total = estado.respostas.length;
+  const nota = Math.round((acertos / QUESTOES_POR_SESSAO) * 100);
+
+  // Salvar dados
+  let dados = carregarDados();
+  dados = atualizarStreak(dados);
+  dados.sessoes = (dados.sessoes || 0) + 1;
+  if (dados.melhorNota === null || nota > dados.melhorNota) dados.melhorNota = nota;
+
+  // Desbloquear próximo nível
+  if (nota >= 70 && estado.nivel === 1) dados.nivelDesbloqueado = Math.max(dados.nivelDesbloqueado || 1, 2);
+  if (nota >= 70 && estado.nivel === 2) dados.nivelDesbloqueado = Math.max(dados.nivelDesbloqueado || 1, 3);
+
+  // Atualizar temas fracos
+  for (const [tema, erros] of Object.entries(estado.errosPorTema)) {
+    dados.temasFracos[tema] = (dados.temasFracos[tema] || 0) + erros;
+  }
+
+  salvarDados(dados);
+
+  // Renderizar resultado
+  mostrarTela('resultado');
+
+  const msgs = {
+    100: ['Domínio <em>absoluto</em>', 'Nota perfeita. Você está pronto para ensinar.'],
+    90: ['Excelente <em>desempenho</em>', 'Quase perfeito. Revise os temas errados e você está pronto.'],
+    70: ['Bom <em>resultado</em>', 'Nível aprovado. Revise os pontos fracos antes de avançar.'],
+    50: ['Em <em>desenvolvimento</em>', 'Continue praticando. Os temas fracos estão identificados abaixo.'],
+    0: ['Precisa <em>revisar</em>', 'Não desanime. Revise o material e tente novamente.']
+  };
+
+  let chave = 0;
+  for (const k of [90, 70, 50]) { if (nota >= k) { chave = k; break; } }
+  if (nota === 100) chave = 100;
+
+  document.getElementById('resultado-nota').textContent = nota;
+  document.getElementById('resultado-msg').innerHTML = msgs[chave][0];
+  document.getElementById('resultado-sub').textContent = msgs[chave][1] + (semVidas ? ' (sessão encerrada por falta de vidas)' : '');
+
+  // Pontos fracos
+  const pf = document.getElementById('pontos-fracos-box');
+  const temasFracos = Object.entries(dados.temasFracos).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  if (temasFracos.length > 0) {
+    pf.innerHTML = `<div class="pf-titulo">Pontos a reforçar</div>` +
+      temasFracos.map(([tema, erros]) => {
+        const dots = [0,1,2,3,4].map(i => `<div class="pf-dot ${i < Math.min(erros,5) ? 'erro' : ''}"></div>`).join('');
+        return `<div class="pf-item"><span class="pf-tema">${tema}</span><div class="pf-barra">${dots}</div></div>`;
+      }).join('');
+  } else {
+    pf.style.display = 'none';
+  }
+}
+
+// ── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
+function mostrarTela(tela) {
+  document.getElementById('tela-inicio').style.display = tela === 'inicio' ? 'flex' : 'none';
+  document.getElementById('tela-quiz').style.display = tela === 'quiz' ? 'flex' : 'none';
+  document.getElementById('tela-resultado').style.display = tela === 'resultado' ? 'flex' : 'none';
+}
+
+function voltarInicio() {
+  document.getElementById('btn-comecar').disabled = false;
+  document.getElementById('btn-comecar').textContent = 'Começar sessão →';
+  renderizarInicio();
+  mostrarTela('inicio');
+}
+
+function refazerSessao() {
+  mostrarTela('inicio');
+  setTimeout(() => iniciarQuiz(), 100);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+renderizarInicio();
+</script>
+</body>
+</html>
