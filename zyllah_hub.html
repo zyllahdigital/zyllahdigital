@@ -29,7 +29,8 @@
   .senha-hint { font-size: 12px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
 
   /* HEADER */
-  .header { background: var(--ink); padding: 56px 80px 48px; }
+  .header { background: var(--ink); padding: 56px 80px 48px; position: relative; overflow: hidden; }
+  .header::after { content: 'HUB'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); font-family: 'Cormorant Garamond', serif; font-size: 260px; font-weight: 300; color: rgba(184,151,106,0.04); line-height: 1; pointer-events: none; }
   .header-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
   .header-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 12px; }
   .header-titulo em { font-style: italic; color: var(--gold-light); }
@@ -37,47 +38,54 @@
   .header-regra { margin-top: 28px; padding: 16px 20px; background: rgba(184,151,106,0.07); border-left: 2px solid rgba(184,151,106,0.3); font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.75; max-width: 560px; }
   .header-regra strong { color: rgba(255,255,255,0.55); font-weight: 400; }
 
+  /* NAV FUNCIONÁRIOS */
+  .nav-func { background: rgba(26,23,20,0.97); border-bottom: 1px solid rgba(184,151,106,0.1); position: sticky; top: 0; z-index: 100; display: flex; gap: 0; overflow-x: auto; }
+  .nav-item { padding: 16px 24px; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; white-space: nowrap; border-right: 1px solid rgba(184,151,106,0.08); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+  .nav-item:hover { color: var(--gold); }
+  .nav-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
   /* CORPO */
   .corpo { max-width: 900px; margin: 0 auto; padding: 64px 60px 100px; }
 
-  /* FUNDO */
-  .fundo { margin-bottom: 64px; }
-  .fundo-header { display: flex; align-items: center; gap: 20px; margin-bottom: 8px; }
-  .fundo-cor { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .fundo-nome { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); }
-  .fundo-nome em { font-style: italic; color: var(--gold); }
-  .fundo-regra { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 24px; padding: 12px 16px; background: rgba(184,151,106,0.05); border-left: 2px solid rgba(184,151,106,0.2); max-width: 600px; }
-  .fundo-regra strong { color: var(--ink); font-weight: 400; }
+  /* FUNCIONÁRIO */
+  .funcionario { margin-bottom: 80px; scroll-margin-top: 56px; }
+  .func-header { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 8px; }
+  .func-cor { width: 6px; height: 72px; flex-shrink: 0; border-radius: 3px; margin-top: 4px; }
+  .func-info { flex: 1; }
+  .func-num { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block; }
+  .func-nome { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+  .func-nome em { font-style: italic; color: var(--gold); }
+  .func-missao { font-size: 13px; color: var(--ink-soft); line-height: 1.7; max-width: 560px; margin-bottom: 24px; padding: 12px 16px; background: rgba(184,151,106,0.05); border-left: 2px solid rgba(184,151,106,0.2); }
+  .func-missao strong { color: var(--ink); font-weight: 400; }
 
   /* SUBFUNDO */
-  .subfundo { margin-bottom: 32px; }
-  .subfundo-titulo { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(184,151,106,0.12); }
+  .subfundo { margin-bottom: 28px; }
+  .subfundo-titulo { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(184,151,106,0.12); }
 
   /* DOCS GRID */
   .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
-  .doc {
-    background: white;
-    border: 1px solid rgba(184,151,106,0.15);
-    border-left: 3px solid rgba(184,151,106,0.3);
-    padding: 18px 20px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
+  .doc { background: white; border: 1px solid rgba(184,151,106,0.15); border-left: 3px solid rgba(184,151,106,0.3); padding: 18px 20px; text-decoration: none; display: flex; flex-direction: column; gap: 6px; transition: border-color 0.2s, box-shadow 0.2s; }
   .doc:hover { border-left-color: var(--gold); box-shadow: 0 2px 12px rgba(184,151,106,0.1); }
   .doc-nome { font-size: 15px; color: var(--ink); font-weight: 400; line-height: 1.3; }
   .doc-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
   .doc-badge { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-top: 4px; }
+  .doc-badge.interno { color: #7A3535; }
+  .doc-badge.cliente { color: #2E5E3E; }
+  .doc-badge.bloqueado { color: #8B6914; }
 
-  /* DIVISOR */
+  /* CLIENTES */
+  .cliente-card { background: white; border: 1px solid rgba(184,151,106,0.15); padding: 20px 24px; margin-bottom: 10px; }
+  .cliente-nome { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--ink); margin-bottom: 4px; }
+  .cliente-status { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  .cliente-docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+
   .divisor { height: 1px; background: rgba(184,151,106,0.12); margin: 56px 0; }
 
   @media (max-width: 640px) {
     .header { padding: 40px 24px 36px; }
     .corpo { padding: 40px 20px 80px; }
     .docs { grid-template-columns: 1fr; }
+    .nav-func { display: none; }
   }
 </style>
 
@@ -128,243 +136,254 @@
 
 <div class="header">
   <span class="header-tag">Uso interno · Zyllah Digital</span>
-  <h1 class="header-titulo">Hub de<br><em>documentos</em></h1>
-  <p class="header-sub">Organizado em três fundos. Cada documento tem um lugar. Quando chegar algo novo, a regra de cada fundo diz onde ele entra.</p>
+  <h1 class="header-titulo">Hub de<br><em>operação</em></h1>
+  <p class="header-sub">Organizado por papel. Cada funcionário sabe exatamente o que precisa para operar — sem navegar em tudo.</p>
   <div class="header-regra">
     <strong>Nunca compartilhe este link.</strong> Compartilhe sempre o link direto do documento específico — nunca o hub inteiro.
   </div>
 </div>
 
+<!-- NAV -->
+<nav class="nav-func">
+  <a href="#prospector" class="nav-item"><span class="dot" style="background:#B8976A"></span>Prospector</a>
+  <a href="#vendedor" class="nav-item"><span class="dot" style="background:#7A9E7E"></span>Vendedor</a>
+  <a href="#produtor" class="nav-item"><span class="dot" style="background:#8A9BB5"></span>Produtor</a>
+  <a href="#gestor" class="nav-item"><span class="dot" style="background:#9B8AB5"></span>Gestor de Clientes</a>
+  <a href="#arquivo" class="nav-item"><span class="dot" style="background:#6B6560"></span>Arquivo</a>
+</nav>
+
 <div class="corpo">
 
-  <!-- FUNDO 1: ZYLLAH -->
-  <div class="fundo">
-    <div class="fundo-header">
-      <div class="fundo-cor" style="background:#B8976A;"></div>
-      <div class="fundo-nome">Fundo <em>Zyllah</em></div>
-    </div>
-    <div class="fundo-regra">
-      <strong>Regra:</strong> entra aqui tudo que descreve como a Zyllah funciona, se posiciona e opera — independente de cliente. Se o documento existiria mesmo sem nenhum cliente ativo, é deste fundo.
-    </div>
-
-    <div class="subfundo">
-      <div class="subfundo-titulo">Identidade e estratégia</div>
-      <div class="docs">
-        <a href="zyllah_brandbook.html" class="doc">
-          <div class="doc-nome">Brand Book</div>
-          <div class="doc-desc">Logo, paleta, tipografia, tom de voz, regras de uso da marca</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_raciocinio.html" class="doc">
-          <div class="doc-nome">O Raciocínio por Trás</div>
-          <div class="doc-desc">Por que cada decisão foi tomada — para tomar as próximas sem depender de ninguém</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_conteudo_linkedin.html" class="doc">
-          <div class="doc-nome">Estratégia LinkedIn</div>
-          <div class="doc-desc">Posicionamento, cadência, tipos de post, como crescer no canal</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_conteudo_instagram.html" class="doc">
-          <div class="doc-nome">Estratégia Instagram</div>
-          <div class="doc-desc">Perfil, conteúdo, frequência, como construir presença visual</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_post_exemplo.html" class="doc">
-          <div class="doc-nome">Post Exemplo</div>
-          <div class="doc-desc">Referência de post bem construído — estrutura, linguagem, chamada para ação</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_calendario.html" class="doc">
-          <div class="doc-nome">Calendário de Conteúdo</div>
-          <div class="doc-desc">4 semanas detalhadas — LinkedIn pessoal, LinkedIn empresa e Instagram. Textos prontos e visual descrito por post</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
+  <!-- FUNCIONÁRIO 1: PROSPECTOR -->
+  <div class="funcionario" id="prospector" style="background:linear-gradient(to bottom, rgba(184,151,106,0.05) 0%, transparent 120px); padding: 32px 28px; border-radius: 2px; margin-left:-28px; margin-right:-28px;">
+    <div class="func-header">
+      <div class="func-cor" style="background:#B8976A"></div>
+      <div class="func-info">
+        <span class="func-num">Funcionário 01</span>
+        <div class="func-nome"><em>Prospector</em></div>
       </div>
     </div>
-
-    <div class="subfundo">
-      <div class="subfundo-titulo">Vendas e reunião</div>
-      <div class="docs">
-        <a href="zyllah_script_reuniao.html" class="doc">
-          <div class="doc-nome">Script de Reunião</div>
-          <div class="doc-desc">Fluxo passo a passo, narrativa de cada entregável, perguntas do cliente com respostas prontas. Consultar no celular durante a conversa.</div>
-          <div class="doc-badge">Senha necessária · Uso interno</div>
-        </a>
-        <a href="zyllah_vendas.html" class="doc">
-          <div class="doc-nome">Playbook de Vendas</div>
-          <div class="doc-desc">Como abordar, qualificar, propor e fechar — do primeiro contato ao contrato</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_objecoes.html" class="doc">
-          <div class="doc-nome">Mapa de Objeções</div>
-          <div class="doc-desc">Respostas prontas para cada objeção — preço, prazo, concorrente, já faz sozinho</div>
-          <div class="doc-badge">Uso interno</div>
-        </a>
-        <a href="zyllah_apresentacao_16x9.html" class="doc">
-          <div class="doc-nome">Apresentação de Vendas 16:9</div>
-          <div class="doc-desc">9 slides para usar na reunião presencial ou por vídeo — com foto do fundador e slide de aspiração</div>
-        </a>
-        <a href="zyllah_material_visita.html" class="doc">
-          <div class="doc-nome">Material de Visita</div>
-          <div class="doc-desc">Cartão de visita e panfleto A5 — para imprimir e levar para reuniões (Printi)</div>
-        </a>
-        <a href="zyllah_vendedor_indicacao.html" class="doc">
-          <div class="doc-nome">Zyllah Confiança + Vendedor</div>
-          <div class="doc-desc">Programa de indicação e parceria com vendedor externo — regras, comissões, scripts</div>
-          <div class="doc-badge">Uso interno</div>
-        </a>
-      </div>
+    <div class="func-missao">
+      <strong>Missão:</strong> identificar especialistas com potencial, fazer primeiro contato e manter o relacionamento aquecido até a reunião. Operar com inteligência de mercado e vocabulário clínico correto.
     </div>
 
     <div class="subfundo">
-      <div class="subfundo-titulo">Definições de serviço</div>
+      <div class="subfundo-titulo">Inteligência e abordagem</div>
       <div class="docs">
-        <a href="zyllah_nexa_ads.html" class="doc">
-          <div class="doc-nome">Nexa Ads</div>
-          <div class="doc-desc">Definição completa — canais, escopo, regras CFM, precificação (15% sobre excedente), 6 perguntas com respostas, onboarding</div>
-        </a>
-        <a href="zyllah_flow_rascunho.html" class="doc">
-          <div class="doc-nome">Zyllah Flow — Rascunho</div>
-          <div class="doc-desc">Automação de atendimento (WhatsApp + Agenda + CRM). Rascunho interno — aguarda validação com Encantarys antes de ofertar.</div>
-          <div class="doc-badge">Interno · Não apresentar ao cliente</div>
-        </a>
         <a href="zyllah_concorrencia_seo.html" class="doc">
           <div class="doc-nome">Mapa Competitivo</div>
-          <div class="doc-desc">Axiom, DF Comunicação e posicionamento Zyllah em Nova Friburgo — oceano azul confirmado</div>
-          <div class="doc-badge">Uso interno</div>
-        </a>
-      </div>
-    </div>
-
-    <div class="subfundo">
-      <div class="subfundo-titulo">Operação e contratos</div>
-      <div class="docs">
-        <a href="zyllah_contratos.html" class="doc">
-          <div class="doc-nome">Contratos</div>
-          <div class="doc-desc">Três modelos de contrato por tier — Essencial, Presença Completa, Autoridade</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="zyllah_docs_producao.html" class="doc">
-          <div class="doc-nome">Documentos de Produção</div>
-          <div class="doc-desc">Autorização de uso de imagem, NDA, prazos saudáveis de entrega</div>
-          <div class="doc-badge">Senha necessária</div>
-        </a>
-        <a href="guia_sessao_cliente.html" class="doc">
-          <div class="doc-nome">Guia de Sessão Fotográfica</div>
-          <div class="doc-desc">Página para enviar ao cliente — figurino, preparação do rosto, ambiente do consultório</div>
-          <div class="doc-badge">Compartilhar com cliente</div>
-        </a>
-        <a href="TEMPLATE_mensagem_pre_sessao.html" class="doc">
-          <div class="doc-nome">Mensagem Pré-Sessão</div>
-          <div class="doc-desc">Template interno — preenche nome/data/hora/link e gera mensagem 48h antes + lembrete véspera</div>
-          <div class="doc-badge">Uso interno</div>
+          <div class="doc-desc">Axiom, DF Comunicação, posicionamento Zyllah — oceano azul confirmado em Nova Friburgo</div>
+          <div class="doc-badge interno">Uso interno</div>
         </a>
         <a href="zyllah_checklist_instagram.html" class="doc">
-          <div class="doc-nome">Checklist Instagram + LinkedIn Semanal</div>
-          <div class="doc-desc">Posts, stories e engajamento ativo por dia — estratégia dos dois públicos, perfis, regras de ouro</div>
-          <div class="doc-badge">Uso interno</div>
+          <div class="doc-nome">Checklist de Engajamento</div>
+          <div class="doc-desc">Estratégia de comentários e follow por dia — perfis a seguir, regras de ouro, como demonstrar expertise sem vender</div>
+          <div class="doc-badge interno">Uso interno</div>
         </a>
-        <a href="zyllah_infraestrutura_automacao.html" class="doc">
-          <div class="doc-nome">Infraestrutura de Automação</div>
-          <div class="doc-desc">Arquitetura n8n + Claude + Sheets — fluxo completo, problemas resolvidos, como replicar por cliente</div>
-          <div class="doc-badge">Uso interno · Técnico</div>
-        </a>
-      </div>
-    </div>
-
-    <div class="subfundo">
-      <div class="subfundo-titulo">Treinamento interno</div>
-      <div class="docs">
-        <a href="zyllah_quiz_vendas.html" class="doc">
-          <div class="doc-nome">Quiz de Vendas</div>
-          <div class="doc-desc">4 modos de treino (reunião, objeções, abordagem, completo) — situações reais, IA integrada, streak e pontos fracos</div>
-          <div class="doc-badge">Uso interno · API Claude</div>
+        <a href="zyllah_imersao_laboratorio.html" class="doc">
+          <div class="doc-nome">Imersão Clínica</div>
+          <div class="doc-desc">Vocabulário médico, dilemas reais dos especialistas, frases que soam certo — para soar parte do mundo deles na abordagem</div>
+          <div class="doc-badge interno">Uso interno</div>
         </a>
         <a href="zyllah_quiz_conselhos.html" class="doc">
           <div class="doc-nome">Quiz CFM / CRN / CFO / CFP</div>
-          <div class="doc-desc">3 níveis progressivos de regulamentação por conselho — dominar antes de reunião com cada especialidade</div>
-          <div class="doc-badge">Uso interno · API Claude</div>
+          <div class="doc-desc">Dominar a regulamentação antes de falar com cada especialidade — 3 níveis progressivos, IA integrada</div>
+          <div class="doc-badge interno">API Claude · Treinar antes</div>
         </a>
       </div>
     </div>
 
     <div class="subfundo">
-      <div class="subfundo-titulo">Expansão · Produto digital</div>
+      <div class="subfundo-titulo">Templates de abordagem</div>
       <div class="docs">
-        <a href="zyllah_produto_perpetuo.html" class="doc">
-          <div class="doc-nome">Produto Perpétuo</div>
-          <div class="doc-desc">Estrutura do curso digital — promessa, módulos, preço R$297–397, funil. Lançar após 2 cases documentados.</div>
-          <div class="doc-badge">Pós 2 cases · Não lançar antes</div>
+        <a href="zyllah_vendas.html" class="doc">
+          <div class="doc-nome">Playbook de Vendas</div>
+          <div class="doc-desc">Seção de abordagem — primeiro contato, personalização por especialidade, follow-up sem pressão</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
+        </a>
+        <a href="zyllah_briefing_rapido.html" class="doc">
+          <div class="doc-nome">Briefing Rápido</div>
+          <div class="doc-desc">Formulário curto para preencher com o prospect na primeira conversa — duplicar para cada novo contato</div>
+          <div class="doc-badge bloqueado">Duplicar antes de usar</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- FUNCIONÁRIO 2: VENDEDOR -->
+  <div class="funcionario" id="vendedor" style="background:linear-gradient(to bottom, rgba(122,158,126,0.07) 0%, transparent 120px); padding: 32px 28px; border-radius: 2px; margin-left:-28px; margin-right:-28px;">
+    <div class="func-header">
+      <div class="func-cor" style="background:#7A9E7E"></div>
+      <div class="func-info">
+        <span class="func-num">Funcionário 02</span>
+        <div class="func-nome"><em>Vendedor</em></div>
+      </div>
+    </div>
+    <div class="func-missao">
+      <strong>Missão:</strong> conduzir a reunião de 15–20 minutos, apresentar os planos, ancorar o valor, fechar ou avançar para proposta. Saber responder qualquer objeção sem defensiva.
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Para usar na reunião</div>
+      <div class="docs">
+        <a href="zyllah_script_reuniao.html" class="doc">
+          <div class="doc-nome">Script de Reunião</div>
+          <div class="doc-desc">Fluxo passo a passo, narrativa de cada entregável, perguntas com respostas prontas — consultar no celular</div>
+          <div class="doc-badge bloqueado">Senha: Zyl@Script26</div>
+        </a>
+        <a href="zyllah_apresentacao_16x9.html" class="doc">
+          <div class="doc-nome">Apresentação de Vendas</div>
+          <div class="doc-desc">9 slides 16:9 — slide de aspiração, planos, âncora de valor, projeto piloto. Abrir no notebook ou TV</div>
+        </a>
+        <a href="zyllah_objecoes.html" class="doc">
+          <div class="doc-nome">Mapa de Objeções</div>
+          <div class="doc-desc">Respostas para preço alto, já tem agência, não acredita no digital, quer garantia, vai pensar</div>
+          <div class="doc-badge interno">Uso interno</div>
+        </a>
+        <a href="zyllah_material_visita.html" class="doc">
+          <div class="doc-nome">Material de Visita</div>
+          <div class="doc-desc">Cartão e panfleto A5 para imprimir na Printi — levar para reunião presencial</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Para fechar e contratar</div>
+      <div class="docs">
+        <a href="zyllah_contratos.html" class="doc">
+          <div class="doc-nome">Contratos</div>
+          <div class="doc-desc">Três modelos por tier — Essencial, Presença Completa, Autoridade. Assinatura digital.</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
+        </a>
+        <a href="zyllah_vendas.html" class="doc">
+          <div class="doc-nome">Playbook de Vendas</div>
+          <div class="doc-desc">Estratégia completa de fechamento, posicionamento por plano, como lidar com pedido de desconto</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
+        </a>
+        <a href="zyllah_vendedor_indicacao.html" class="doc">
+          <div class="doc-nome">Zyllah Confiança</div>
+          <div class="doc-desc">Programa de indicação — regras, quando apresentar (reunião do 1º mês), como plantar semente no fechamento</div>
+          <div class="doc-badge interno">Uso interno</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Treinamento de vendas</div>
+      <div class="docs">
+        <a href="zyllah_quiz_vendas.html" class="doc">
+          <div class="doc-nome">Quiz de Vendas</div>
+          <div class="doc-desc">4 modos: reunião, objeções, abordagem, completo — situações reais, streak, pontos fracos identificados</div>
+          <div class="doc-badge interno">API Claude · Treinar antes da reunião</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Definições de serviço — para responder com precisão</div>
+      <div class="docs">
+        <a href="zyllah_nexa_ads.html" class="doc">
+          <div class="doc-nome">Nexa Ads</div>
+          <div class="doc-desc">O que é, canais, CFM, precificação (15% excedente), 6 perguntas com respostas prontas</div>
+        </a>
+        <a href="zyllah_flow_rascunho.html" class="doc">
+          <div class="doc-nome">Zyllah Flow</div>
+          <div class="doc-desc">Mencionar como "automação de atendimento no Autoridade" — não detalhar. Aguarda validação Encantarys.</div>
+          <div class="doc-badge interno">Não apresentar ao cliente</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- FUNCIONÁRIO 3: PRODUTOR -->
+  <div class="funcionario" id="produtor" style="background:linear-gradient(to bottom, rgba(138,155,181,0.07) 0%, transparent 120px); padding: 32px 28px; border-radius: 2px; margin-left:-28px; margin-right:-28px;">
+    <div class="func-header">
+      <div class="func-cor" style="background:#8A9BB5"></div>
+      <div class="func-info">
+        <span class="func-num">Funcionário 03</span>
+        <div class="func-nome"><em>Produtor</em></div>
+      </div>
+    </div>
+    <div class="func-missao">
+      <strong>Missão:</strong> criar todo conteúdo da Zyllah e dos clientes com identidade visual consistente — posts, stories, vídeos, fotos, documentos, apresentações. Nada sai sem passar pelo memorando visual.
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Padrão obrigatório</div>
+      <div class="docs">
+        <a href="zyllah_memorando_visual.html" class="doc" style="border-left-color: var(--gold);">
+          <div class="doc-nome">Memorando Visual</div>
+          <div class="doc-desc">Paleta, tipografia, formatos por canal, anatomia do frame, regras de composição — ler antes de criar qualquer peça</div>
+          <div class="doc-badge" style="color:var(--gold)">⚡ Ler primeiro</div>
+        </a>
+        <a href="zyllah_variaveis_css.html" class="doc">
+          <div class="doc-nome">Variáveis CSS</div>
+          <div class="doc-desc">Bloco :root oficial, guia de uso por contexto, como corrigir problemas de contraste em documentos</div>
+          <div class="doc-badge interno">Referência técnica</div>
+        </a>
+        <a href="zyllah_brandbook.html" class="doc">
+          <div class="doc-nome">Brand Book Zyllah</div>
+          <div class="doc-desc">Identidade visual completa da própria agência — logo, paleta, tipografia, tom de voz, regras de uso</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Conteúdo próprio Zyllah</div>
+      <div class="docs">
+        <a href="zyllah_calendario.html" class="doc">
+          <div class="doc-nome">Calendário Editorial</div>
+          <div class="doc-desc">4 semanas — LinkedIn pessoal, LinkedIn empresa, Instagram. Textos prontos e visual descrito por post</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
+        </a>
+        <a href="zyllah_conteudo_linkedin.html" class="doc">
+          <div class="doc-nome">Estratégia LinkedIn</div>
+          <div class="doc-desc">Posicionamento, cadência, tipos de post, como crescer no canal próprio da Zyllah</div>
+        </a>
+        <a href="zyllah_conteudo_instagram.html" class="doc">
+          <div class="doc-nome">Estratégia Instagram</div>
+          <div class="doc-desc">Perfil, conteúdo, frequência, como construir presença visual consistente</div>
         </a>
         <a href="roteiro_youtube_v1.html" class="doc">
           <div class="doc-nome">Roteiro YouTube — Vídeo 1</div>
-          <div class="doc-desc">"O que o Google encontra quando pesquisam seu nome" — voz over, sem câmera, prova de método no cena 5-A</div>
-        </a>
-        <a href="encantarys-relatorio-validacao-zyllah.html" class="doc">
-          <div class="doc-nome">Case Encantarys — Prova de Método</div>
-          <div class="doc-desc">Relatório de validação do método Zyllah em negócio local. Usar como prova de profundidade — nunca mencionar setor, prazo ou custo.</div>
-          <div class="doc-badge">Uso interno · Referência de método</div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="divisor"></div>
-
-  <!-- FUNDO 2: CLIENTES -->
-  <div class="fundo">
-    <div class="fundo-header">
-      <div class="fundo-cor" style="background:#7A9E7E;"></div>
-      <div class="fundo-nome">Fundo <em>Clientes</em></div>
-    </div>
-    <div class="fundo-regra">
-      <strong>Regra:</strong> entra aqui tudo que foi criado para ou sobre um cliente específico — briefing preenchido, proposta enviada, materiais entregues. Cada cliente tem o seu subfundo. Quando fechar um novo cliente, ele ganha uma entrada aqui.
-    </div>
-
-    <div class="subfundo">
-      <div class="subfundo-titulo">Thayara — prospect ativo</div>
-      <div class="docs">
-        <a href="zyllah_thayara.html" class="doc">
-          <div class="doc-nome">Página Thayara</div>
-          <div class="doc-desc">Proposta personalizada, diagnóstico de presença digital e próximos passos</div>
-          <div class="doc-badge">Senha necessária · Pode compartilhar</div>
-        </a>
-        <a href="zyllah_briefing_rapido.html" class="doc">
-          <div class="doc-nome">Briefing Rápido — Thayara</div>
-          <div class="doc-desc">Formulário de briefing curto para preencher com ela na primeira conversa</div>
-          <div class="doc-badge">Senha necessária</div>
+          <div class="doc-desc">"O que o Google encontra quando pesquisam seu nome" — voz over, sem câmera, cena 5-A com prova de método</div>
         </a>
       </div>
     </div>
 
     <div class="subfundo">
-      <div class="subfundo-titulo">Encantarys — cliente piloto · Em produção</div>
+      <div class="subfundo-titulo">Sessão fotográfica com clientes</div>
       <div class="docs">
-        <a href="encantarys_brandbook.html" class="doc">
-          <div class="doc-nome">Brand Book — Encantarys</div>
-          <div class="doc-desc">Identidade visual completa: paleta midnight/violeta/dourado, Cinzel, logo em variações, voz da marca</div>
-          <div class="doc-badge">Senha necessária · Uso interno</div>
+        <a href="guia_sessao_cliente.html" class="doc">
+          <div class="doc-nome">Guia de Sessão</div>
+          <div class="doc-desc">Figurino, rosto, ambiente do consultório — enviar ao cliente antes da sessão</div>
+          <div class="doc-badge cliente">Compartilhar com cliente</div>
         </a>
-        <a href="diagnostico_encantarys.html" class="doc">
-          <div class="doc-nome">Diagnóstico de Presença</div>
-          <div class="doc-desc">Grid de problemas vs oportunidades, análise de anúncios, conversas analisadas, posicionamento proposto</div>
-          <div class="doc-badge">Uso interno</div>
+        <a href="TEMPLATE_mensagem_pre_sessao.html" class="doc">
+          <div class="doc-nome">Mensagem Pré-Sessão</div>
+          <div class="doc-desc">Preenche nome/data/hora/link e gera mensagem 48h antes + lembrete da véspera</div>
+          <div class="doc-badge interno">Uso interno</div>
         </a>
-        <a href="festaemont_briefing.html" class="doc">
-          <div class="doc-nome">Estratégia — Briefing Original</div>
-          <div class="doc-desc">Diagnóstico, posicionamento, frase-âncora, análise Instagram e próximos passos</div>
-          <div class="doc-badge">Uso interno</div>
+        <a href="zyllah_docs_producao.html" class="doc">
+          <div class="doc-nome">Documentos de Produção</div>
+          <div class="doc-desc">Autorização de uso de imagem, NDA, prazos de entrega</div>
+          <div class="doc-badge bloqueado">Senha necessária</div>
         </a>
-        <a href="festaemonte_roteiro_fotos.html" class="doc">
-          <div class="doc-nome">Roteiro de Fotos dos Kits</div>
-          <div class="doc-desc">Guia operacional para Fernanda fotografar os kits sozinha — setup, luz, ângulos</div>
-          <div class="doc-badge">Pode compartilhar com Fernanda</div>
-        </a>
-        <a href="festaemont_formulario.html" class="doc">
-          <div class="doc-nome">Formulário de Briefing</div>
-          <div class="doc-desc">Formulário preenchível da Encantarys — campos personalizados, escala e múltipla escolha</div>
-          <div class="doc-badge">Pode compartilhar com Fernanda</div>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Expansão futura</div>
+      <div class="docs">
+        <a href="zyllah_produto_perpetuo.html" class="doc">
+          <div class="doc-nome">Produto Perpétuo</div>
+          <div class="doc-desc">Estrutura do curso digital — promessa, módulos, preço R$297–397. Produzir apenas após 2 cases.</div>
+          <div class="doc-badge interno">Pós 2 cases · Não produzir antes</div>
         </a>
       </div>
     </div>
@@ -372,81 +391,110 @@
 
   <div class="divisor"></div>
 
-  <!-- FUNDO 3: TEMPLATES -->
-  <div class="fundo">
-    <div class="fundo-header">
-      <div class="fundo-cor" style="background:#8A9BB5;"></div>
-      <div class="fundo-nome">Fundo <em>Templates</em></div>
+  <!-- FUNCIONÁRIO 4: GESTOR DE CLIENTES -->
+  <div class="funcionario" id="gestor" style="background:linear-gradient(to bottom, rgba(155,138,181,0.07) 0%, transparent 120px); padding: 32px 28px; border-radius: 2px; margin-left:-28px; margin-right:-28px;">
+    <div class="func-header">
+      <div class="func-cor" style="background:#9B8AB5"></div>
+      <div class="func-info">
+        <span class="func-num">Funcionário 04</span>
+        <div class="func-nome"><em>Gestor de Clientes</em></div>
+      </div>
     </div>
-    <div class="fundo-regra">
-      <strong>Regra:</strong> entra aqui tudo que você copia antes de usar — nunca o original. Quando chegar um novo cliente, você duplica o template dele, personaliza e move para o fundo Clientes. O template fica intacto para o próximo.
+    <div class="func-missao">
+      <strong>Missão:</strong> garantir que cada cliente receba o que foi prometido no prazo e com qualidade — onboarding, entrega mensal, relatórios, reuniões e retenção. Cada cliente tem seu espaço aqui.
     </div>
 
-    <div class="docs">
-      <a href="zyllah_briefing.html" class="doc">
-        <div class="doc-nome">Briefing Completo — Modelo</div>
-        <div class="doc-desc">Briefing aprofundado para novos clientes Zyllah — duplicar e personalizar por nicho</div>
-        <div class="doc-badge">Senha necessária · Nunca editar o original</div>
-      </a>
-      <a href="zyllah_briefing_rapido.html" class="doc">
-        <div class="doc-nome">Briefing Rápido — Modelo</div>
-        <div class="doc-desc">Versão curta para primeira conversa — duplicar para cada novo prospect</div>
-        <div class="doc-badge">Senha necessária · Nunca editar o original</div>
-      </a>
-      <a href="TEMPLATE_guia_gravacao.html" class="doc">
-        <div class="doc-nome">Guia de Gravação — Modelo</div>
-        <div class="doc-desc">Template de onboarding para clientes remotos — setup de vídeo, luz, enquadramento, checklist interativo</div>
-        <div class="doc-badge">Duplicar e substituir {{NOME_CLIENTE}} · Nunca editar o original</div>
-      </a>
-      <a href="TEMPLATE_guia_fotos.html" class="doc">
-        <div class="doc-nome">Guia de Fotos — Modelo</div>
-        <div class="doc-desc">Template de onboarding para clientes remotos — setup de foto, luz, enquadramento por tipo de imagem, checklist interativo</div>
-        <div class="doc-badge">Duplicar e substituir {{NOME_CLIENTE}} · Nunca editar o original</div>
-      </a>
-      <a href="TEMPLATE_formulario_cliente.html" class="doc">
-        <div class="doc-nome">Formulário de Cliente — Modelo</div>
-        <div class="doc-desc">Template genérico de formulário com variáveis — duplicar e personalizar por cliente</div>
-        <div class="doc-badge">Duplicar antes de usar · Nunca editar o original</div>
-      </a>
-      <div class="doc" style="border-style:dashed;border-left-style:dashed;opacity:0.5;cursor:default;">
-        <div class="doc-nome">+ Formulário novo cliente</div>
-        <div class="doc-desc">Quando fechar um novo cliente, solicitar ID Formspree e gerar formulário personalizado aqui</div>
-        <div class="doc-badge">A criar conforme necessário</div>
+    <div class="subfundo">
+      <div class="subfundo-titulo">Operação de entrega</div>
+      <div class="docs">
+        <a href="zyllah_raciocinio.html" class="doc">
+          <div class="doc-nome">O Raciocínio por Trás</div>
+          <div class="doc-desc">Por que cada decisão estratégica foi tomada — para manter consistência sem depender de ninguém</div>
+        </a>
+        <a href="zyllah_infraestrutura_automacao.html" class="doc">
+          <div class="doc-nome">Infraestrutura de Automação</div>
+          <div class="doc-desc">Arquitetura n8n + Claude + Sheets — fluxo completo, erros resolvidos, como replicar por cliente</div>
+          <div class="doc-badge interno">Técnico</div>
+        </a>
+        <a href="zyllah_flow_rascunho.html" class="doc">
+          <div class="doc-nome">Zyllah Flow</div>
+          <div class="doc-desc">Automação de atendimento (WhatsApp + Agenda + CRM) — em desenvolvimento, validar na Encantarys</div>
+          <div class="doc-badge interno">Não entregar antes da validação</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Templates de onboarding</div>
+      <div class="docs">
+        <a href="zyllah_briefing.html" class="doc">
+          <div class="doc-nome">Briefing Completo</div>
+          <div class="doc-desc">Briefing aprofundado — duplicar e personalizar por cliente. Nunca editar o original.</div>
+          <div class="doc-badge bloqueado">Duplicar antes de usar</div>
+        </a>
+        <a href="TEMPLATE_formulario_cliente.html" class="doc">
+          <div class="doc-nome">Formulário de Cliente</div>
+          <div class="doc-desc">Template genérico com variáveis — duplicar e personalizar</div>
+          <div class="doc-badge bloqueado">Duplicar antes de usar</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Clientes ativos</div>
+
+      <div class="cliente-card">
+        <div class="cliente-nome">Encantarys</div>
+        <span class="cliente-status">Piloto em andamento · Validação do método</span>
+        <div class="cliente-docs">
+          <a href="encantarys-relatorio-validacao-zyllah.html" class="doc">
+            <div class="doc-nome">Relatório de Validação</div>
+            <div class="doc-desc">Prova de método — profundidade, organização, resultado documentado</div>
+            <div class="doc-badge interno">Não revelar setor ao prospect</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="cliente-card" style="margin-top:10px; border-style:dashed; opacity:0.6;">
+        <div class="cliente-nome" style="color:rgba(26,23,20,0.4)">+ Próximo cliente</div>
+        <span class="cliente-status" style="color:rgba(184,151,106,0.4)">Aguardando resposta dos prospects</span>
       </div>
     </div>
   </div>
 
   <div class="divisor"></div>
 
-  <!-- FUNDO 4: IDEIAS -->
-  <div class="fundo">
-    <div class="fundo-header">
-      <div class="fundo-cor" style="background:#9B8AB5;"></div>
-      <div class="fundo-nome">Fundo <em>Ideias</em></div>
+  <!-- ARQUIVO -->
+  <div class="funcionario" id="arquivo" style="background:linear-gradient(to bottom, rgba(107,101,96,0.05) 0%, transparent 120px); padding: 32px 28px; border-radius: 2px; margin-left:-28px; margin-right:-28px;">
+    <div class="func-header">
+      <div class="func-cor" style="background:#6B6560"></div>
+      <div class="func-info">
+        <span class="func-num">Arquivo</span>
+        <div class="func-nome"><em>Referência e ideias</em></div>
+      </div>
     </div>
-    <div class="fundo-regra">
-      <strong>Regra:</strong> entra aqui tudo que ainda não tem momento certo — ideias registradas para não perder, a desenvolver quando a operação estiver mais madura.
+    <div class="func-missao">
+      Documentos que não pertencem ao fluxo operacional ativo — ideias registradas, referências estratégicas e material a desenvolver no futuro.
     </div>
-    <div class="docs">
-      <a href="zyllah_ideias_esboço.html" class="doc">
-        <div class="doc-nome">Duas Ideias em Esboço</div>
-        <div class="doc-desc">Infoproduto para médicos + curso de imersão no mundo do médico. Registradas em 16 mar 2026.</div>
-        <div class="doc-badge">Rascunho · Desenvolver no momento certo</div>
-      </a>
-      <a href="zyllah_imersao_laboratorio.html" class="doc">
-        <div class="doc-nome">Imersão · Laboratório Clínico</div>
-        <div class="doc-desc">Vocabulário, dilemas reais, frases que soam certo e quiz de 10 questões. Módulo 1 do curso de imersão.</div>
-        <div class="doc-badge">Módulo 1 · Uso interno</div>
-      </a>
-      <a href="zyllah_entrevista_descoberta.html" class="doc">
-        <div class="doc-nome">Roteiro de Entrevista de Descoberta</div>
-        <div class="doc-desc">11 perguntas para ouvir profissionais de saúde antes de criar qualquer produto. Com ficha de registro por entrevista.</div>
-        <div class="doc-badge">Pesquisa · Usar antes de desenvolver produto</div>
-      </a>
+
+    <div class="subfundo">
+      <div class="subfundo-titulo">Ideias e expansão futura</div>
+      <div class="docs">
+        <a href="zyllah_imersao_laboratorio.html" class="doc">
+          <div class="doc-nome">Imersão · Laboratório Clínico</div>
+          <div class="doc-desc">Vocabulário, dilemas reais, quiz de 10 questões — Módulo 1 de curso de imersão. Base para conversa com Hugo.</div>
+          <div class="doc-badge interno">Desenvolver com Hugo · Sem prazo</div>
+        </a>
+        <a href="zyllah_entrevista_descoberta.html" class="doc">
+          <div class="doc-nome">Roteiro de Entrevista de Descoberta</div>
+          <div class="doc-desc">11 perguntas para ouvir profissionais de saúde antes de criar qualquer produto</div>
+          <div class="doc-badge interno">Pesquisa · Antes de produto</div>
+        </a>
+      </div>
     </div>
+
   </div>
 
 </div>
-
 </body>
 </html>
