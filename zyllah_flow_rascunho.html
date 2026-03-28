@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyllah Flow — Rascunho Interno</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1714;
+    --ink-soft: #3D3830;
+    --gold: #B8976A;
+    --gold-light: #D4B896;
+    --cream: #FAF7F2;
+    --cream-mid: #F0EBE1;
+    --brown: #4A3F35;
+    --red: #7A3535;
+    --green: #2E5E3E;
+    --amber: #8B6914;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; color: var(--ink); padding: 0 0 120px; }
+
+  /* HEADER */
+  .header { background: var(--ink); padding: 64px 80px 56px; position: relative; overflow: hidden; }
+  .header::after {
+    content: 'FLOW';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 280px;
+    font-weight: 300;
+    color: rgba(184,151,106,0.05);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(139,105,20,0.2);
+    border: 1px solid rgba(184,151,106,0.3);
+    padding: 6px 16px;
+    margin-bottom: 28px;
+  }
+  .header-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .header-badge-text { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+  .header-tag { font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+  .header-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: white;
+    line-height: 1.0;
+    margin-bottom: 12px;
+  }
+  .header-titulo em { font-style: italic; color: var(--gold-light); }
+  .header-sub { font-size: 15px; color: rgba(255,255,255,0.4); max-width: 620px; line-height: 1.85; margin-top: 16px; }
+  .header-meta { display: flex; gap: 0; margin-top: 36px; border: 1px solid rgba(184,151,106,0.15); width: fit-content; }
+  .meta-item { padding: 16px 28px; border-right: 1px solid rgba(184,151,106,0.15); }
+  .meta-item:last-child { border-right: none; }
+  .meta-valor { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--gold-light); }
+  .meta-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-top: 2px; }
+
+  /* CONTAINER */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+
+  /* SEÇÃO */
+  .secao-tag { font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin: 64px 0 12px; display: flex; align-items: center; gap: 12px; }
+  .secao-tag::after { content: ''; flex: 1; height: 1px; background: rgba(184,151,106,0.2); }
+  .secao-titulo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--ink); margin-bottom: 28px; line-height: 1.2; }
+  .secao-titulo em { font-style: italic; color: var(--gold); }
+
+  /* ALERTA */
+  .alerta {
+    background: rgba(122,53,53,0.06);
+    border-left: 3px solid var(--red);
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .alerta strong { color: var(--red); font-weight: 500; }
+  .alerta-titulo { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; display: block; }
+
+  /* NOTA INTERNA */
+  .nota-interna {
+    background: rgba(184,151,106,0.07);
+    border: 1px dashed rgba(184,151,106,0.35);
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.8;
+  }
+  .nota-interna strong { color: var(--gold); font-weight: 400; }
+  .nota-interna-titulo { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; opacity: 0.7; }
+
+  /* DEFINIÇÃO BOX */
+  .def-box {
+    background: var(--ink);
+    padding: 36px 40px;
+    margin: 32px 0;
+  }
+  .def-box p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.9; }
+  .def-box p + p { margin-top: 12px; }
+  .def-box strong { color: var(--gold-light); font-weight: 400; }
+  .def-box em { font-style: italic; color: rgba(255,255,255,0.35); }
+
+  /* LISTA LIMITES */
+  .lista { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+  .lista-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(184,151,106,0.1);
+    font-size: 15px;
+    color: var(--brown);
+    line-height: 1.6;
+  }
+  .lista-item:last-child { border-bottom: none; }
+  .lista-item .icone { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
+  .icone-sim { background: rgba(46,94,62,0.12); color: var(--green); border: 1px solid rgba(46,94,62,0.2); }
+  .icone-nao { background: rgba(122,53,53,0.1); color: var(--red); border: 1px solid rgba(122,53,53,0.2); }
+  .lista-item strong { color: var(--ink); font-weight: 400; display: block; margin-bottom: 2px; }
+
+  /* PLANOS */
+  .planos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+  .plano-card { background: white; border: 1px solid rgba(184,151,106,0.15); padding: 28px 28px 24px; }
+  .plano-card-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+  .plano-card-nome { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 16px; }
+  .plano-card-itens { display: flex; flex-direction: column; gap: 10px; }
+  .plano-card-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--brown); line-height: 1.5; }
+  .plano-card-item::before { content: '✦'; color: var(--gold); opacity: 0.6; font-size: 8px; margin-top: 4px; flex-shrink: 0; }
+
+  /* STACK TÉCNICO */
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+  .stack-card { background: white; border: 1px solid rgba(184,151,106,0.12); padding: 20px; }
+  .stack-card-nome { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .stack-card-desc { font-size: 12px; color: var(--brown); line-height: 1.6; opacity: 0.8; }
+  .stack-card-status { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 10px; }
+  .status-validado { color: var(--green); }
+  .status-pendente { color: var(--amber); }
+
+  /* FLUXO */
+  .fluxo { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+  .fluxo-etapa { display: flex; gap: 24px; align-items: flex-start; }
+  .fluxo-linha { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .fluxo-num { width: 36px; height: 36px; background: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--gold); flex-shrink: 0; }
+  .fluxo-conector { width: 1px; height: 32px; background: rgba(184,151,106,0.2); margin: 4px 0; }
+  .fluxo-etapa:last-child .fluxo-conector { display: none; }
+  .fluxo-corpo { padding-top: 6px; padding-bottom: 28px; flex: 1; }
+  .fluxo-titulo { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .fluxo-desc { font-size: 13px; color: var(--brown); line-height: 1.7; }
+  .fluxo-tag { display: inline-block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; background: rgba(184,151,106,0.1); color: var(--gold); margin-top: 8px; }
+
+  /* VALIDAÇÃO */
+  .validacao-box {
+    background: rgba(46,94,62,0.05);
+    border: 1px solid rgba(46,94,62,0.2);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .validacao-titulo { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; display: block; }
+  .validacao-box p { font-size: 14px; color: var(--brown); line-height: 1.8; }
+  .validacao-box strong { color: var(--green); font-weight: 400; }
+
+  .divisor { height: 1px; background: rgba(184,151,106,0.12); margin: 56px 0; }
+  .rodape { font-size: 11px; color: rgba(61,56,48,0.35); margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(184,151,106,0.1); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">
+    <div class="header-badge-dot"></div>
+    <span class="header-badge-text">Rascunho interno · Não apresentar ao cliente</span>
+  </div>
+  <span class="header-tag">Zyllah Digital · Produto em desenvolvimento</span>
+  <h1 class="header-titulo">Zyllah <em>Flow</em></h1>
+  <p class="header-sub">Camada de automação de atendimento digital integrada aos planos Presença Completa e Autoridade. Responde, qualifica e encaminha — 24 horas por dia, sem intervenção humana.</p>
+  <div class="header-meta">
+    <div class="meta-item">
+      <div class="meta-valor">Rascunho</div>
+      <div class="meta-label">Status</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-valor">Março 2026</div>
+      <div class="meta-label">Iniciado em</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-valor">Encantarys</div>
+      <div class="meta-label">Validação planejada</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-valor">Pós validação</div>
+      <div class="meta-label">Oferta ao cliente</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="alerta" style="margin-top: 48px;">
+    <span class="alerta-titulo">⚠ Instrução de uso deste documento</span>
+    Este rascunho <strong>não deve ser apresentado a prospects ou clientes.</strong> O Zyllah Flow ainda não foi validado em produção. A oferta só entra no script de reunião após a validação com a Encantarys (ou equivalente). Nas reuniões atuais, o Flow pode ser mencionado como "automação de atendimento inclusa no Autoridade" — sem detalhar nem comprometer prazo de entrega.
+  </div>
+
+  <!-- DEFINIÇÃO -->
+  <div class="secao-tag">Definição</div>
+  <h2 class="secao-titulo">O que é o<br><em>Zyllah Flow</em></h2>
+
+  <div class="def-box">
+    <p><strong>Zyllah Flow é uma camada de automação de atendimento digital</strong> integrada aos planos Presença Completa e Autoridade. Funciona 24 horas por dia, 7 dias por semana, respondendo mensagens, qualificando pacientes e registrando interações — sem que o especialista ou sua equipe precisem intervir fora do horário comercial.</p>
+    <p>O Flow <em>não é um sistema de gestão clínica.</em> Ele opera exclusivamente na camada digital de atendimento: recebe, responde, agenda e registra. Tudo o que exige julgamento clínico ou acesso a prontuário permanece fora do escopo.</p>
+  </div>
+
+  <!-- O QUE FAZ / O QUE NÃO FAZ -->
+  <div class="secao-tag">Limites do serviço</div>
+  <h2 class="secao-titulo">O que faz —<br><em>e o que nunca faz</em></h2>
+
+  <div class="lista">
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Responde mensagens fora do horário via WhatsApp</strong>
+        Atendimento automático com linguagem calibrada para o especialista. Não é resposta genérica — é personalizada com o nome do médico, especialidade e tom definido no onboarding.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Confirma, reagenda e cancela consultas</strong>
+        Integrado ao Google Agenda do especialista. O paciente consegue resolver o agendamento sem precisar falar com ninguém.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Qualifica o paciente antes da consulta</strong>
+        Faz perguntas objetivas: é primeira consulta? Qual a queixa principal? Tem encaminhamento? As respostas são registradas no CRM antes que o especialista abra o dia.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Registra cada interação no CRM</strong>
+        Cada contato vira uma entrada com nome, data, tipo de demanda e qualificação. Base para reengajamento posterior.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Gera gatilhos de reengajamento passivo</strong>
+        Com base no histórico de agendamentos: "Faz alguns meses desde sua última consulta — quer agendar uma revisão?" Sem diagnóstico, sem indicação clínica. Apenas lembretes de cuidado preventivo.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">✓</div>
+      <div>
+        <strong>Envia lembretes automáticos pré-consulta</strong>
+        24h e 2h antes da consulta: confirmação, endereço, o que trazer. Reduz faltas sem esforço da equipe.
+      </div>
+    </div>
+  </div>
+
+  <div class="lista" style="margin-top: 8px;">
+    <div class="lista-item">
+      <div class="icone icone-nao">✕</div>
+      <div>
+        <strong>Não interpreta sintomas nem sugere diagnóstico</strong>
+        Qualquer mensagem com conteúdo clínico é redirecionada para atendimento humano com mensagem padrão.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-nao">✕</div>
+      <div>
+        <strong>Não sugere procedimentos, medicamentos ou exames</strong>
+        Essa barreira é inegociável — protege o especialista perante o CFM e a Zyllah perante o cliente.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-nao">✕</div>
+      <div>
+        <strong>Não acessa prontuário nem histórico clínico</strong>
+        Só lida com dados de agendamento: nome, data, tipo de consulta. Nenhuma informação de saúde é processada.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-nao">✕</div>
+      <div>
+        <strong>Não responde dúvidas médicas</strong>
+        "Posso tomar esse remédio?" → redirecionamento imediato. Sem exceção.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-nao">✕</div>
+      <div>
+        <strong>Não substitui recepcionista para casos complexos</strong>
+        Casos que saem do fluxo padrão (urgências, pedidos especiais, conflitos de agenda) são encaminhados para o contato humano.
+      </div>
+    </div>
+  </div>
+
+  <!-- ONDE ENTRA NOS PLANOS -->
+  <div class="secao-tag">Estrutura nos planos</div>
+  <h2 class="secao-titulo">Flow básico e<br><em>Flow completo</em></h2>
+
+  <div class="planos-grid">
+    <div class="plano-card">
+      <span class="plano-card-tag">Plano Presença Completa</span>
+      <div class="plano-card-nome">Flow Básico</div>
+      <div class="plano-card-itens">
+        <div class="plano-card-item">Resposta automática fora do horário (WhatsApp)</div>
+        <div class="plano-card-item">Confirmação e cancelamento de consultas</div>
+        <div class="plano-card-item">Lembrete pré-consulta (24h antes)</div>
+        <div class="plano-card-item">Registro simples no CRM (nome, data, tipo)</div>
+      </div>
+    </div>
+    <div class="plano-card" style="border-color: rgba(184,151,106,0.4); background: var(--cream-mid);">
+      <span class="plano-card-tag">Plano Autoridade</span>
+      <div class="plano-card-nome">Flow Completo</div>
+      <div class="plano-card-itens">
+        <div class="plano-card-item">Tudo do Flow Básico</div>
+        <div class="plano-card-item">Qualificação do paciente antes da consulta</div>
+        <div class="plano-card-item">Reagendamento autônomo via Google Agenda</div>
+        <div class="plano-card-item">CRM com qualificação e histórico de interações</div>
+        <div class="plano-card-item">Gatilhos de reengajamento passivo</div>
+        <div class="plano-card-item">Lembrete duplo (24h + 2h antes)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nota-interna">
+    <span class="nota-interna-titulo">💡 Nota de precificação</span>
+    O Flow não é cobrado separadamente — está embutido no valor dos planos. Isso evita a percepção de "cobrança por módulo" e reforça que o cliente está comprando um sistema, não peças avulsas. Quando o custo de infraestrutura for calculado (após validação), revisar se o valor atual dos planos absorve esse custo com margem saudável.
+  </div>
+
+  <!-- FLUXO DE ATENDIMENTO -->
+  <div class="secao-tag">Fluxo de atendimento</div>
+  <h2 class="secao-titulo">Como uma mensagem<br><em>percorre o sistema</em></h2>
+
+  <div class="fluxo">
+    <div class="fluxo-etapa">
+      <div class="fluxo-linha">
+        <div class="fluxo-num">1</div>
+        <div class="fluxo-conector"></div>
+      </div>
+      <div class="fluxo-corpo">
+        <div class="fluxo-titulo">Paciente envia mensagem via WhatsApp</div>
+        <div class="fluxo-desc">Fora do horário comercial ou quando a recepção não responde. O sistema detecta a entrada e inicia o fluxo automaticamente.</div>
+        <span class="fluxo-tag">Entrada</span>
+      </div>
+    </div>
+    <div class="fluxo-etapa">
+      <div class="fluxo-linha">
+        <div class="fluxo-num">2</div>
+        <div class="fluxo-conector"></div>
+      </div>
+      <div class="fluxo-corpo">
+        <div class="fluxo-titulo">IA classifica a intenção da mensagem</div>
+        <div class="fluxo-desc">Claude (via API) analisa o conteúdo: é agendamento, cancelamento, dúvida operacional ou conteúdo clínico? A classificação define o caminho.</div>
+        <span class="fluxo-tag">n8n + API Claude</span>
+      </div>
+    </div>
+    <div class="fluxo-etapa">
+      <div class="fluxo-linha">
+        <div class="fluxo-num">3</div>
+        <div class="fluxo-conector"></div>
+      </div>
+      <div class="fluxo-corpo">
+        <div class="fluxo-titulo">Rota A: demanda operacional → automação resolve</div>
+        <div class="fluxo-desc">Agendar, confirmar, cancelar, reagendar: o sistema verifica disponibilidade no Google Agenda, confirma com o paciente e registra no CRM. Zero intervenção humana.</div>
+        <span class="fluxo-tag">Google Agenda + CRM</span>
+      </div>
+    </div>
+    <div class="fluxo-etapa">
+      <div class="fluxo-linha">
+        <div class="fluxo-num">4</div>
+        <div class="fluxo-conector"></div>
+      </div>
+      <div class="fluxo-corpo">
+        <div class="fluxo-titulo">Rota B: conteúdo clínico → redirecionamento imediato</div>
+        <div class="fluxo-desc">Qualquer mensagem com dúvida médica, sintoma ou solicitação clínica recebe resposta padrão: "Para questões clínicas, entre em contato diretamente com o consultório no horário de atendimento." Entrada registrada no CRM com flag de atenção.</div>
+        <span class="fluxo-tag">Barreira obrigatória</span>
+      </div>
+    </div>
+    <div class="fluxo-etapa">
+      <div class="fluxo-linha">
+        <div class="fluxo-num">5</div>
+        <div class="fluxo-conector"></div>
+      </div>
+      <div class="fluxo-corpo">
+        <div class="fluxo-titulo">Registro e reengajamento</div>
+        <div class="fluxo-desc">Toda interação é salva no CRM com data, tipo e qualificação. Com o Flow Completo, o sistema identifica pacientes sem consulta há X meses e dispara mensagem de reengajamento passivo — sem diagnóstico, apenas cuidado preventivo.</div>
+        <span class="fluxo-tag">CRM + automação recorrente</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK TÉCNICO -->
+  <div class="secao-tag">Stack técnico</div>
+  <h2 class="secao-titulo">Ferramentas e<br><em>infraestrutura</em></h2>
+
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-card-nome">n8n (self-hosted)</div>
+      <div class="stack-card-desc">Orquestrador central de automação. Gratuito. Já instalado e testado na infraestrutura Zyllah.</div>
+      <div class="stack-card-status status-validado">✓ Validado internamente</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-nome">API Claude (Haiku)</div>
+      <div class="stack-card-desc">Classificação de mensagens e geração de respostas. Custo por uso — frações de centavo por interação.</div>
+      <div class="stack-card-status status-validado">✓ Validado internamente</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-nome">Google Agenda</div>
+      <div class="stack-card-desc">Integração via OAuth2 para leitura e escrita de eventos de agendamento.</div>
+      <div class="stack-card-status status-validado">✓ Integração mapeada</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-nome">WhatsApp (Z-API / Evolution)</div>
+      <div class="stack-card-desc">Canal de entrada das mensagens. Custo ~R$50/mês. A definir qual plataforma após consulta com Daniel.</div>
+      <div class="stack-card-status status-pendente">⏳ Pendente — aguarda Daniel</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-nome">CRM (Google Sheets / Notion)</div>
+      <div class="stack-card-desc">Registro de interações e qualificação. Sheets já funcional. Notion como opção mais visual para o cliente acompanhar.</div>
+      <div class="stack-card-status status-validado">✓ Sheets validado</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-nome">Typebot / ManyChat</div>
+      <div class="stack-card-desc">Interface de conversa estruturada para qualificação progressiva. A avaliar necessidade após validação com Encantarys.</div>
+      <div class="stack-card-status status-pendente">⏳ A avaliar</div>
+    </div>
+  </div>
+
+  <div class="nota-interna">
+    <span class="nota-interna-titulo">📋 Referência técnica</span>
+    A arquitetura base (Webhook → n8n → API Claude → Google Sheets) está documentada e testada no arquivo <strong>zyllah_infraestrutura_automacao.md</strong> do hub. O fluxo do Flow é uma expansão dessa arquitetura com os nós de WhatsApp e Google Agenda adicionados.
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- VALIDAÇÃO -->
+  <div class="secao-tag">Próximo passo</div>
+  <h2 class="secao-titulo">Validação com<br><em>Encantarys</em></h2>
+
+  <div class="validacao-box">
+    <span class="validacao-titulo">🎯 Objetivo da validação</span>
+    <p>Rodar o Flow completo na Encantarys antes de ofertar a qualquer cliente médico. A validação precisa confirmar: <strong>o fluxo de agendamento funciona sem intervenção humana, as barreiras clínicas funcionam, o CRM registra corretamente e o custo de infraestrutura por cliente é viável dentro da margem dos planos.</strong></p>
+  </div>
+
+  <div class="lista">
+    <div class="lista-item">
+      <div class="icone icone-sim">1</div>
+      <div>
+        <strong>Montar o fluxo completo na Encantarys</strong>
+        WhatsApp + n8n + Google Agenda + CRM. Simular cenários: agendamento, cancelamento, dúvida clínica (barreira), reengajamento.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">2</div>
+      <div>
+        <strong>Documentar falhas e ajustes</strong>
+        Tudo que quebrar ou precisar de intervenção humana vira lição de contorno antes de chegar no cliente médico.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">3</div>
+      <div>
+        <strong>Calcular custo real de infraestrutura por cliente</strong>
+        Z-API ou Evolution + API Claude + eventual Typebot. Confirmar margem nos planos atuais.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">4</div>
+      <div>
+        <strong>Reunião com Daniel</strong>
+        Retomar a conversa pendente sobre ferramentas de WhatsApp. Pode mudar a escolha de stack antes de escalar.
+      </div>
+    </div>
+    <div class="lista-item">
+      <div class="icone icone-sim">5</div>
+      <div>
+        <strong>Atualizar este documento e integrar ao script de reunião</strong>
+        Só após os 4 passos acima o Flow vira oferta oficial. Detalhar perguntas do cliente e respostas prontas.
+      </div>
+    </div>
+  </div>
+
+  <p class="rodape">
+    Zyllah Digital · Documento interno · Rascunho v1.0 · Março 2026<br>
+    Não apresentar a prospects ou clientes. Atualizar após validação com Encantarys.<br>
+    Referência técnica: <strong>zyllah_infraestrutura_automacao.md</strong>
+  </p>
+
+</div>
+</body>
+</html>
