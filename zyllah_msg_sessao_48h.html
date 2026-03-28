@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyllah — Mensagem 48h Antes da Sessão</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1714;--ink-soft:#3D3830;--gold:#B8976A;--gold-light:#D4B896;--cream:#FAF7F2;--cream-mid:#F0EBE1;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);padding:0 0 80px;}
+.header{background:var(--ink);padding:48px 64px 40px;}
+.header-tag{font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;}
+.header-titulo{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:white;line-height:1.05;margin-bottom:10px;}
+.header-titulo em{font-style:italic;color:var(--gold-light);}
+.header-sub{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;max-width:520px;}
+.container{max-width:780px;margin:0 auto;padding:0 48px;}
+.secao-tag{font-size:11px;letter-spacing:0.45em;text-transform:uppercase;color:var(--gold);margin:48px 0 12px;display:flex;align-items:center;gap:12px;}
+.secao-tag::after{content:'';flex:1;height:1px;background:rgba(184,151,106,0.2);}
+.secao-titulo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ink);margin-bottom:20px;}
+.secao-titulo em{font-style:italic;color:var(--gold);}
+.instrucao{font-size:13px;color:var(--ink-soft);line-height:1.75;margin-bottom:20px;padding:14px 18px;background:rgba(184,151,106,0.07);border-left:3px solid var(--gold);}
+.instrucao strong{color:var(--ink);font-weight:400;}
+.msg-box{background:var(--ink);padding:28px 32px;position:relative;}
+.msg-label{font-size:10px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(184,151,106,0.5);margin-bottom:14px;display:block;}
+.msg-texto{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.9;white-space:pre-line;font-family:'Jost',sans-serif;}
+.msg-texto .variavel{color:var(--gold-light);font-style:italic;}
+.btn-copiar{margin-top:18px;background:rgba(184,151,106,0.15);border:1px solid rgba(184,151,106,0.3);color:var(--gold);padding:10px 20px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;display:inline-block;}
+.btn-copiar:hover{background:rgba(184,151,106,0.25);}
+.alerta{background:rgba(139,58,58,0.05);border-left:3px solid rgba(139,58,58,0.3);padding:12px 16px;font-size:13px;color:#8B3A3A;line-height:1.7;margin-top:16px;}
+.variavel-lista{background:white;border:1px solid rgba(184,151,106,0.12);padding:20px 24px;margin-bottom:16px;}
+.variavel-item{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid rgba(184,151,106,0.08);font-size:13px;}
+.variavel-item:last-child{border-bottom:none;}
+.variavel-chave{color:var(--gold);font-style:italic;min-width:120px;flex-shrink:0;}
+.variavel-desc{color:var(--ink-soft);}
+.timing-box{background:white;border:1px solid rgba(184,151,106,0.12);padding:20px 24px;margin-top:4px;}
+.timing-item{display:flex;gap:16px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(184,151,106,0.08);}
+.timing-item:last-child{border-bottom:none;}
+.timing-quando{font-size:12px;font-weight:500;color:var(--ink);min-width:140px;flex-shrink:0;}
+.timing-o-que{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.data{font-size:11px;color:rgba(61,56,48,0.4);margin-top:40px;padding-top:20px;border-top:1px solid rgba(184,151,106,0.1);}
+@media(max-width:600px){.header{padding:40px 24px;}.container{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-tag">Uso interno · Produção</span>
+  <h1 class="header-titulo">Mensagem<br><em>48h antes</em></h1>
+  <p class="header-sub">Texto pronto para enviar pelo WhatsApp dois dias antes da sessão fotográfica. Substitua as variáveis em dourado antes de enviar.</p>
+</div>
+
+<div class="container">
+
+  <!-- VARIÁVEIS -->
+  <div class="secao-tag">Antes de enviar</div>
+  <h2 class="secao-titulo">Substitua as<br><em>variáveis</em></h2>
+
+  <div class="variavel-lista">
+    <div class="variavel-item"><div class="variavel-chave">[NOME]</div><div class="variavel-desc">Primeiro nome do cliente. Ex: Lídia, Fabrício, Marina.</div></div>
+    <div class="variavel-item"><div class="variavel-chave">[DIA E HORA]</div><div class="variavel-desc">Data e horário da sessão. Ex: amanhã às 14h · terça às 10h.</div></div>
+    <div class="variavel-item"><div class="variavel-chave">[LINK DO GUIA]</div><div class="variavel-desc">URL da página do cliente hospedada no GitHub Pages. Ex: zyllah.com.br/guia-sessao-[nome].html</div></div>
+  </div>
+
+  <!-- MENSAGEM PRINCIPAL -->
+  <div class="secao-tag">Mensagem principal</div>
+  <h2 class="secao-titulo">Enviar <em>48h antes</em></h2>
+
+  <div class="instrucao"><strong>Canal:</strong> WhatsApp. Tom: pessoal, direto, sem formalidade excessiva. O cliente já te conhece — não precisa de apresentação.</div>
+
+  <div class="msg-box">
+    <span class="msg-label">Copie, substitua as variáveis e envie</span>
+    <div class="msg-texto" id="msg1">[NOME], nossa sessão é [DIA E HORA]!
+
+Preparei um guia rápido com tudo que você precisa separar antes — figurino, preparação do rosto e como deixar o consultório pronto. São detalhes simples que fazem muita diferença no resultado.
+
+👉 [LINK DO GUIA]
+
+Se tiver alguma dúvida, é só me chamar aqui mesmo. Até [DIA E HORA]!</div>
+    <button class="btn-copiar" onclick="copiar('msg1', this)">Copiar mensagem</button>
+  </div>
+
+  <div class="alerta">Não envie no dia anterior — 48h dá tempo para o cliente providenciar o pó compacto e organizar o jaleco. Mensagem no dia anterior é tarde demais para ajustes.</div>
+
+  <!-- LEMBRETE NO DIA ANTERIOR -->
+  <div class="secao-tag" style="margin-top:48px;">Lembrete</div>
+  <h2 class="secao-titulo">Enviar <em>na véspera</em></h2>
+
+  <div class="instrucao"><strong>Opcional mas recomendado.</strong> Uma mensagem curta na véspera aumenta muito a taxa de preparação — o cliente que esqueceu o guia vai abrir agora.</div>
+
+  <div class="msg-box">
+    <span class="msg-label">Lembrete simples — enviar no dia anterior</span>
+    <div class="msg-texto" id="msg2">[NOME], amanhã é nossa sessão! 📷
+
+Só lembrando do guia que enviei — especialmente o pó compacto translúcido e a organização da mesa do consultório. Faz muita diferença.
+
+Confirma que está tudo certo para [HORA]?</div>
+    <button class="btn-copiar" onclick="copiar('msg2', this)">Copiar mensagem</button>
+  </div>
+
+  <!-- TIMING COMPLETO -->
+  <div class="secao-tag" style="margin-top:48px;">Visão geral</div>
+  <h2 class="secao-titulo">Sequência<br><em>de comunicação</em></h2>
+
+  <div class="timing-box">
+    <div class="timing-item">
+      <div class="timing-quando">Ao agendar</div>
+      <div class="timing-o-que">Confirmar data, hora e endereço. Informar duração (2 horas). Nada mais.</div>
+    </div>
+    <div class="timing-item">
+      <div class="timing-quando">48h antes</div>
+      <div class="timing-o-que">Enviar mensagem principal com link do guia de preparação.</div>
+    </div>
+    <div class="timing-item">
+      <div class="timing-quando">Véspera</div>
+      <div class="timing-o-que">Lembrete curto — confirmar horário e reforçar os dois itens mais importantes (pó compacto e organização do ambiente).</div>
+    </div>
+    <div class="timing-item">
+      <div class="timing-quando">No dia — ao chegar</div>
+      <div class="timing-o-que">Checar ambiente, dar uma olhada rápida no figurino e orientar verbalmente se precisar ajustar algo. Sem constrangimento — é parte do serviço.</div>
+    </div>
+    <div class="timing-item">
+      <div class="timing-quando">Até 7 dias depois</div>
+      <div class="timing-o-que">Entregar as 20–30 fotos editadas via link de download. Mensagem curta com contexto de como usar no mês.</div>
+    </div>
+  </div>
+
+  <p class="data">Criado em 28 de março de 2026 · Zyllah Digital · Uso interno</p>
+
+</div>
+
+<script>
+function copiar(id, btn) {
+  const texto = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(texto).then(() => {
+    btn.textContent = 'Copiado ✓';
+    setTimeout(() => btn.textContent = 'Copiar mensagem', 2000);
+  });
+}
+</script>
+</body>
+</html>
