@@ -21,6 +21,30 @@
     if (localStorage.getItem('zyllah_cookie') === 'accepted') { _loadGA(); }
   </script>
 
+  <!-- Meta Pixel — ativado apenas após consentimento -->
+  <script>
+    window._fbqEnabled = false;
+    function _loadFBQ() {
+      if (window._fbqEnabled) return;
+      window._fbqEnabled = true;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1658717945474741');
+      fbq('track', 'PageView');
+    }
+    // Se já aceitou antes, carrega imediatamente
+    if (localStorage.getItem('zyllah_cookie') === 'accepted') { _loadFBQ(); }
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1658717945474741&ev=PageView&noscript=1"
+  /></noscript>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zyllah Digital — Presença Digital para Profissionais de Saúde em Nova Friburgo</title>
@@ -830,6 +854,7 @@
       localStorage.setItem(KEY, 'accepted');
       esconderBanner();
       _loadGA();
+      _loadFBQ();
     };
 
     window.zylRecusar = function() {
