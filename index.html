@@ -1,49 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Google Analytics — ativado apenas após consentimento -->
+  <!-- Google Analytics 4 — analytics anônimo, base legal: legítimo interesse (LGPD art. 10) -->
+  <!-- IP anonimizado. Nenhum dado pessoal identificável coletado. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4TKSQQED"></script>
   <script>
-    window._gaEnabled = false;
-    function _loadGA() {
-      if (window._gaEnabled) return;
-      window._gaEnabled = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-JY4TKSQQED';
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-JY4TKSQQED', { anonymize_ip: true });
-    }
-    // Se já aceitou antes, carrega imediatamente
-    if (localStorage.getItem('zyllah_cookie') === 'accepted') { _loadGA(); }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JY4TKSQQED', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+    // _loadGA mantido como no-op para compatibilidade com o banner de consentimento
+    window._gaEnabled = true;
+    window._loadGA = function(){};
   </script>
-
-  <!-- Meta Pixel — ativado apenas após consentimento -->
-  <script>
-    window._fbqEnabled = false;
-    function _loadFBQ() {
-      if (window._fbqEnabled) return;
-      window._fbqEnabled = true;
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1658717945474741');
-      fbq('track', 'PageView');
-    }
-    // Se já aceitou antes, carrega imediatamente
-    if (localStorage.getItem('zyllah_cookie') === 'accepted') { _loadFBQ(); }
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1658717945474741&ev=PageView&noscript=1"
-  /></noscript>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +26,7 @@
 <meta name="author" content="Zyllah Digital">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://zyllah.com.br/">
+<!-- Redirect www → sem www deve ser configurado no DNS/GitHub Pages via CNAME: zyllah.com.br -->
 <!-- Google Search Console -->
 <meta name="google-site-verification" content="DT2KiGjbAzfbGVdcq7OtjIlakrVvAz0MU0V8U-1Adkc">
 <!-- Open Graph -->
@@ -728,19 +702,11 @@
       </ul>
     </div>
     <div class="footer-links">
-      <h4>Redes</h4>
-      <ul>
-        <li><a href="https://instagram.com/zyllahdigital" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="https://tiktok.com/@zyllahdigital" target="_blank" rel="noopener">TikTok</a></li>
-        <li><a href="https://youtube.com/@zyllahdigital" target="_blank" rel="noopener">YouTube</a></li>
-        <li><a href="https://linkedin.com/company/zyllah-digital" target="_blank" rel="noopener">LinkedIn</a></li>
-      </ul>
-    </div>
-    <div class="footer-links">
       <h4>Contato</h4>
       <ul>
-        <li><a href="https://wa.me/55" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:contato@zyllah.com.br">E-mail</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="https://wa.me/55">WhatsApp</a></li>
+        <li><a href="#">E-mail</a></li>
         <li><a href="javascript:void(0)" onclick="abrirModal()">Política de Privacidade</a></li>
       </ul>
     </div>
@@ -826,8 +792,8 @@
 <!-- ── COOKIE BANNER ZYLLAH ── -->
 <div id="zylCookie" role="dialog" aria-label="Aviso de cookies">
   <p class="zyl-cookie-texto">
-    Utilizamos cookies analíticos (Google Analytics 4) para entender como você navega pelo site.
-    Nenhum dado é vendido ou compartilhado. Você pode
+    Este site utiliza Google Analytics 4 com IP anonimizado para entender como os visitantes navegam.
+    Nenhum dado pessoal identificável é coletado, vendido ou compartilhado. Você pode
     <a onclick="abrirModal(event)" href="#">ler nossa política completa</a>.
   </p>
   <div class="zyl-cookie-acoes">
@@ -854,7 +820,6 @@
       localStorage.setItem(KEY, 'accepted');
       esconderBanner();
       _loadGA();
-      _loadFBQ();
     };
 
     window.zylRecusar = function() {
