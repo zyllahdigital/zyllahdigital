@@ -1,0 +1,26 @@
+# Dados de clientes — nunca commitar
+clinica_*.html
+cliente-b*.html
+crm-*.html
+*_brandbook_cliente*.html
+diagnostico_*.html
+cliente-c*.html
+*_[nome removido]*.html
+*_cliente-a*.html
+
+# Operacional sensível
+zyllah_hub*.html
+zyllah_vendas.html
+zyllah_quiz_vendas.html
+*_senha*.html
+*catalogo_senhas*.html
+
+# Rascunhos internos
+*_rascunho*.html
+*_interno*.html
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
