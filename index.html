@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Google Analytics 4 — analytics anônimo, base legal: legítimo interesse (LGPD art. 10) -->
-  <!-- IP anonimizado. Nenhum dado pessoal identificável coletado. -->
+  <!-- Google Analytics 4 — base legal: legítimo interesse (LGPD art. 10) · IP anonimizado · sem dados pessoais -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4TKSQQED"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', 'G-JY4TKSQQED', {
       anonymize_ip: true,
       allow_google_signals: false,
       allow_ad_personalization_signals: false
     });
-    // _loadGA mantido como no-op para compatibilidade com o banner de consentimento
     window._gaEnabled = true;
     window._loadGA = function(){};
   </script>
@@ -26,7 +25,6 @@
 <meta name="author" content="Zyllah Digital">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://zyllah.com.br/">
-<!-- Redirect www → sem www deve ser configurado no DNS/GitHub Pages via CNAME: zyllah.com.br -->
 <!-- Google Search Console -->
 <meta name="google-site-verification" content="DT2KiGjbAzfbGVdcq7OtjIlakrVvAz0MU0V8U-1Adkc">
 <!-- Open Graph -->
@@ -39,18 +37,36 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   "name": "Zyllah Digital",
-  "description": "Agência de presença digital especializada em profissionais e clínicas de saúde.",
+  "description": "Agência de presença digital especializada em profissionais de saúde — médicos, dentistas, psicólogos e clínicas — em Nova Friburgo, RJ.",
   "url": "https://zyllah.com.br",
+  "telephone": "+55-22-98164-0512",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Nova Friburgo",
     "addressRegion": "RJ",
     "addressCountry": "BR"
   },
-  "areaServed": "Nova Friburgo, RJ",
-  "serviceType": "Marketing Digital para Saúde"
+  "areaServed": [
+    {"@type": "City", "name": "Nova Friburgo"},
+    {"@type": "State", "name": "Rio de Janeiro"}
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Serviços de Marketing Médico",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Marketing para Profissionais de Saúde"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gestão de Redes Sociais para Clínicas"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Identidade Visual para Clínicas"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Produção Audiovisual para Saúde"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tráfego Pago para Médicos"}}
+    ]
+  },
+  "sameAs": [
+    "https://www.instagram.com/zyllahdigital",
+    "https://www.linkedin.com/in/guilherme-caetano-zyllah"
+  ]
 }
 </script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1080'><path fill='%23c3a366' d='M336.72,395.72l-2.56-108.02,361.99-.56-139.33,201.49h-45.04l110.91-162.7-.32-2.46-251.57,1.13s-6.53,20.66-9.51,34.27c-3.2,14.6-8.17,36.75-8.17,36.75l-16.4.12Z'/><polygon fill='%23c1a260' points='759.77 286.08 635.69 490.35 606.07 490.52 759.77 286.08'/><path fill='%23c7a866' d='M368.72,571.78c6.36-8.49,19.37-22.49,34.43-35.86,25.37-22.52,52.29-32.93,78.89-35.68,46.33-4.78,93.95,16.68,142.93,17.94,48.53,1.26,74.37-15.75,110.42-42.55-20.82,26.1-56.02,56.17-91.17,61.61-8.66,1.47-16.88,1.46-25.57.7-30.3-2.63-73.16-13.06-106.56-15.9-33.4-1.42-65.74,5.49-96.63,20.78-14.22,7.04-38.42,21.82-46.67,28.94h-.06Z'/><path fill='%23a58346' d='M760.37,680.02l4.22,111.19-383.6,2.71,162.35-235.5h42.43l-135.01,197.18,1.16,3.58,272.41-2.04s6.95-18.53,11.82-39.42c3.94-16.88,6.47-37.43,6.47-37.43l17.73-.28Z'/><polygon fill='%23a38342' points='315.41 790.04 462.38 556.94 495.41 556.77 315.41 790.04'/></svg>">
@@ -409,6 +425,27 @@
   .modal-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--ink); margin-bottom: 24px; }
   .modal-content p { font-size: 16px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 16px; }
 
+  /* ── ENTREGÁVEIS ── */
+  .deliverables { padding: 120px 80px; background: var(--bg); }
+  .deliverables-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
+  .deliverables-intro { font-size: 18px; font-weight: 300; color: var(--ink-soft); line-height: 1.7; margin-top: 20px; }
+  .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 2px; }
+  .dlv-card { background: var(--surface); padding: 44px 40px; position: relative; transition: background 0.3s; }
+  .dlv-card:hover { background: var(--card); }
+  .dlv-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold-dim); margin-bottom: 16px; }
+  .dlv-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+  .dlv-desc { font-size: 15px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; }
+  .dlv-mais { background: var(--surface); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .dlv-mais-text { font-size: 16px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; max-width: 640px; }
+  .dlv-mais-link { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--gold); white-space: nowrap; text-decoration: none; border-bottom: 1px solid rgba(184,151,106,0.3); padding-bottom: 2px; transition: border-color 0.2s; flex-shrink: 0; }
+  .dlv-mais-link:hover { border-color: var(--gold); }
+  @media (max-width: 900px) {
+    .deliverables { padding: 80px 32px; }
+    .deliverables-grid { grid-template-columns: 1fr; gap: 2px; }
+    .dlv-mais { flex-direction: column; gap: 28px; padding: 40px 32px; }
+    .dlv-mais-link { white-space: normal; }
+  }
+
   /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -515,7 +552,7 @@
 </svg></div>
     <span class="hero-tag">Presença Digital de Alto Padrão</span>
     <h1 class="hero-headline">Sua excelência clínica<br><em>traduzida em prestígio</em><br>digital.</h1>
-    <p class="hero-sub">Para clínicas e especialistas que já são referência no físico e precisam que o digital reflita essa autoridade — com a mesma precisão.</p>
+    <p class="hero-sub">Para especialistas de saúde em Nova Friburgo e região — médicos, dentistas, psicólogos e outros profissionais — que já são referência no físico e precisam que o digital reflita essa autoridade com a mesma precisão.</p>
     <div class="hero-cta-group">
       <a href="#diagnostico" class="btn-primary">Solicitar Diagnóstico</a>
       <span class="hero-note">Vagas limitadas por ciclo</span>
@@ -547,7 +584,7 @@
 <section class="services" id="servicos">
   <div class="services-header reveal">
     <div><p class="section-tag">O que fazemos</p><h2 class="section-title">O Sistema<br>Zyllah de Presença</h2></div>
-    <p class="services-intro">Quatro pilares integrados. Cada um projetado para que sua clínica seja percebida como o que ela realmente é: a melhor opção disponível.</p>
+    <p class="services-intro">Quatro pilares integrados de marketing médico. Cada um projetado para que sua clínica seja percebida como o que ela realmente é: a melhor opção disponível para o paciente certo.</p>
   </div>
   <div class="services-grid">
     <div class="service-card reveal">
@@ -568,8 +605,61 @@
     <div class="service-card reveal">
       <div class="service-number">04</div><div class="service-name">Nexa-Ads</div><div class="service-subtitle">Tráfego Pago de Precisão</div>
       <p class="service-desc">Anúncios que não apenas geram cliques — segmentam. O medo de crescer e perder o requinte deixa de existir quando cada investimento é direcionado com precisão para quem realmente pertence ao universo da sua clínica.</p>
-      <div class="service-detail"><span class="detail-tag">Meta Ads</span><span class="detail-tag">Google Ads</span><span class="detail-tag">Relatórios Mensais</span></div>
+      <div class="service-detail"><span class="detail-tag">Meta Ads</span><span class="detail-tag">Google Ads</span><span class="detail-tag">LinkedIn Ads</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ENTREGÁVEIS -->
+<section class="deliverables" id="entregaveis">
+  <div class="deliverables-header reveal">
+    <p class="section-tag">O que você recebe</p>
+    <h2 class="section-title">Presença construída.<br><em>Detalhe a detalhe.</em></h2>
+    <p class="deliverables-intro">Cada entregável foi pensado para que você não precise gerenciar — apenas aprovar.</p>
+  </div>
+  <div class="deliverables-grid">
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">01</div>
+      <div class="dlv-name">Identidade Visual Completa</div>
+      <p class="dlv-desc">Brandbook, logotipo, paletas, tipografia e todas as aplicações digitais. A linguagem visual que comunica sua autoridade antes de qualquer palavra ser lida — e que nenhum paciente vai confundir com outra clínica.</p>
+    </div>
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">02</div>
+      <div class="dlv-name">Gestão de Redes Sociais</div>
+      <p class="dlv-desc">Calendário editorial, criação de conteúdo e postagens no Instagram e LinkedIn. Cada publicação passa pela mesma régua: reforça sua autoridade, respeita as normas do seu conselho e nunca atrai o perfil errado.</p>
+    </div>
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">03</div>
+      <div class="dlv-name">Produção Audiovisual</div>
+      <p class="dlv-desc">Vídeos institucionais, reels e fotografia editorial produzidos in-house. O ambiente da sua clínica, o seu jeito de cuidar — traduzidos em imagem antes da primeira consulta acontecer.</p>
+    </div>
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">04</div>
+      <div class="dlv-name">Site Profissional</div>
+      <p class="dlv-desc">Responsivo, rápido e indexado corretamente. Encontrado pelo Google quando seu futuro paciente pesquisa seu nome às 23h — e que passa a mesma sensação de sofisticação da sua clínica física.</p>
+    </div>
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">05</div>
+      <div class="dlv-name">Zyllah Flow — Atendimento 24h</div>
+      <p class="dlv-desc">Sistema de atendimento automatizado via WhatsApp que qualifica, responde e agenda com a sofisticação que sua clínica exige. Sua paciente recebe resposta às 23h — sem você precisar estar disponível.</p>
+    </div>
+
+    <div class="dlv-card reveal">
+      <div class="dlv-number">06</div>
+      <div class="dlv-name">Conformidade com seu Conselho</div>
+      <p class="dlv-desc">Todo conteúdo publicado é revisado antes de ir ao ar. CFM, CFO, CFP, CRMV, CREFITO — conhecemos as resoluções e aplicamos. Sua presença cresce sem expor seu registro profissional.</p>
+    </div>
+
+  </div>
+
+  <div class="dlv-mais reveal">
+    <p class="dlv-mais-text">E muito mais — estratégia editorial personalizada, relatórios mensais com dados reais, Google Meu Negócio, campanhas de tráfego pago quando fizer sentido e atendimento direto sem intermediários.</p>
+    <a href="#diagnostico" class="dlv-mais-link">Ver o que faz sentido para a sua clínica →</a>
   </div>
 </section>
 
@@ -658,7 +748,7 @@
   <span class="diagnostic-tag">O próximo passo</span>
   <h2 class="diagnostic-title">Solicite seu<br><em>Diagnóstico Digital</em></h2>
   <p class="diagnostic-sub">Uma análise da sua presença atual, dos seus objetivos e de como a Zyllah pode — ou não — ser a parceira certa para onde você quer chegar. Sem compromisso. Com honestidade.</p>
-  <a href="https://wa.me/55" class="btn-diagnostic">Solicitar Diagnóstico</a>
+  <a href="https://wa.me/5522981640512" class="btn-diagnostic">Solicitar Diagnóstico</a>
   <p class="diagnostic-detail">Vagas limitadas · Respondemos em até 48h úteis</p>
 </section>
 
@@ -705,7 +795,7 @@
       <h4>Contato</h4>
       <ul>
         <li><a href="#">Instagram</a></li>
-        <li><a href="https://wa.me/55">WhatsApp</a></li>
+        <li><a href="https://wa.me/5522981640512">WhatsApp</a></li>
         <li><a href="#">E-mail</a></li>
         <li><a href="javascript:void(0)" onclick="abrirModal()">Política de Privacidade</a></li>
       </ul>
@@ -718,7 +808,7 @@
 </footer>
 
 <!-- WHATSAPP FLUTUANTE -->
-<a href="https://wa.me/55" class="wa-float" id="waBtn" aria-label="WhatsApp" target="_blank">
+<a href="https://wa.me/5522981640512" class="wa-float" id="waBtn" aria-label="WhatsApp" target="_blank">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
@@ -792,8 +882,8 @@
 <!-- ── COOKIE BANNER ZYLLAH ── -->
 <div id="zylCookie" role="dialog" aria-label="Aviso de cookies">
   <p class="zyl-cookie-texto">
-    Este site utiliza Google Analytics 4 com IP anonimizado para entender como os visitantes navegam.
-    Nenhum dado pessoal identificável é coletado, vendido ou compartilhado. Você pode
+    Utilizamos cookies analíticos (Google Analytics 4) para entender como você navega pelo site.
+    Nenhum dado é vendido ou compartilhado. Você pode
     <a onclick="abrirModal(event)" href="#">ler nossa política completa</a>.
   </p>
   <div class="zyl-cookie-acoes">
