@@ -320,7 +320,11 @@
   .services { background: var(--ink); padding: 120px 60px; }
   .services-header { max-width: 1200px; margin: 0 auto 80px; display: flex; justify-content: space-between; align-items: flex-end; }
   .section-tag { font-size: 15px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 52px); font-weight: 300; color: var(--white); line-height: 1.15; }
+  /* Brandbook: default cream bg = ink; dark bg = white via .light */
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 52px); font-weight: 300; color: var(--ink); line-height: 1.15; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-title.light { color: var(--white); }
+  .section-title.light em { color: var(--gold-light); }
   .services-intro { max-width: 360px; font-size: 20px; line-height: 1.9; color: rgba(255,255,255,0.4); text-align: right; }
   .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
   .service-card {
@@ -508,7 +512,7 @@
     .nav-row-bottom { gap: 24px; padding: 6px 0 8px; }
     .hero { grid-template-columns: 1fr; }
     .hero-right { display: none; }
-    .hero-left { padding: 160px 32px 80px; }
+    .hero-left { padding: 110px 32px 72px; }
     .manifesto { grid-template-columns: 1fr; gap: 32px; padding: 80px 32px; }
     .manifesto-label { position: static; }
     .services { padding: 80px 32px; }
@@ -628,7 +632,7 @@
 <!-- SERVIÇOS -->
 <section class="services" id="servicos">
   <div class="services-header reveal">
-    <div><p class="section-tag">O que fazemos</p><h2 class="section-title">O Sistema<br>Zyllah de Presença</h2></div>
+    <div><p class="section-tag">O que fazemos</p><h2 class="section-title light">O Sistema<br>Zyllah de Presença</h2></div>
     <p class="services-intro">Quatro pilares integrados de marketing médico. Cada um projetado para que sua clínica seja percebida como o que ela realmente é: a melhor opção disponível para o paciente certo.</p>
   </div>
   <div class="services-grid">
