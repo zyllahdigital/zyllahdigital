@@ -426,22 +426,22 @@
   .modal-content p { font-size: 16px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 16px; }
 
   /* ── ENTREGÁVEIS ── */
-  .deliverables { padding: 120px 80px; background: var(--bg); }
+  .deliverables { padding: 120px 80px; background: var(--cream); }
   .deliverables-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
   .deliverables-intro { font-size: 18px; font-weight: 300; color: var(--ink-soft); line-height: 1.7; margin-top: 20px; }
-  .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 2px; }
-  .dlv-card { background: var(--surface); padding: 44px 40px; position: relative; transition: background 0.3s; }
-  .dlv-card:hover { background: var(--card); }
-  .dlv-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold-dim); margin-bottom: 16px; }
-  .dlv-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+  .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gold-pale); margin-bottom: 1px; }
+  .dlv-card { background: var(--white); padding: 44px 40px; transition: background 0.25s; }
+  .dlv-card:hover { background: #fffdf9; }
+  .dlv-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 16px; }
+  .dlv-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
   .dlv-desc { font-size: 15px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; }
-  .dlv-mais { background: var(--surface); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .dlv-mais { background: var(--gold-pale); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
   .dlv-mais-text { font-size: 16px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; max-width: 640px; }
-  .dlv-mais-link { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--gold); white-space: nowrap; text-decoration: none; border-bottom: 1px solid rgba(184,151,106,0.3); padding-bottom: 2px; transition: border-color 0.2s; flex-shrink: 0; }
-  .dlv-mais-link:hover { border-color: var(--gold); }
+  .dlv-mais-link { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--gold); white-space: nowrap; text-decoration: none; border-bottom: 1px solid rgba(184,151,106,0.4); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; flex-shrink: 0; }
+  .dlv-mais-link:hover { border-color: var(--gold); color: var(--ink); }
   @media (max-width: 900px) {
     .deliverables { padding: 80px 32px; }
-    .deliverables-grid { grid-template-columns: 1fr; gap: 2px; }
+    .deliverables-grid { grid-template-columns: 1fr; }
     .dlv-mais { flex-direction: column; gap: 28px; padding: 40px 32px; }
     .dlv-mais-link { white-space: normal; }
   }
