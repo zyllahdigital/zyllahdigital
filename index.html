@@ -426,23 +426,68 @@
   .modal-content p { font-size: 16px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 16px; }
 
   /* ── ENTREGÁVEIS ── */
-  .deliverables { padding: 120px 80px; background: var(--cream); }
+  .deliverables { padding: 120px 80px; background: var(--cream-mid); }
+  .deliverables-inner { max-width: 1280px; margin: 0 auto; }
   .deliverables-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
   .deliverables-intro { font-size: 18px; font-weight: 300; color: var(--ink-soft); line-height: 1.7; margin-top: 20px; }
-  .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gold-pale); margin-bottom: 1px; }
-  .dlv-card { background: var(--white); padding: 44px 40px; transition: background 0.25s; }
-  .dlv-card:hover { background: #fffdf9; }
-  .dlv-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 16px; }
-  .dlv-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
-  .dlv-desc { font-size: 15px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; }
-  .dlv-mais { background: var(--gold-pale); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
-  .dlv-mais-text { font-size: 16px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; max-width: 640px; }
-  .dlv-mais-link { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--gold); white-space: nowrap; text-decoration: none; border-bottom: 1px solid rgba(184,151,106,0.4); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; flex-shrink: 0; }
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .dlv-card {
+    background: var(--white);
+    padding: 48px 44px;
+    border: 1px solid rgba(184,151,106,0.15);
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .dlv-card:hover {
+    border-color: rgba(184,151,106,0.4);
+    box-shadow: 0 8px 32px rgba(26,23,20,0.06);
+  }
+  .dlv-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 0.3em;
+    color: var(--gold); margin-bottom: 18px;
+  }
+  .dlv-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 400;
+    color: var(--ink); margin-bottom: 16px; line-height: 1.2;
+  }
+  .dlv-desc { font-size: 15px; font-weight: 300; color: var(--ink-soft); line-height: 1.8; }
+  .dlv-mais {
+    background: var(--white);
+    border: 1px solid rgba(184,151,106,0.2);
+    padding: 48px 56px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 48px;
+  }
+  .dlv-mais-text { font-size: 16px; font-weight: 300; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+  .dlv-mais-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-style: italic;
+    color: var(--gold); white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184,151,106,0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
   .dlv-mais-link:hover { border-color: var(--gold); color: var(--ink); }
-  @media (max-width: 900px) {
-    .deliverables { padding: 80px 32px; }
-    .deliverables-grid { grid-template-columns: 1fr; }
-    .dlv-mais { flex-direction: column; gap: 28px; padding: 40px 32px; }
+
+  /* Tablet: 2 colunas */
+  @media (max-width: 1100px) {
+    .deliverables { padding: 100px 48px; }
+    .deliverables-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  }
+  /* Mobile */
+  @media (max-width: 640px) {
+    .deliverables { padding: 72px 24px; }
+    .deliverables-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+    .dlv-card { padding: 36px 28px; }
+    .dlv-mais { flex-direction: column; gap: 24px; padding: 36px 28px; }
     .dlv-mais-link { white-space: normal; }
   }
 
@@ -610,8 +655,11 @@
   </div>
 </section>
 
+<div class="divider"><div class="divider-line"></div><div class="divider-ornament">✦</div><div class="divider-line"></div></div>
+
 <!-- ENTREGÁVEIS -->
 <section class="deliverables" id="entregaveis">
+<div class="deliverables-inner">
   <div class="deliverables-header reveal">
     <p class="section-tag">O que você recebe</p>
     <h2 class="section-title">Presença construída.<br><em>Detalhe a detalhe.</em></h2>
@@ -661,7 +709,10 @@
     <p class="dlv-mais-text">E muito mais — estratégia editorial personalizada, relatórios mensais com dados reais, Google Meu Negócio, campanhas de tráfego pago quando fizer sentido e atendimento direto sem intermediários.</p>
     <a href="#diagnostico" class="dlv-mais-link">Ver o que faz sentido para a sua clínica →</a>
   </div>
+</div>
 </section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-ornament">✦</div><div class="divider-line"></div></div>
 
 <!-- PARA QUEM -->
 <section class="for-whom" id="para-quem">
