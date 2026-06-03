@@ -971,5 +971,57 @@
     // Se 'accepted', GA já foi carregado pelo script inline no <head>
   })();
 </script>
+<!-- ===== Zyllah · Chat Sofia (widget) — conecta ao Zyllah Flow ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Cormorant+Garamond:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+#zy-launch{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;background:#1A1714;border:1px solid #B8976A;cursor:pointer;z-index:99998;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .18s ease;}
+#zy-launch:hover{transform:translateY(-2px);}
+#zy-launch span{font-family:'Cinzel',serif;color:#B8976A;font-size:22px;line-height:1;}
+#zy-launch .zy-dot{position:absolute;top:12px;right:12px;width:8px;height:8px;border-radius:50%;background:#D4B896;}
+#zy-panel{position:fixed;right:22px;bottom:94px;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#FAF7F2;z-index:99999;border:1px solid rgba(184,151,106,.25);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);}
+#zy-panel.zy-open{display:flex;}
+#zy-panel .zy-head{background:#1A1714;padding:18px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+#zy-panel .zy-ava{width:38px;height:38px;border-radius:50%;background:#231f1b;border:1px solid #B8976A;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;color:#B8976A;font-size:16px;}
+#zy-panel .zy-id{flex:1;}
+#zy-panel .zy-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:#FAF7F2;font-size:19px;line-height:1;}
+#zy-panel .zy-sub{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(184,151,106,.6);margin-top:4px;}
+#zy-panel .zy-x{background:none;border:none;color:rgba(250,247,242,.5);font-size:20px;cursor:pointer;line-height:1;}
+#zy-panel .zy-x:hover{color:#FAF7F2;}
+#zy-panel .zy-body{flex:1;overflow-y:auto;padding:20px 16px;display:flex;flex-direction:column;gap:12px;}
+#zy-panel .zy-msg{max-width:82%;padding:11px 14px;font-size:14px;line-height:1.55;border-radius:12px;white-space:pre-wrap;font-family:'Jost',sans-serif;font-weight:300;}
+#zy-panel .zy-bot{align-self:flex-start;background:#fff;border:1px solid #EFEAE2;color:#1A1714;border-bottom-left-radius:3px;}
+#zy-panel .zy-user{align-self:flex-end;background:#1A1714;color:#FAF7F2;border-bottom-right-radius:3px;}
+#zy-panel .zy-typing{align-self:flex-start;display:flex;gap:4px;padding:13px 14px;background:#fff;border:1px solid #EFEAE2;border-radius:12px;border-bottom-left-radius:3px;}
+#zy-panel .zy-typing i{width:6px;height:6px;border-radius:50%;background:#B8976A;opacity:.4;animation:zyb 1s infinite;}
+#zy-panel .zy-typing i:nth-child(2){animation-delay:.15s;}#zy-panel .zy-typing i:nth-child(3){animation-delay:.3s;}
+@keyframes zyb{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+#zy-panel .zy-foot{flex-shrink:0;border-top:1px solid #EFEAE2;padding:12px;display:flex;gap:8px;background:#FAF7F2;}
+#zy-panel .zy-in{flex:1;border:1px solid #EFEAE2;border-radius:20px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:14px;color:#1A1714;background:#fff;outline:none;}
+#zy-panel .zy-in:focus{border-color:#B8976A;}
+#zy-panel .zy-send{width:42px;height:42px;border-radius:50%;background:#B8976A;border:none;cursor:pointer;color:#1A1714;font-size:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+#zy-panel .zy-send:hover{background:#D4B896;}
+#zy-panel .zy-disc{font-size:10px;color:rgba(26,23,20,.4);text-align:center;padding:0 16px 10px;background:#FAF7F2;line-height:1.5;font-family:'Jost',sans-serif;}
+</style>
+<div id="zy-launch" onclick="zyToggle()" title="Falar com a Sofia"><span>Z</span><div class="zy-dot"></div></div>
+<div id="zy-panel" role="dialog" aria-label="Chat com a Sofia">
+  <div class="zy-head"><div class="zy-ava">S</div><div class="zy-id"><div class="zy-name">Sofia</div><div class="zy-sub">Assistente &middot; Zyllah</div></div><button class="zy-x" onclick="zyToggle()" aria-label="Fechar">&times;</button></div>
+  <div class="zy-body" id="zy-body"></div>
+  <div class="zy-disc" id="zy-disc"></div>
+  <form class="zy-foot" onsubmit="zySend(event)"><input class="zy-in" id="zy-in" placeholder="Escreva sua mensagem..." autocomplete="off"><button class="zy-send" id="zy-send" type="submit" aria-label="Enviar">&#10148;</button></form>
+</div>
+<script>
+(function(){
+var BACKEND_URL="https://flow.zyllah.com.br/webhook/zyllah-web";
+var ABERTURA="Ola! Aqui e a Sofia, assistente virtual com inteligencia artificial do consultorio. Posso ajudar com agendamento, remarcacao, cancelamento ou duvidas.\n\nComo posso ajudar voce hoje?";
+var DISC="Atendimento automatizado com IA. Nao substitui consulta medica. Seus dados sao usados so para o agendamento (LGPD).";
+var aberto=false,started=false,sending=false;
+function ses(){var s=localStorage.getItem('zy_session');if(!s){s='web_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('zy_session',s);}return s;}
+window.zyToggle=function(){aberto=!aberto;document.getElementById('zy-panel').classList.toggle('zy-open',aberto);document.getElementById('zy-disc').textContent=DISC;if(aberto&&!started){started=true;ap(ABERTURA,'bot');setTimeout(function(){var i=document.getElementById('zy-in');if(i)i.focus();},100);}};
+function ap(t,w){var b=document.getElementById('zy-body');var d=document.createElement('div');d.className='zy-msg '+(w==='user'?'zy-user':'zy-bot');d.textContent=t;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function ty(on){var b=document.getElementById('zy-body');var t=document.getElementById('zy-typing');if(on&&!t){t=document.createElement('div');t.id='zy-typing';t.className='zy-typing';t.innerHTML='<i></i><i></i><i></i>';b.appendChild(t);b.scrollTop=b.scrollHeight;}if(!on&&t)t.remove();}
+window.zySend=function(e){e.preventDefault();if(sending)return;var inp=document.getElementById('zy-in');var m=(inp.value||'').trim();if(!m)return;inp.value='';ap(m,'user');sending=true;document.getElementById('zy-send').disabled=true;ty(true);fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:ses(),message:m})}).then(function(r){return r.json();}).then(function(j){ty(false);ap((j&&(j.reply||j.text))||"Tive uma instabilidade aqui. Pode repetir, por favor?",'bot');}).catch(function(){ty(false);ap("Tive um problema tecnico aqui. Pode tentar de novo em instantes?",'bot');}).then(function(){sending=false;document.getElementById('zy-send').disabled=false;var i=document.getElementById('zy-in');if(i)i.focus();});};
+})();
+</script>
+
 </body>
 </html>
