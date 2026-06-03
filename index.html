@@ -127,6 +127,10 @@
   .flow-item-text { font-size: 18px; color: var(--ink-soft); line-height: 1.6; }
   .flow-cta { display: inline-block; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; background: var(--ink); color: var(--cream); padding: 16px 36px; text-decoration: none; transition: background 0.3s; }
   .flow-cta:hover { background: var(--gold); color: var(--ink); }
+  .flow-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .flow-demo-btn { display: inline-block; font-family: inherit; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; background: var(--gold); color: var(--ink); padding: 16px 36px; border: none; cursor: pointer; transition: all 0.3s; }
+  .flow-demo-btn:hover { background: var(--gold-light); letter-spacing: 0.24em; }
+  .flow-demo-cap { margin-top: 14px; font-size: 13px; letter-spacing: 0.04em; color: var(--ink-soft); font-style: italic; }
   .flow-mockup { background: var(--ink); padding: 0; overflow: hidden; box-shadow: 0 40px 80px rgba(26,23,20,0.2); }
   .flow-mockup-header { background: rgba(184,151,106,0.1); padding: 16px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(184,151,106,0.15); }
   .flow-mockup-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
@@ -397,7 +401,7 @@
 
   /* WHATSAPP FLUTUANTE */
   .wa-float {
-    position: fixed; bottom: 32px; right: 32px; z-index: 200;
+    position: fixed; bottom: 96px; right: 34px; z-index: 200;
     width: 56px; height: 56px; border-radius: 50%;
     background: var(--gold);
     display: flex; align-items: center; justify-content: center;
@@ -767,7 +771,11 @@
         <div class="flow-item"><div class="flow-item-dot"></div><div class="flow-item-text">Respostas com a voz da sua clínica, 24h por dia</div></div>
         <div class="flow-item"><div class="flow-item-dot"></div><div class="flow-item-text">Follow-up pós-atendimento automatizado</div></div>
       </div>
-      <a href="#diagnostico" class="flow-cta">Conhecer o Zyllah Flow</a>
+      <div class="flow-ctas">
+        <a href="#diagnostico" class="flow-cta">Conhecer o Zyllah Flow</a>
+        <button type="button" class="flow-demo-btn" onclick="zyToggle()">Ver a Sofia atender</button>
+      </div>
+      <p class="flow-demo-cap">Demonstração ao vivo — converse como se fosse um paciente.</p>
     </div>
     <div class="flow-right reveal">
       <div class="flow-mockup">
@@ -971,23 +979,30 @@
     // Se 'accepted', GA já foi carregado pelo script inline no <head>
   })();
 </script>
-<!-- ===== Zyllah · Chat Sofia (widget) — conecta ao Zyllah Flow ===== -->
+<!-- ===== Zyllah · Chat Sofia (widget) — DEMONSTRAÇÃO de recepção de consultório ===== -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Cormorant+Garamond:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-#zy-launch{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;background:#1A1714;border:1px solid #B8976A;cursor:pointer;z-index:99998;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .18s ease;}
+#zy-launch{position:fixed;right:24px;bottom:24px;z-index:99998;display:flex;align-items:center;gap:11px;background:#1A1714;border:1px solid #B8976A;border-radius:32px;padding:7px 9px 7px 18px;cursor:pointer;box-shadow:0 12px 32px rgba(0,0,0,.42);transition:transform .18s ease;}
 #zy-launch:hover{transform:translateY(-2px);}
-#zy-launch span{font-family:'Cinzel',serif;color:#B8976A;font-size:22px;line-height:1;}
-#zy-launch .zy-dot{position:absolute;top:12px;right:12px;width:8px;height:8px;border-radius:50%;background:#D4B896;}
-#zy-panel{position:fixed;right:22px;bottom:94px;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#FAF7F2;z-index:99999;border:1px solid rgba(184,151,106,.25);border-radius:4px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);}
+#zy-launch .zy-lbl{font-family:'Jost',sans-serif;text-align:right;line-height:1.25;}
+#zy-launch .zy-lbl b{display:block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#B8976A;font-weight:500;margin-bottom:2px;}
+#zy-launch .zy-lbl em{font-style:normal;font-size:12.5px;color:#FAF7F2;font-weight:300;}
+#zy-launch .zy-circ{position:relative;width:46px;height:46px;border-radius:50%;background:#231f1b;border:1px solid rgba(184,151,106,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#zy-launch .zy-circ i{font-family:'Cinzel',serif;font-style:normal;color:#B8976A;font-size:20px;}
+#zy-launch .zy-dot{position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#7FB77E;border:2px solid #1A1714;}
+@media(max-width:600px){#zy-launch .zy-lbl{display:none;}#zy-launch{padding:7px;border-radius:50%;right:18px;bottom:18px;}}
+#zy-panel{position:fixed;right:24px;bottom:96px;width:380px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#FAF7F2;z-index:99999;border:1px solid rgba(184,151,106,.25);border-radius:6px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);}
 #zy-panel.zy-open{display:flex;}
-#zy-panel .zy-head{background:#1A1714;padding:18px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+#zy-panel .zy-head{background:#1A1714;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
 #zy-panel .zy-ava{width:38px;height:38px;border-radius:50%;background:#231f1b;border:1px solid #B8976A;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;color:#B8976A;font-size:16px;}
 #zy-panel .zy-id{flex:1;}
 #zy-panel .zy-name{font-family:'Cormorant Garamond',serif;font-style:italic;color:#FAF7F2;font-size:19px;line-height:1;}
-#zy-panel .zy-sub{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(184,151,106,.6);margin-top:4px;}
+#zy-panel .zy-sub{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(184,151,106,.7);margin-top:4px;}
 #zy-panel .zy-x{background:none;border:none;color:rgba(250,247,242,.5);font-size:20px;cursor:pointer;line-height:1;}
 #zy-panel .zy-x:hover{color:#FAF7F2;}
-#zy-panel .zy-body{flex:1;overflow-y:auto;padding:20px 16px;display:flex;flex-direction:column;gap:12px;}
+#zy-panel .zy-body{flex:1;overflow-y:auto;padding:16px 16px 20px;display:flex;flex-direction:column;gap:12px;}
+#zy-panel .zy-demo{background:rgba(184,151,106,.12);border:1px solid rgba(184,151,106,.32);border-radius:10px;padding:11px 13px;font-family:'Jost',sans-serif;font-size:11.5px;line-height:1.55;color:#5a513f;}
+#zy-panel .zy-demo b{color:#1A1714;font-weight:500;}
 #zy-panel .zy-msg{max-width:82%;padding:11px 14px;font-size:14px;line-height:1.55;border-radius:12px;white-space:pre-wrap;font-family:'Jost',sans-serif;font-weight:300;}
 #zy-panel .zy-bot{align-self:flex-start;background:#fff;border:1px solid #EFEAE2;color:#1A1714;border-bottom-left-radius:3px;}
 #zy-panel .zy-user{align-self:flex-end;background:#1A1714;color:#FAF7F2;border-bottom-right-radius:3px;}
@@ -1002,21 +1017,25 @@
 #zy-panel .zy-send:hover{background:#D4B896;}
 #zy-panel .zy-disc{font-size:10px;color:rgba(26,23,20,.4);text-align:center;padding:0 16px 10px;background:#FAF7F2;line-height:1.5;font-family:'Jost',sans-serif;}
 </style>
-<div id="zy-launch" onclick="zyToggle()" title="Falar com a Sofia"><span>Z</span><div class="zy-dot"></div></div>
-<div id="zy-panel" role="dialog" aria-label="Chat com a Sofia">
-  <div class="zy-head"><div class="zy-ava">S</div><div class="zy-id"><div class="zy-name">Sofia</div><div class="zy-sub">Assistente &middot; Zyllah</div></div><button class="zy-x" onclick="zyToggle()" aria-label="Fechar">&times;</button></div>
+<div id="zy-launch" onclick="zyToggle()" title="Demonstração — experimente o atendimento da Sofia (consultório fictício)">
+  <span class="zy-lbl"><b>Demonstração</b><em>Veja a Sofia atender</em></span>
+  <span class="zy-circ"><i>Z</i><span class="zy-dot"></span></span>
+</div>
+<div id="zy-panel" role="dialog" aria-label="Demonstração do atendimento Zyllah">
+  <div class="zy-head"><div class="zy-ava">S</div><div class="zy-id"><div class="zy-name">Sofia</div><div class="zy-sub">Demonstração &middot; recepção de consultório</div></div><button class="zy-x" onclick="zyToggle()" aria-label="Fechar">&times;</button></div>
   <div class="zy-body" id="zy-body"></div>
   <div class="zy-disc" id="zy-disc"></div>
-  <form class="zy-foot" onsubmit="zySend(event)"><input class="zy-in" id="zy-in" placeholder="Escreva sua mensagem..." autocomplete="off"><button class="zy-send" id="zy-send" type="submit" aria-label="Enviar">&#10148;</button></form>
+  <form class="zy-foot" onsubmit="zySend(event)"><input class="zy-in" id="zy-in" placeholder="Escreva como se fosse um paciente..." autocomplete="off"><button class="zy-send" id="zy-send" type="submit" aria-label="Enviar">&#10148;</button></form>
 </div>
 <script>
 (function(){
 var BACKEND_URL="https://flow.zyllah.com.br/webhook/zyllah-web";
-var ABERTURA="Ola! Aqui e a Sofia, assistente virtual com inteligencia artificial do consultorio. Posso ajudar com agendamento, remarcacao, cancelamento ou duvidas.\n\nComo posso ajudar voce hoje?";
-var DISC="Atendimento automatizado com IA. Nao substitui consulta medica. Seus dados sao usados so para o agendamento (LGPD).";
+var DEMO="<b>Demonstracao.</b> Esta e a recepcao virtual com IA que a Zyllah instala no consultorio. Faca de conta que voce e um paciente e tente marcar, remarcar ou cancelar uma consulta. O consultorio e a Dra. Helena sao ficticios.";
+var ABERTURA="Ola! Aqui e a Sofia, a recepcao virtual da Dra. Helena. Posso ajudar a marcar, remarcar ou cancelar uma consulta, ou tirar duvidas. Como posso ajudar voce hoje?";
+var DISC="Demonstracao com IA. Nao substitui consulta medica. Nesta simulacao nao use dados reais (LGPD).";
 var aberto=false,started=false,sending=false;
 function ses(){var s=localStorage.getItem('zy_session');if(!s){s='web_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('zy_session',s);}return s;}
-window.zyToggle=function(){aberto=!aberto;document.getElementById('zy-panel').classList.toggle('zy-open',aberto);document.getElementById('zy-disc').textContent=DISC;if(aberto&&!started){started=true;ap(ABERTURA,'bot');setTimeout(function(){var i=document.getElementById('zy-in');if(i)i.focus();},100);}};
+window.zyToggle=function(){aberto=!aberto;document.getElementById('zy-panel').classList.toggle('zy-open',aberto);document.getElementById('zy-disc').textContent=DISC;if(aberto&&!started){started=true;var b=document.getElementById('zy-body');var n=document.createElement('div');n.className='zy-demo';n.innerHTML=DEMO;b.appendChild(n);ap(ABERTURA,'bot');setTimeout(function(){var i=document.getElementById('zy-in');if(i)i.focus();},100);}};
 function ap(t,w){var b=document.getElementById('zy-body');var d=document.createElement('div');d.className='zy-msg '+(w==='user'?'zy-user':'zy-bot');d.textContent=t;b.appendChild(d);b.scrollTop=b.scrollHeight;}
 function ty(on){var b=document.getElementById('zy-body');var t=document.getElementById('zy-typing');if(on&&!t){t=document.createElement('div');t.id='zy-typing';t.className='zy-typing';t.innerHTML='<i></i><i></i><i></i>';b.appendChild(t);b.scrollTop=b.scrollHeight;}if(!on&&t)t.remove();}
 window.zySend=function(e){e.preventDefault();if(sending)return;var inp=document.getElementById('zy-in');var m=(inp.value||'').trim();if(!m)return;inp.value='';ap(m,'user');sending=true;document.getElementById('zy-send').disabled=true;ty(true);fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:ses(),message:m})}).then(function(r){return r.json();}).then(function(j){ty(false);ap((j&&(j.reply||j.text))||"Tive uma instabilidade aqui. Pode repetir, por favor?",'bot');}).catch(function(){ty(false);ap("Tive um problema tecnico aqui. Pode tentar de novo em instantes?",'bot');}).then(function(){sending=false;document.getElementById('zy-send').disabled=false;var i=document.getElementById('zy-in');if(i)i.focus();});};
