@@ -938,6 +938,22 @@
     });
   })();
 
+  // ── whatsapp_click: conversão nº1 (clique em qualquer link wa.me) ──
+  (function() {
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest && e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp"], a[href*="whatsapp.com"]');
+      if (!a || typeof gtag === 'undefined') return;
+      var origem = a.classList.contains('wa-float') ? 'botao_flutuante'
+                 : a.classList.contains('btn-diagnostic') ? 'cta_diagnostico'
+                 : (a.closest('footer') ? 'rodape' : 'outro');
+      gtag('event', 'whatsapp_click', {
+        origem: origem,
+        pagina: location.pathname,
+        transport_type: 'beacon'   // sobrevive à navegação p/ o WhatsApp
+      });
+    }, true);
+  })();
+
 </script>
 
 <!-- ── COOKIE BANNER ZYLLAH ── -->
