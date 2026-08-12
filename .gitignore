@@ -1,25 +1,63 @@
-# Dados de clientes — nunca commitar
-clinica_*.html
-cliente-b*.html
-crm-*.html
-*_brandbook_cliente*.html
-diagnostico_*.html
-cliente-c*.html
-*_[nome removido]*.html
-*_cliente-a*.html
+# ══════════════════════════════════════════════════════════════════════
+#  LISTA DE PERMISSÃO — o padrão é IGNORAR. Só entra o que foi declarado.
+#  Reescrito em 12/08/2026, depois que a lista de PROIBIÇÃO deixou passar
+#  20 documentos internos para dentro do ar público.
+#
+#  🔑 POR QUE INVERTEU:
+#  a versão anterior proibia `zyllah_hub*`, `*_interno*`, `*_[nome removido]*`.
+#  Passaram por baixo dela:
+#    · zyllah_contratos.html      (o contrato inteiro)
+#    · zyllah_objecoes.html       (o banco de objeções de venda)
+#    · zyllah_script_reuniao.html (o roteiro da reunião)
+#    · zyllah_producao_docs.html  (nome de uma pessoa real e a abordagem
+#                                  escrita sobre ela — a regra `*_[nome removido]*`
+#                                  pegou o arquivo COM o nome dela e deixou
+#                                  passar o arquivo com o CONTEÚDO dela)
+#  Lista de proibição só barra o que alguém previu, e falha em silêncio.
+#
+#  ⚠️ CONSEQUÊNCIA PRÁTICA: página nova só entra no site depois de ganhar
+#     uma linha aqui. É de propósito — publicar passa a ser um ATO, não um
+#     efeito colateral de `git add -A`.
+#     Rede de segurança: `PORTOES/portao_publico.py` (camada 3) acusa
+#     qualquer URL que esteja no sitemap e não tenha arquivo.
+#     Para publicar algo fora da lista, conscientemente: `git add -f <arquivo>`
+# ══════════════════════════════════════════════════════════════════════
 
-# Operacional sensível
-zyllah_hub*.html
-zyllah_vendas.html
-zyllah_quiz_vendas.html
-*_senha*.html
-*catalogo_senhas*.html
+# ── 1. o padrão é ignorar tudo ───────────────────────────────────────
+*
 
-# Rascunhos internos
-*_rascunho*.html
-*_interno*.html
+# ── 2. mas descer nas pastas, senão as exceções abaixo nunca são vistas ──
+!*/
 
-# Sistema
+# ── 3. PÁGINAS PÚBLICAS DECLARADAS (as 9 do sitemap) ─────────────────
+!index.html
+!blog/index.html
+!blog/*/index.html
+!marketing-medico-*/index.html
+!quanto-custa-agencia-marketing-medico/index.html
+!agencia-marketing-medico-ou-freelancer/index.html
+
+# ── 4. INFRAESTRUTURA pública de propósito ───────────────────────────
+!CNAME
+!.gitignore
+!.nojekyll
+!sitemap.xml
+!robots.txt
+!llms.txt
+!favicon.ico
+!favicon.png
+!site.webmanifest
+
+# ── 5. ESTÁTICOS (nenhum hoje; liberados para quando existirem) ───────
+!assets/**
+!img/**
+!imagens/**
+!fonts/**
+!static/**
+!css/**
+!js/**
+
+# ── 6. lixo de sistema, ignorado mesmo se alguém liberar acima ────────
 .DS_Store
 Thumbs.db
 desktop.ini
